@@ -1,0 +1,61 @@
+.breadcrumb {
+    padding: 0;
+    background-color: white;
+  }
+  
+  .breadcrumb-item + .breadcrumb-item {
+    padding: 0;
+  }
+  
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '';
+    padding-right: 0;
+  }
+  
+  .breadcrumb-item  div:first-child {
+    display: flex;
+    position: relative;  
+  }
+  
+  .breadcrumb-item a {
+    display: flex;
+  }
+  
+  .breadcrumb-item a:link {
+    text-decoration: none;
+  }
+  
+  .breadcrumb-item-active {
+    background-color: var(--primary_one);
+  }
+  .arrow {
+    position: relative;
+    border-style: solid;
+    border-color: transparent var(--primary_one) transparent transparent;
+    border-width: 15px 27px 15px 0;
+    top: 0;
+    left: 0;
+  }
+  .s {
+    /* position: relative; */
+    padding-left: 1rem;
+  
+  }
+  
+  .badge-primary {
+    background-color: transparent;
+    font-weight: normal;
+    font-size: 50%;
+  }
+    
+  .badge-pill {
+    border-radius: 50%;
+    border: 1px solid white;
+    width: 1rem;
+    height:1rem;
+    margin-bottom: auto;
+    margin-top: auto;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    
+  }
