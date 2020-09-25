@@ -11,7 +11,6 @@ function Main(): React.ReactElement {
 
     return (
         <div>
-            Main
             <Button variant="primary" onClick={handleClick}>המשך</Button>
         </div>
     )

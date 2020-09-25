@@ -1,6 +1,7 @@
 .breadcrumb {
     padding: 0;
     background-color: white;
+    border-radius: 0;
   }
   
   .breadcrumb-item + .breadcrumb-item {
@@ -33,7 +34,7 @@
     position: relative;
     border-style: solid;
     border-color: transparent var(--primary_one) transparent transparent;
-    border-width: 15px 27px 15px 0;
+    border-width: var(--main-size) calc(1rem + var(--main-size))  var(--main-size) 0;
     top: 0;
     left: 0;
   }
@@ -52,8 +53,8 @@
   .badge-pill {
     border-radius: 50%;
     border: 1px solid var(--secondary);
-    width: 1rem;
-    height:1rem;
+    width: var(--main-size);
+    height: var(--main-size);
     margin-bottom: auto;
     margin-top: auto;
     margin-left: 0.5rem;

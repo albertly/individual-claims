@@ -1,5 +1,6 @@
 :root {
   --primary_one: #00427F;
+  --main-size: 2rem;
 }
 
 .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
@@ -10,4 +11,6 @@
 
 body {
   direction: rtl;
+  background-color: #CFE4FE;
+  font-size: var(--main-size);
 }

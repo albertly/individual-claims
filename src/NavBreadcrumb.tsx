@@ -36,8 +36,8 @@ function NavBreadcrumb(): React.ReactElement {
                 history.push("/second/treatdetails");
                 break;
         }  
-        console.log('click', e.id);
     };
+    
     return (
         <Breadcrumb style={{ marginRight: '0.2rem', marginLeft: '0.2rem' }}>
         <Breadcrumb.Item href="#s1" onClick={handleClick} active={active.l1}>
