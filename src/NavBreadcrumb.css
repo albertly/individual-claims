@@ -27,6 +27,7 @@
   
   .breadcrumb-item-active {
     background-color: var(--primary_one);
+    color: var(--white) !important;
   }
   .arrow {
     position: relative;
@@ -39,23 +40,28 @@
   .s {
     /* position: relative; */
     padding-left: 1rem;
-  
+    color: var(--secondary);
   }
   
   .badge-primary {
     background-color: transparent;
     font-weight: normal;
-    font-size: 50%;
+    font-size: 50%;    
   }
     
   .badge-pill {
     border-radius: 50%;
-    border: 1px solid white;
+    border: 1px solid var(--secondary);
     width: 1rem;
     height:1rem;
     margin-bottom: auto;
     margin-top: auto;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
-    
+    color: var(--secondary);
+  }
+
+  .breadcrumb-item-active .badge-pill {
+    border: 1px solid var(--white);   
+    color: var(--white);
   }

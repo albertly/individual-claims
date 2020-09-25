@@ -3,6 +3,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Badge from 'react-bootstrap/Badge';
 import { useHistory } from "react-router-dom";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBreadcrumb.css';
 
 interface IActive {
