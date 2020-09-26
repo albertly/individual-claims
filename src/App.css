@@ -14,3 +14,27 @@ body {
   background-color: #CFE4FE;
   font-size: var(--main-size);
 }
+
+section {
+  margin: 0 1rem;
+}
+
+.col {
+  border-left: 1px solid var(--secondary);
+  background-color: white;  
+}
+
+.col, .col-2, .col-3, .col-4, .col-5, .col-6, .col-9 {
+    text-align: right;    
+} 
+
+.col-text-help {
+  font-size: 1rem;
+}
+.col-first {
+  background-color: var(--primary_one);
+  color: white;
+}
+.col-last {
+  border-left: 0;
+}

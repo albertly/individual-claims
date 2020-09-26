@@ -8,20 +8,11 @@ section {
     margin-bottom: 1rem;
 }
 .row-two {
-    height: 6rem;
+    height: 7rem;
     margin-bottom: 1rem;
 }
 .col {
     border-left: 1px solid var(--secondary);
     background-color: white;
 }
-.col-first {
-    background-color: var(--primary_one);
-}
-.col-last {
-    border-left: 0;
-}
-/* .col, .col-2, .col-3, .col-4, .col-5, .col-6, .col-9 {
-    border: 1px solid black;
-    width: 100%
-} */
+
