@@ -38,7 +38,7 @@ function InsDetails(): React.ReactElement {
                     </div>
                 </div>
             </section>
-            <Button variant="primary" onClick={handleClick}>המשך</Button>
+            {/* <Button variant="primary" onClick={handleClick}>המשך</Button> */}
         </>
     )
 }
