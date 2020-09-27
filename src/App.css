@@ -1,5 +1,6 @@
 :root {
   --primary_one: #00427F;
+  --helper_color: #006CB2;
   --main-size: 2rem;
 }
 
@@ -24,8 +25,9 @@ section {
   background-color: white;  
 }
 
-.col, .col-2, .col-3, .col-4, .col-5, .col-6, .col-9 {
-    text-align: right;    
+.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-9 {
+    text-align: right;
+    padding-right: 1.5rem;    
 } 
 
 .col-text-help {
