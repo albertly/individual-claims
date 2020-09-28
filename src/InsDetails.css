@@ -3,14 +3,10 @@ section {
 }
 
 .row-one {
-  height: 5rem;
+  min-height: 8rem;
   margin-bottom: 1rem;
 }
 .row-two {
-  height: 7rem;
+  min-height: 10rem;
   margin-bottom: 1rem;
-}
-.col-bl {
-  border-left: 1px solid var(--secondary);
-  background-color: white;
 }
