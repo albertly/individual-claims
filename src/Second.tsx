@@ -11,8 +11,6 @@ import './Second.css';
 function Second(props: any): React.ReactElement {
 
     let { path, url } = useRouteMatch();
-    console.log('path', path, url);
-    console.log('props', props);
     
     return (
         <div>

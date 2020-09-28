@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 import Main from './Main';
@@ -8,9 +8,24 @@ import Second from './Second';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+
 function App(): React.ReactElement {
+  let history = useHistory();
+
+  function handleClick() {
+    switch(window.location.pathname) {
+      case '/':
+        history.push('/second');
+        break;
+      case '/second':
+        history.push('/second/treatdetails') 
+        break; 
+    }
+    
+  }
+
   return (
-    <BrowserRouter>
+    <>
       <header style={{ backgroundColor: '#CFE4FE' }}>
         <div style={{ backgroundColor: '#003F80' }}>
           <svg
@@ -79,9 +94,9 @@ function App(): React.ReactElement {
       </Switch>
 
       <footer>    
-        <Button variant="primary">המשך</Button>
+        <Button variant="primary" onClick={handleClick}>המשך</Button>
       </footer>
-    </BrowserRouter>
+    </>
   );
 }
 

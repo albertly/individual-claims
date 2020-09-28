@@ -38,7 +38,7 @@ footer {
   background-color: var(--helper_color);
 }
 .col-bl {
-  border-left: 2px solid var(--secondary);
+  border-left: 2px solid #E0E0E0;
   background-color: white;
 }
 
