@@ -1,8 +1,8 @@
 .row_one {
-    height: 10rem;
-    margin-bottom: 1rem;
-  }
-  .row_two {
-    height: 20rem;
-    margin-bottom: 1rem;
-  }
+  min-height: 10rem;
+  margin-bottom: 1rem;
+}
+.row_two {
+  min-height: 20rem;
+  margin-bottom: 1rem;
+}

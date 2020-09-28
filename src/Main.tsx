@@ -29,9 +29,11 @@ function Main(): React.ReactElement {
   return (
     <>
       <section>
-        <div className={`row justify-content-center ${styles.row_one}`}>
-          <div className="col-3 col-first">רגע לפני שמתחילים...</div>
-          <div className="col col-last col-text-help">
+        <div className={`row  ${styles.row_one}`}>
+          <div className="col-md-3 col-xs-12 col-first">
+            רגע לפני שמתחילים...
+          </div>
+          <div className="col-md-9 col-xs-12 col-last col-text-help">
             <p>
               כדי שנוכל להתקדם בזריזות, אנחנו מבקשים שסריקה או צילום של המסמכים
               תהיה ההישג ידך:
@@ -50,29 +52,28 @@ function Main(): React.ReactElement {
           </div>
         </div>
         <div className={`row ${styles.row_two}`}>
-          <div className="col-3 col-first">טופס התביעה</div>
-          <div className="col col-last">
+          <div className="col-md-3 col-xs-12 col-first">טופס התביעה</div>
+          <div className="col-md-9 col-xs-12 col-last">
             <div className="row">
-              <div className="col col-text-help">
+              <div className="col-12 col-text-help">
                 כדי להגיש את התביעה עבור חלק מהטיפולים נדרש טופס פירוט ההליך
                 הרפואי כפי שמולא על ידי מרפאת השיניים.
               </div>
             </div>
-            <div className="row">
-              <div className="col-1" style={{ flexBasis: '1rem' }}>
-                <FontAwesomeIcon icon={faExclamationCircle} color="#006CB2" />
-              </div>
-              <div
-                className="col pr-1 col-text-help"
-                style={{ paddingTop: '0.5rem' }}
-              >
+            <div className="row mt-3">
+              <div className="col-12 col-text-help">
+                <FontAwesomeIcon
+                  className="icon-font-size va-m ml-2"
+                  icon={faExclamationCircle}
+                  color="#006CB2"
+                />
                 עבור הטיפולים הללו אין צורך בטופס:
               </div>
             </div>
             <div className="row">
               <div className="col col-text-help">
                 <div className="row">
-                  <div className="col">
+                  <div className="col-xs-12 col-md-4">
                     <ul>
                       {cares.map((el: ICare, i: number) => {
                         const count = Math.floor(cares.length / 2);
@@ -82,7 +83,7 @@ function Main(): React.ReactElement {
                       })}
                     </ul>
                   </div>
-                  <div className="col">
+                  <div className="col-sx-12 col-md-4">
                     <ul>
                       {cares.map((el: ICare, i: number) => {
                         const count = Math.ceil(cares.length / 2);
@@ -92,27 +93,27 @@ function Main(): React.ReactElement {
                       })}
                     </ul>
                   </div>
+                  <div className="col col-md-4"></div>
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col">
-                <span
-                  className="fa-layers fa-fw"
-                  style={{ fontSize: '1.5rem' }}
-                >
+              <div className="col-12 col-text-help">
+                אם לא קיבלת את הטופס, ניתן להורידו ולהעביר אותו למרפאה למילוי:
+              </div>
+            </div>
+            <div className="row mt-3">
+              <div className="col-12 col-text-help">
+                <span className="fa-layers fa-fw icon-font-size va-m ml-2">
                   <FontAwesomeIcon icon={faCircle} size="lg" color="#006CB2" />
                   <FontAwesomeIcon icon={faFileAlt} size="xs" color="#006CB2" />
                 </span>
+                <a style={{color: "#006CB2"}} href="#">טופס פירוט ההליך הרפואי</a>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <Button variant="primary" onClick={handleClick}>
-        המשך
-      </Button>
     </>
   );
 }
