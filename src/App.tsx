@@ -8,20 +8,18 @@ import Second from './Second';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-
 function App(): React.ReactElement {
   let history = useHistory();
 
   function handleClick() {
-    switch(window.location.pathname) {
+    switch (window.location.pathname) {
       case '/':
         history.push('/second');
         break;
       case '/second':
-        history.push('/second/treatdetails') 
-        break; 
+        history.push('/second/treatdetails');
+        break;
     }
-    
   }
 
   return (
@@ -79,12 +77,38 @@ function App(): React.ReactElement {
             color: 'white',
           }}
         >
-          <h3 style={{ marginTop: 'auto', marginBottom: 'auto', paddingRight: '1.5rem' }}>
+          <h3
+            style={{
+              marginTop: 'auto',
+              marginBottom: 'auto',
+              paddingRight: '1.5rem',
+            }}
+          >
             הגשת תביעה לביטוח שיניים
           </h3>
         </div>
         <div style={{ height: '1rem', backgroundColor: '#CFE4FE' }}></div>
-        <div style={{ height: '2rem', backgroundColor: 'white' }}></div>
+        <div
+          className="align-top text-right"
+          style={{
+            height: '2rem',
+            marginRight: '0.2rem',
+            backgroundColor: 'white',
+          }}
+        >
+          <span
+            className="mr-2 align-top text-right"
+            style={{ fontSize: '1rem', fontWeight: 500, textAlign: 'right' }}
+          >
+            שדות בטופס המסומנים בכוכבית הינם שדות חובה
+          </span>
+          <span
+            className="mr-2 text-danger align-top text-right"
+            style={{ fontSize: '1rem', fontWeight: 900, textAlign: 'right' }}
+          >
+            *
+          </span>
+        </div>
         <div style={{ height: '1rem', backgroundColor: '#CFE4FE' }}></div>
       </header>
 
@@ -93,8 +117,10 @@ function App(): React.ReactElement {
         <Route path="/second" component={Second} />
       </Switch>
 
-      <footer>    
-        <Button variant="primary" onClick={handleClick}>המשך</Button>
+      <footer>
+        <Button variant="primary" onClick={handleClick}>
+          המשך
+        </Button>
       </footer>
     </>
   );
