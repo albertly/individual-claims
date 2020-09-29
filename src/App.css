@@ -1,7 +1,14 @@
 :root {
   --primary_one: #00427f;
-  --helper_color: #006cb2;
+  --info_color: #006cb2;
   --main-size: 2rem;
+}
+
+@media (max-width: 576px) {
+  :root {
+    --main-size: 0.9rem;
+  }
+  
 }
 
 .container,
@@ -35,10 +42,15 @@ footer {
 .btn {
   border-radius: 0;
   padding: 0.5rem 1rem;
-  background-color: var(--helper_color);
+  background-color: var(--info_color);
 }
+
 .col-bl {
-  border-left: 2px solid #E0E0E0;
+  border-left: 1px solid #e0e0e0;
+  background-color: white;
+}
+.col-bb {
+  border-bottom: 1px solid #e0e0e0;
   background-color: white;
 }
 
@@ -59,6 +71,12 @@ footer {
 .col-text-help {
   font-size: 1rem;
 }
+.col-text-info {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--info_color);  
+}
+
 .col-first {
   background-color: var(--primary_one);
   color: white;
@@ -68,10 +86,18 @@ footer {
   font-size: 1.5rem;
 }
 
+input[type='radio'] {
+  transform: scale(2.5);
+}
+
 /* xs size */
 @media (max-width: 576px) {
   .icon-font-size {
     font-size: 1rem;
+  }
+
+  input[type='radio'] {
+    transform: scale(2);
   }
 
   .col,

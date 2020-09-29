@@ -12,28 +12,93 @@ function InsDetails(): React.ReactElement {
           <div className="col-md-3 col-xs-12 col-first">
             פרטי המבוטח לגביו מוגשת התביעה
           </div>
-          <div className="col-md-3 col-xs-12 col-bl">
-            <Form>
-              <div className="mb-1">
-                <Form.Check
-                  className="form-control form-control-lg"
-                  size={10}
-                  inline
-                  label="123456789"
-                  type="radio"
-                  id={`inline--1`}
-                />
+
+          <div className="col-md-9 col-xs-12">
+            <div className="row">
+              <div className="col-md-4 pb-md-4 col-xs-12 col-bl col-bb col-text-info">
+                <div className="mt-md-4">
+                  <Form.Check
+                    className="pl-4"
+                    inline
+                    type="radio"
+                    id={`inline--1`}
+                  />
+                  <label className="pt-2 mb-0" htmlFor={`inline--1`}>
+                    123456789
+                  </label>
+                  <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
+                </div>
               </div>
-            </Form>
+
+              <div className="col-md-4 pb-md-4 col-xs-12 col-bl col-bb col-text-info">
+                <div className="mt-md-4">
+                  <Form.Check
+                    className="pl-4"
+                    inline
+                    type="radio"
+                    id={`inline--2`}
+                  />
+                  <label className="pt-2 mb-0" htmlFor={`inline--2`}>
+                    123456789
+                  </label>
+                  <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
+                </div>
+              </div>
+
+              <div className="col-md-4 pb-md-4 col-xs-12 col-bl col-bb col-text-info">
+                <div className="mt-md-4">
+                  <Form.Check
+                    className="pl-4"
+                    inline
+                    type="radio"
+                    id={`inline--3`}
+                  />
+                  <label className="pt-2 mb-0" htmlFor={`inline--3`}>
+                    123456789
+                  </label>
+                  <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
+                </div>
+              </div>
+
+              <div className="col-md-4 pb-md-4 col-xs-12 col-bl col-bb col-text-info">
+                <div className="mt-md-4">
+                  <Form.Check
+                    className="pl-4"
+                    inline
+                    type="radio"
+                    id={`inline--4`}
+                  />
+                  <label className="pt-2 mb-0" htmlFor={`inline--4`}>
+                    123456789
+                  </label>
+                  <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
+                </div>
+              </div>
+
+              {/* <div className="col-md-4 col-xs-12 col-bl col-bb col-text-info">3 of 4</div> */}
+              {/* <div className="col-md-4 col-xs-12 col-last">4 of 4</div> */}
+            </div>
           </div>
-          <div className="col-md-3 col-xs-12 col-bl">3 of 4</div>
-          <div className="col-md-3 col-xs-12 col-last">4 of 4</div>
         </div>
-        <div className="row row-two">
+        <div className="row row-two bg-white">
           <div className="col-md-3 col-xs-12 col-first">
             פרטי יצירת קשר עם המבוטח
           </div>
-          <div className="col-md-9 col-xs-12 col-last">2 of 2</div>
+          <div className="col-md-9 col-xs-12 align-self-center col-last">
+            <div className="form-row col-text-info">
+              <div className="form-group col-md-4">
+                <label htmlFor="mobile">מספר טלפון נייד</label>
+                <label className="mr-2 text-danger">*</label>
+                <input type="tel" className="form-control" id="mobile" />
+              </div>
+              <div className="form-group col-md-7">
+                <label htmlFor="email">כתובת דואר אלקטרוני</label>
+                <label className="mr-2 text-danger">*</label>
+                <input type="email" className="form-control" id="email" />
+              </div>
+              <div className="col-md-1 d-xs-none"></div>
+            </div>
+          </div>
         </div>
       </section>
     </>
