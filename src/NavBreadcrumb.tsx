@@ -1,86 +1,141 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Badge from 'react-bootstrap/Badge';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBreadcrumb.css';
 
 interface IActive {
-    [key: string]: boolean;
+  [key: string]: boolean;
 }
 
-
 function NavBreadcrumb(): React.ReactElement {
-    const [active, setActive] = useState<IActive>({ l1: true, l2: false, l3: false, l4: false });
-    let history = useHistory();
+  const [active, setActive] = useState<IActive>({
+    l1: false,
+    l2: false,
+    l3: false,
+    l4: false,
+  });
 
-    const handleClick: React.ReactEventHandler = (
-        event: React.SyntheticEvent
-    ) => {
-        event.preventDefault();
-        const e: any = event.nativeEvent.target;
-        const obj: IActive = { l1: false, l2: false, l3: false, l4: false };
-        const prop: string = e.id;
-        obj[prop] = true;
+  useEffect(() => {
+    const obj: IActive = { l1: false, l2: false, l3: false, l4: false };
+    let prop = 'l1';
+    switch (window.location.pathname) {
+      case '/second':
+        prop = 'l1';
+        break;
+      case '/second/treatdetails':
+        prop = 'l2';
+    }
+    setActive({ ...obj, [prop]: true });
+  }, [window.location.pathname]);
 
-        const obj1: IActive = { ...obj, [prop]: true };
+  let history = useHistory();
 
-        setActive(obj1);
+  const handleClick: React.ReactEventHandler = (
+    event: React.SyntheticEvent
+  ) => {
+    event.preventDefault();
+    const e: any = event.currentTarget;
+    const obj: IActive = { l1: false, l2: false, l3: false, l4: false };
+    const prop: string = e.id;
+    obj[prop] = true;
 
-        switch(prop) {
-            case 'l1':
-                history.push("/second");
-                break;
-            case 'l2':
-                history.push("/second/treatdetails");
-                break;
-        }  
-    };
-    
-    return (
-        <Breadcrumb style={{ marginRight: '0.2rem', marginLeft: '0.2rem' }}>
-        <Breadcrumb.Item href="#s1" onClick={handleClick} active={active.l1}>
-          <div id="l1" className={`s ${active.l1 || active.l2 || active.l3 || active.l4 ? 'breadcrumb-item-active' : ''}`}>
-            <Badge pill variant="primary">1</Badge> פרטי מבוטח
-          </div>
-          {active.l1 &&
-            <div className="arrow" />
-          }
-        </Breadcrumb.Item>
+    const obj1: IActive = { ...obj, [prop]: true };
 
-        <Breadcrumb.Item active={active.l2} href="#s1" onClick={handleClick}
+  //  setActive(obj1);
+
+    switch (prop) {
+      case 'l1':
+        history.push('/second');
+        break;
+      case 'l2':
+        history.push('/second/treatdetails');
+        break;
+    }
+  };
+
+  return (
+    <Breadcrumb style={{ marginRight: '0.2rem', marginLeft: '0.2rem' }}>
+      <Breadcrumb.Item
+        id="l1"
+        href="#s1"
+        onClick={handleClick}
+        active={active.l1}
+      >
+        <div
+          className={`s ${
+            active.l1 || active.l2 || active.l3 || active.l4
+              ? 'breadcrumb-item-active'
+              : ''
+          }`}
         >
-          <div id="l2" className={`s ${active.l2 || active.l3 || active.l4 ? 'breadcrumb-item-active' : ''}`}>
-            <Badge pill variant="primary">2</Badge> פרטי טיפול
-          </div>
-          {active.l2 &&
-            <div className="arrow" />
-          }
+          <Badge pill variant="primary">
+            1
+          </Badge>
+          <span className="d-none d-sm-inline">פרטי מבוטח</span>
+          <span className="d-inline d-sm-none">מבוטח</span>
+        </div>
+        {active.l1 && <div className="arrow" />}
+      </Breadcrumb.Item>
 
-        </Breadcrumb.Item>
-        <Breadcrumb.Item href="#s3" active={active.l3} onClick={handleClick}>
+      <Breadcrumb.Item
+        id="l2"
+        active={active.l2}
+        href="#s1"
+        onClick={handleClick}
+      >
+        <div
+          className={`s ${
+            active.l2 || active.l3 || active.l4 ? 'breadcrumb-item-active' : ''
+          }`}
+        >
+          <Badge pill variant="primary">
+            2
+          </Badge>
+          <span className="d-none d-sm-inline">פרטי טיפול</span>
+          <span className="d-inline d-sm-none">טיפול</span>
+        </div>
+        {active.l2 && <div className="arrow" />}
+      </Breadcrumb.Item>
+      <Breadcrumb.Item
+        id="l3"
+        href="#s3"
+        active={active.l3}
+        onClick={handleClick}
+      >
+        <div
+          className={`s ${
+            active.l3 || active.l4 ? 'breadcrumb-item-active' : ''
+          }`}
+        >
+          <Badge pill variant="primary">
+            3
+          </Badge>
+          <span className="d-none d-sm-inline">צירוף מסמכים</span>
+          <span className="d-inline d-sm-none">מסמכים</span>
+        </div>
+        {active.l3 && <div className="arrow" />}
+      </Breadcrumb.Item>
 
-          <div id="l3" className={`s ${active.l3 || active.l4 ? 'breadcrumb-item-active' : ''}`}>
-            <Badge pill variant="primary">3</Badge>צירוף מסמכים
-          </div>
-          {active.l3 &&
-            <div className="arrow" />
-          }
+      <Breadcrumb.Item
+        id="l4"
+        href="#s3"
+        active={active.l4}
+        onClick={handleClick}
+      >
+        <div className={`s ${active.l4 ? 'breadcrumb-item-active' : ''}`}>
+          <Badge pill variant="primary">
+            4
+          </Badge>
+          <span className="d-none d-sm-inline">אמצעי להעברת תשלום</span>
+          <span className="d-inline d-sm-none">תשלום</span>
+        </div>
 
-        </Breadcrumb.Item>
-
-        <Breadcrumb.Item href="#s3" active={active.l4} onClick={handleClick}>
-
-          <div id="l4" className={`s ${active.l4 ? 'breadcrumb-item-active' : ''}`}>
-            <Badge pill variant="primary">4</Badge>אמצעי להעברת תשלום
-          </div>
-          {active.l4 &&
-            <div className="arrow" />
-          }
-
-        </Breadcrumb.Item>
-      </Breadcrumb>
-    )
+        {active.l4 && <div className="arrow" />}
+      </Breadcrumb.Item>
+    </Breadcrumb>
+  );
 }
 export default NavBreadcrumb;

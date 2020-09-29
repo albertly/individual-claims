@@ -66,3 +66,17 @@
     border: 1px solid var(--white);   
     color: var(--white);
   }
+
+  @media (max-width: 576px) {
+    .s {
+      /* position: relative; */
+      padding-left: 0.3rem;      
+    }
+    .badge-primary {
+      font-size: 50%;    
+    }
+    .badge-pill {
+      margin-left: 0.2rem;
+      margin-right: 0.2rem;
+    }
+  }
