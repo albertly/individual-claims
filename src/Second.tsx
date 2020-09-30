@@ -13,7 +13,7 @@ function Second(props: any): React.ReactElement {
     let { path, url } = useRouteMatch();
     
     return (
-        <div>
+        <>
             <NavBreadcrumb />
             <div style={{position: 'relative'}}>
             <TransitionGroup>
@@ -31,7 +31,7 @@ function Second(props: any): React.ReactElement {
                 </CSSTransition>
             </TransitionGroup>
             </div>
-        </div>
+        </>
     )
 }
 export default Second;

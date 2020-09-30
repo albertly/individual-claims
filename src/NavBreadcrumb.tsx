@@ -57,7 +57,7 @@ function NavBreadcrumb(): React.ReactElement {
   };
 
   return (
-    <Breadcrumb style={{ marginRight: '0.2rem', marginLeft: '0.2rem' }}>
+    <Breadcrumb style={{ marginRight: '0.2rem', marginLeft: '0.2rem' }} aria-live="polite">
       <Breadcrumb.Item
         id="l1"
         href="#s1"

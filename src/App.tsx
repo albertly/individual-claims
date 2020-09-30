@@ -88,7 +88,7 @@ function App(): React.ReactElement {
           </h3>
         </div>
         <div style={{ height: '1rem', backgroundColor: '#CFE4FE' }}></div>
-        <div
+        <aside
           className="align-top text-right"
           style={{
             height: '2rem',
@@ -108,7 +108,7 @@ function App(): React.ReactElement {
           >
             *
           </span>
-        </div>
+        </aside>
         <div style={{ height: '1rem', backgroundColor: '#CFE4FE' }}></div>
       </header>
 

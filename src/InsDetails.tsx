@@ -7,9 +7,9 @@ import { Form } from 'react-bootstrap';
 function InsDetails(): React.ReactElement {
   return (
     <>
-      <section>
-        <div className="row row-one">
-          <div className="col-md-3 col-xs-12 col-first">
+      <main aria-label="פרטי המבוטח">
+        <section className="row row-one" aria-labelledby="insFamily">
+          <div id="insFamily" className="col-md-3 col-xs-12 col-first">
             פרטי המבוטח לגביו מוגשת התביעה
           </div>
 
@@ -79,9 +79,9 @@ function InsDetails(): React.ReactElement {
               {/* <div className="col-md-4 col-xs-12 col-last">4 of 4</div> */}
             </div>
           </div>
-        </div>
-        <div className="row row-two bg-white">
-          <div className="col-md-3 col-xs-12 col-first">
+        </section>
+        <section className="row row-two bg-white" aria-labelledby="insContact">
+          <div id="insContact" className="col-md-3 col-xs-12 col-first">
             פרטי יצירת קשר עם המבוטח
           </div>
           <div className="col-md-9 col-xs-12 align-self-center col-last">
@@ -89,18 +89,28 @@ function InsDetails(): React.ReactElement {
               <div className="form-group col-md-4">
                 <label htmlFor="mobile">מספר טלפון נייד</label>
                 <label className="mr-2 text-danger">*</label>
-                <input type="tel" className="form-control" id="mobile" />
+                <input
+                  type="tel"
+                  className="form-control"
+                  id="mobile"
+                  aria-required="true"
+                />
               </div>
               <div className="form-group col-md-7">
                 <label htmlFor="email">כתובת דואר אלקטרוני</label>
                 <label className="mr-2 text-danger">*</label>
-                <input type="email" className="form-control" id="email" />
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  aria-required="true"
+                />
               </div>
               <div className="col-md-1 d-xs-none"></div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </>
   );
 }
