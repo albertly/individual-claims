@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
+import { ContextInsProvider } from './shared/contextData';
 import Main from './Main';
 import Second from './Second';
 
@@ -23,7 +24,7 @@ function App(): React.ReactElement {
   }
 
   return (
-    <>
+    <ContextInsProvider>
       <header style={{ backgroundColor: '#CFE4FE' }}>
         <div style={{ backgroundColor: '#003F80' }}>
           <svg
@@ -122,7 +123,7 @@ function App(): React.ReactElement {
           המשך
         </Button>
       </footer>
-    </>
+    </ContextInsProvider>
   );
 }
 
