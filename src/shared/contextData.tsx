@@ -33,7 +33,7 @@ type Payload = {
   [Types.SetTreat]: ITreat;
 };
 
-type InitialStateType = {
+export type InitialStateType = {
   insured: IIns;
   treatment: ITreat;
 };
