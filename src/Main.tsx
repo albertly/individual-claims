@@ -29,10 +29,7 @@ function Main(): React.ReactElement {
   return (
     <>
       <main aria-label="דף נחיתה">
-        <section
-          className={`row  ${styles.row_one}`}
-          aria-labelledby="mainBefore"
-        >
+        <section className="row" aria-labelledby="mainBefore">
           <h3 id="mainBefore" className="col-md-3 col-xs-12 col-first">
             רגע לפני שמתחילים...
           </h3>
@@ -54,7 +51,7 @@ function Main(): React.ReactElement {
             </ul>
           </div>
         </section>
-        <section className={`row ${styles.row_two}`} aria-labelledby="claimDoc">
+        <section className="row" aria-labelledby="claimDoc">
           <h3 id="claimDoc" className="col-md-3 col-xs-12 col-first">
             טופס התביעה
           </h3>

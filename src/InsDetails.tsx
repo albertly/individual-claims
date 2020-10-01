@@ -3,23 +3,21 @@ import { useForm } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 
 import {
-  ContextInsProvider,
   InsContext,
   IIns as Inputs,
   Types,
 } from './shared/contextData';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './InsDetails.css';
 
 function InsDetails(): React.ReactElement {
   const { state, dispatch } = useContext(InsContext);
   const { register, handleSubmit, watch, errors } = useForm<Inputs>({
-    defaultValues: { ...state },
+    defaultValues: { ...state.insured },
   });
 
   const onSubmit = (data: Inputs) => {
-    dispatch({ type: Types.Set, payload: { ...data } });
+    dispatch({ type: Types.SetIns, payload: { ...data } });
     console.log('data', data);
   };
 
@@ -30,7 +28,7 @@ function InsDetails(): React.ReactElement {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
-          <section className="row row-one" aria-labelledby="insFamily">
+          <section className="row" aria-labelledby="insFamily">
             <h3 id="insFamily" className="col-md-3 col-xs-12 col-first">
               פרטי המבוטח לגביו מוגשת התביעה
             </h3>
@@ -122,7 +120,7 @@ function InsDetails(): React.ReactElement {
             </div>
           </section>
           <section
-            className="row row-two bg-white"
+            className="row bg-white"
             aria-labelledby="insContact"
           >
             <h3 id="insContact" className="col-md-3 col-xs-12 col-first">
