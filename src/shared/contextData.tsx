@@ -13,52 +13,84 @@ type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum Types {
-  Set = 'SET_DATA',
+  SetIns = 'SET_DATA_INS',
+  SetTreat = 'SET_DATA_TREAT',
 }
 
 export type IIns = {
-    insured: string;
-    mobile: string;
-    email: string;
+  insured: string;
+  mobile: string;
+  email: string;
 };
 
-type InsPayload = {
-  [Types.Set]: IIns;
+export type ITreat = {
+  invoice: number;
+  doctorId?: number;
 };
 
+type Payload = {
+  [Types.SetIns]: IIns;
+  [Types.SetTreat]: ITreat;
+};
 
-export type InsActions = ActionMap<InsPayload>[keyof ActionMap<InsPayload>];
+type InitialStateType = {
+  insured: IIns;
+  treatment: ITreat;
+};
+
+export type InsActions = ActionMap<Payload>[keyof ActionMap<Payload>];
 
 interface IAction {
   type: string;
-  payload: IIns;
+  payload: IIns | ITreat;
 }
 
-const initialState: IIns = {
-  insured: '',
-  mobile: '',
-  email: '',
+const initialState: InitialStateType = {
+  insured: {
+    insured: '',
+    mobile: '',
+    email: '',
+  },
+  treatment: {
+    invoice: 0,
+    doctorId: undefined,
+  },
 };
 
 const InsContext = React.createContext<{
-  state: IIns;
+  state: InitialStateType;
   dispatch: React.Dispatch<any>;
 }>({ state: initialState, dispatch: () => null });
 
-const reducer = (state: IIns, action: InsActions) => {
+const insReducer = (state: IIns, action: InsActions) => {
   switch (action.type) {
-    case Types.Set:
+    case Types.SetIns:
       return { ...action.payload };
     default:
       return state;
   }
 };
 
-const setData = (dispatch: React.Dispatch<IAction>, state: IIns) => {};
+const treatReducer = (state: ITreat, action: InsActions) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+const mainReducer = (
+  { insured, treatment }: InitialStateType,
+  action: InsActions
+) => ({
+  insured: insReducer(insured, action),
+  treatment: treatReducer(treatment, action)
+});
+
+const setData = (dispatch: React.Dispatch<InsActions>, state: IIns) => {};
 
 // eslint-disable-next-line react/prop-types
 const ContextInsProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(mainReducer, initialState);
 
   return (
     <InsContext.Provider value={{ state, dispatch }}>
