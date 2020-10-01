@@ -31,9 +31,9 @@ function InsDetails(): React.ReactElement {
           noValidate
         >
           <section className="row row-one" aria-labelledby="insFamily">
-            <div id="insFamily" className="col-md-3 col-xs-12 col-first">
+            <h3 id="insFamily" className="col-md-3 col-xs-12 col-first">
               פרטי המבוטח לגביו מוגשת התביעה
-            </div>
+            </h3>
 
             <div className="col-md-9 col-xs-12">
               <div className="row">
@@ -125,9 +125,9 @@ function InsDetails(): React.ReactElement {
             className="row row-two bg-white"
             aria-labelledby="insContact"
           >
-            <div id="insContact" className="col-md-3 col-xs-12 col-first">
+            <h3 id="insContact" className="col-md-3 col-xs-12 col-first">
               פרטי יצירת קשר עם המבוטח
-            </div>
+            </h3>
             <div className="col-md-9 col-xs-12 align-self-center col-last">
               <div className="form-row col-text-info">
                 <div className="form-group col-md-4">

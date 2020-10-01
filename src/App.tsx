@@ -69,7 +69,7 @@ function App(): React.ReactElement {
         </div>
         <div style={{ height: '2rem', backgroundColor: '#CFE4FE' }}></div>
         <div
-          className="text-right align-middle"
+          className="text-right align-middle d-flex"
           style={{
             marginRight: '0.2rem',
             marginLeft: '0.2rem',
@@ -78,15 +78,17 @@ function App(): React.ReactElement {
             color: 'white',
           }}
         >
-          <h3
+          <h1
+            // className="display-4" 
             style={{
-              marginTop: 'auto',
-              marginBottom: 'auto',
+              // marginTop: 'auto',
+              // marginBottom: 'auto',
               paddingRight: '1.5rem',
+              alignSelf: 'center'
             }}
           >
             הגשת תביעה לביטוח שיניים
-          </h3>
+          </h1>
         </div>
         <div style={{ height: '1rem', backgroundColor: '#CFE4FE' }}></div>
         <aside

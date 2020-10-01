@@ -29,10 +29,13 @@ function Main(): React.ReactElement {
   return (
     <>
       <main aria-label="דף נחיתה">
-        <section className={`row  ${styles.row_one}`} aria-labelledby="mainBefore">
-          <div id="mainBefore" className="col-md-3 col-xs-12 col-first">
+        <section
+          className={`row  ${styles.row_one}`}
+          aria-labelledby="mainBefore"
+        >
+          <h3 id="mainBefore" className="col-md-3 col-xs-12 col-first">
             רגע לפני שמתחילים...
-          </div>
+          </h3>
           <div className="col-md-9 col-xs-12 col-last col-text-help">
             <p>
               כדי שנוכל להתקדם בזריזות, אנחנו מבקשים שסריקה או צילום של המסמכים
@@ -52,7 +55,9 @@ function Main(): React.ReactElement {
           </div>
         </section>
         <section className={`row ${styles.row_two}`} aria-labelledby="claimDoc">
-          <div id="claimDoc" className="col-md-3 col-xs-12 col-first">טופס התביעה</div>
+          <h3 id="claimDoc" className="col-md-3 col-xs-12 col-first">
+            טופס התביעה
+          </h3>
           <div className="col-md-9 col-xs-12 col-last">
             <div className="row">
               <div className="col-12 col-text-help">
@@ -108,7 +113,9 @@ function Main(): React.ReactElement {
                   <FontAwesomeIcon icon={faCircle} size="lg" color="#006CB2" />
                   <FontAwesomeIcon icon={faFileAlt} size="xs" color="#006CB2" />
                 </span>
-                <a style={{color: "#006CB2"}} href="#">טופס פירוט ההליך הרפואי</a>
+                <a style={{ color: '#006CB2' }} href="#">
+                  טופס פירוט ההליך הרפואי
+                </a>
               </div>
             </div>
           </div>

@@ -1,12 +1,12 @@
-section {
+/* section {
   margin: 0 1rem;
-}
+} */
 
 .row-one {
-  min-height: 8rem;
+  /* min-height: 8rem; */
   margin-bottom: 1rem;
 }
 .row-two {
-  min-height: 10rem;
+  /* min-height: 10rem; */
   margin-bottom: 1rem;
 }
