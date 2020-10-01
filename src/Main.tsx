@@ -118,6 +118,11 @@ function Main(): React.ReactElement {
           </div>
         </section>
       </main>
+      <footer>
+        <Button variant="primary" onClick={handleClick}>
+          המשך
+        </Button>
+      </footer>
     </>
   );
 }

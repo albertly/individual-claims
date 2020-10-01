@@ -122,7 +122,7 @@ function App(): React.ReactElement {
 
       <footer>
         <Button variant="primary" onClick={handleClick}>
-          המשך
+          המשך A
         </Button>
       </footer>
     </ContextInsProvider>

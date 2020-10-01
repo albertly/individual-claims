@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 
-import {
-  InsContext,
-  IIns as Inputs,
-  Types,
-} from './shared/contextData';
+import { InsContext, IIns as Inputs, Types } from './shared/contextData';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function InsDetails(): React.ReactElement {
+  const inputEl = useRef<any>();
+  let history = useHistory();
   const { state, dispatch } = useContext(InsContext);
   const { register, handleSubmit, watch, errors } = useForm<Inputs>({
     defaultValues: { ...state.insured },
@@ -18,16 +18,21 @@ function InsDetails(): React.ReactElement {
 
   const onSubmit = (data: Inputs) => {
     dispatch({ type: Types.SetIns, payload: { ...data } });
+    history.push('/second/treatdetails');
     console.log('data', data);
   };
 
+  function handleClick() {
+    if (inputEl && inputEl.current) {
+      if (inputEl.current !== undefined) {
+        inputEl.current.click();
+      }
+    }
+  }
   return (
     <>
       <main aria-label="פרטי המבוטח">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <section className="row" aria-labelledby="insFamily">
             <h3 id="insFamily" className="col-md-3 col-xs-12 col-first">
               פרטי המבוטח לגביו מוגשת התביעה
@@ -53,10 +58,10 @@ function InsDetails(): React.ReactElement {
                     </label>
                     <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
                     {errors.insured && (
-                    <div className="invalid-tooltip" role="alert">
-                      {errors.insured.message}
-                    </div>
-                  )}
+                      <div className="invalid-tooltip" role="alert">
+                        {errors.insured.message}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -119,10 +124,7 @@ function InsDetails(): React.ReactElement {
               </div>
             </div>
           </section>
-          <section
-            className="row bg-white"
-            aria-labelledby="insContact"
-          >
+          <section className="row bg-white" aria-labelledby="insContact">
             <h3 id="insContact" className="col-md-3 col-xs-12 col-first">
               פרטי יצירת קשר עם המבוטח
             </h3>
@@ -176,9 +178,14 @@ function InsDetails(): React.ReactElement {
               </div>
             </div>
           </section>
-          <input type="submit" />
+          <input type="submit" ref={inputEl} />
         </form>
       </main>
+      <footer>
+        <Button variant="primary" onClick={handleClick}>
+          המשך
+        </Button>
+      </footer>
     </>
   );
 }
