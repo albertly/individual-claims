@@ -145,3 +145,9 @@ input[type='radio'] {
 .va-m {
   vertical-align: middle;
 }
+
+/* Utilites */
+.hidden {
+  position: absolute;
+  clip: 1px, 1px, 1px, 1px;
+ }

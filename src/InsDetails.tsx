@@ -31,7 +31,10 @@ function InsDetails(): React.ReactElement {
   }
   return (
     <>
-      <main aria-label="פרטי המבוטח">
+      <main aria-labelledby="h2_insDetails">
+        <h2 id="h2_insDetails" className="hidden">
+          פרטי המבוטח
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <section className="row" aria-labelledby="insFamily">
             <h3 id="insFamily" className="col-md-3 col-xs-12 col-first">

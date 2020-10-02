@@ -28,7 +28,8 @@ function Main(): React.ReactElement {
 
   return (
     <>
-      <main aria-label="דף נחיתה">
+      <main aria-labelledby="h2_p1">
+        <h2 id="h2_p1" className="hidden">דף נחיתה</h2>
         <section className="row" aria-labelledby="mainBefore">
           <h3 id="mainBefore" className="col-md-3 col-xs-12 col-first">
             רגע לפני שמתחילים...

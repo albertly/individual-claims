@@ -25,7 +25,10 @@ function TreadDetails(): React.ReactElement {
 
   return (
     <>
-      <main aria-label="פרטי טיפול">
+      <main aria-label="h2_treatDetails">
+        <h2 id="h2_treatDetails" className="hidden">
+          פרטי טיפול
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <section className="row" aria-labelledby="treatDetails">
             <h3 id="treatDetails" className="col-md-3 col-xs-12 col-first">
