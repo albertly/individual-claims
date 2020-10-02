@@ -79,12 +79,12 @@ function App(): React.ReactElement {
           }}
         >
           <h1
-            // className="display-4" 
+            // className="display-4"
             style={{
               // marginTop: 'auto',
               // marginBottom: 'auto',
               paddingRight: '1.5rem',
-              alignSelf: 'center'
+              alignSelf: 'center',
             }}
           >
             הגשת תביעה לביטוח שיניים
@@ -119,12 +119,6 @@ function App(): React.ReactElement {
         <Route exact path="/" component={Main} />
         <Route path="/second" component={Second} />
       </Switch>
-
-      <footer>
-        <Button variant="primary" onClick={handleClick}>
-          המשך A
-        </Button>
-      </footer>
     </ContextInsProvider>
   );
 }

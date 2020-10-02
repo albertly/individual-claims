@@ -23,6 +23,9 @@ function TreadDetails(): React.ReactElement {
     history.push('/second');
   }
 
+  function handleBackClick() {
+    history.push('/second');
+  }
   return (
     <>
       <main aria-label="h2_treatDetails">
@@ -85,10 +88,14 @@ function TreadDetails(): React.ReactElement {
         </section>
       </main>
 
-      <footer>
+      <footer className="d-flex justify-content-end align-items-center">
+        <nav>
+        <a style={{textDecoration: 'underline'}} href="#" onClick={handleBackClick}>חזרה אחורה</a>
+        <span className="px-2">או</span>
         <Button variant="primary" onClick={handleClick}>
           המשך
         </Button>
+        </nav>
       </footer>
     </>
   );

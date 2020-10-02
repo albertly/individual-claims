@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { useForm } from 'react-hook-form';
@@ -9,7 +9,6 @@ import { InsContext, IIns as Inputs, Types } from './shared/contextData';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function InsDetails(): React.ReactElement {
-  const inputEl = useRef<any>();
   let history = useHistory();
   const { state, dispatch } = useContext(InsContext);
   const { register, handleSubmit, watch, errors } = useForm<Inputs>({
@@ -18,17 +17,12 @@ function InsDetails(): React.ReactElement {
 
   const onSubmit = (data: Inputs) => {
     dispatch({ type: Types.SetIns, payload: { ...data } });
-    history.push('/second/treatdetails');
-    console.log('data', data);
   };
 
   function handleClick() {
-    if (inputEl && inputEl.current) {
-      if (inputEl.current !== undefined) {
-        inputEl.current.click();
-      }
-    }
+    handleSubmit(onSubmit)().then(() => history.push('/second/treatdetails'));
   }
+
   return (
     <>
       <main aria-labelledby="h2_insDetails">
@@ -181,13 +175,14 @@ function InsDetails(): React.ReactElement {
               </div>
             </div>
           </section>
-          <input type="submit" ref={inputEl} />
         </form>
       </main>
       <footer>
-        <Button variant="primary" onClick={handleClick}>
-          המשך
-        </Button>
+        <nav>
+          <Button variant="primary" onClick={handleClick}>
+            המשך
+          </Button>
+        </nav>
       </footer>
     </>
   );
