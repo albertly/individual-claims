@@ -78,6 +78,7 @@ footer {
 .col,
 .col-1,
 .col-2,
+.col-md-4,
 .col-md-3,
 .col-md-9,
 .col-4,
@@ -129,6 +130,7 @@ input[type='radio'] {
   .col-1,
   .col-2,
   .col-md-3,
+  .col-md-4
   .col-md-3,
   .col-md-6,
   .col-md-9,

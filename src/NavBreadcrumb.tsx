@@ -27,6 +27,10 @@ function NavBreadcrumb(): React.ReactElement {
         break;
       case '/second/treatdetails':
         prop = 'l2';
+        break;
+      case '/second/docs':
+        prop = 'l3';
+        break;
     }
     setActive({ ...obj, [prop]: true });
   }, [window.location.pathname]);
@@ -44,7 +48,7 @@ function NavBreadcrumb(): React.ReactElement {
 
     const obj1: IActive = { ...obj, [prop]: true };
 
-  //  setActive(obj1);
+    //  setActive(obj1);
 
     switch (prop) {
       case 'l1':
@@ -53,11 +57,17 @@ function NavBreadcrumb(): React.ReactElement {
       case 'l2':
         history.push('/second/treatdetails');
         break;
+      case 'l3':
+        history.push('/second/docs');
+        break;
     }
   };
 
   return (
-    <Breadcrumb style={{ marginRight: '0.2rem', marginLeft: '0.2rem' }} aria-live="polite">
+    <Breadcrumb
+      style={{ marginRight: '0.2rem', marginLeft: '0.2rem' }}
+      aria-live="polite"
+    >
       <Breadcrumb.Item
         id="l1"
         href="#s1"
