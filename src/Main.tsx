@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faExclamationCircle,
-  faFileAudio,
-  faLayerGroup,
-} from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { faFileAlt, faCircle } from '@fortawesome/free-regular-svg-icons';
 
 import { getCares, ICare } from './services/Cares';
