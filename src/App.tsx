@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
-import { ContextInsProvider } from './shared/contextData';
+import { DataProvider } from './shared/contextData';
 import Main from './Main';
 import Second from './Second';
 
@@ -24,7 +24,7 @@ function App(): React.ReactElement {
   }
 
   return (
-    <ContextInsProvider>
+    <DataProvider>
       <header style={{ backgroundColor: '#CFE4FE' }}>
         <div style={{ backgroundColor: '#003F80' }}>
           <svg
@@ -119,7 +119,7 @@ function App(): React.ReactElement {
         <Route exact path="/" component={Main} />
         <Route path="/second" component={Second} />
       </Switch>
-    </ContextInsProvider>
+    </DataProvider>
   );
 }
 

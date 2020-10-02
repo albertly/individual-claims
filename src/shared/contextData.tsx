@@ -17,33 +17,56 @@ export enum Types {
   SetTreat = 'SET_DATA_TREAT',
 }
 
-export type IIns = {
+// Insured
+export type InsType  = {
   insured: string;
   mobile: string;
   email: string;
 };
 
-export type ITreat = {
+type InsPayload = {
+  [Types.SetIns]: InsType;
+};
+
+export type InsActions = ActionMap<InsPayload>[keyof ActionMap<InsPayload>];
+
+const insReducer = (state: InsType, action: InsActions | TreatActions) => {
+
+  switch (action.type) {
+    case Types.SetIns:
+      return { ...action.payload };
+    default:
+      return state;
+  }
+};
+
+// Treatment
+
+export type  TreatType = {
   invoice: number;
   doctorId?: number;
 };
 
-type Payload = {
-  [Types.SetIns]: IIns;
-  [Types.SetTreat]: ITreat;
+type TreatPayload = {
+  [Types.SetTreat]: TreatType;
 };
 
+export type TreatActions = ActionMap<TreatPayload>[keyof ActionMap<TreatPayload>];
+
+const treatReducer = (state: TreatType, action: InsActions | TreatActions) => {
+  switch (action.type) {
+    case Types.SetTreat:
+      return { ...action.payload };
+    default:
+      return state;
+  }
+};
+
+// Context
 export type InitialStateType = {
-  insured: IIns;
-  treatment: ITreat;
+  insured: InsType;
+  treatment: TreatType;
 };
-
-export type InsActions = ActionMap<Payload>[keyof ActionMap<Payload>];
-
-interface IAction {
-  type: string;
-  payload: IIns | ITreat;
-}
 
 const initialState: InitialStateType = {
   insured: {
@@ -57,46 +80,29 @@ const initialState: InitialStateType = {
   },
 };
 
-const InsContext = React.createContext<{
+const DataContext = React.createContext<{
   state: InitialStateType;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<InsActions | TreatActions>;
 }>({ state: initialState, dispatch: () => null });
-
-const insReducer = (state: IIns, action: InsActions) => {
-  switch (action.type) {
-    case Types.SetIns:
-      return { ...action.payload };
-    default:
-      return state;
-  }
-};
-
-const treatReducer = (state: ITreat, action: InsActions) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
 
 const mainReducer = (
   { insured, treatment }: InitialStateType,
-  action: InsActions
+  action: InsActions | TreatActions
 ) => ({
   insured: insReducer(insured, action),
   treatment: treatReducer(treatment, action)
 });
 
-const setData = (dispatch: React.Dispatch<InsActions>, state: IIns) => {};
 
 // eslint-disable-next-line react/prop-types
-const ContextInsProvider: React.FC = ({ children }) => {
+const DataProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
 
   return (
-    <InsContext.Provider value={{ state, dispatch }}>
+    <DataContext.Provider value={{ state, dispatch }}>
       {children}
-    </InsContext.Provider>
+    </DataContext.Provider>
   );
 };
 
-export { InsContext, ContextInsProvider, setData };
+export { DataContext, DataProvider };
