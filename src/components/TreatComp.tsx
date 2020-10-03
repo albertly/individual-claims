@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { ArrayField, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { DataContext, TreatType as Inputs, Types } from '../shared/contextData';
@@ -8,24 +8,62 @@ import { Treatment } from '../services/Treatments';
 import Button from 'react-bootstrap/Button';
 
 type Props = {
-    treatments: Treatment[];
-    treatment: Inputs;
-}
-function TreatComp({treatments, treatment}: Props): React.ReactElement {
-//   const treatments: Treatment[] = props.treatments;
-//   const treatment: Inputs = props.treatment;
-  const [kind, setKind] = useState(0);
+  treatments: Treatment[];
+  treatment: Partial<ArrayField<Record<string, any>, 'id'>>;
+  index: number;
+  register: any;
+  control: any;
+  setValue: any;
+};
+function TreatComp({
+  treatments,
+  treatment,
+  index,
+  register,
+  control,
+  setValue,
+}: Props): React.ReactElement {
+  const lookupTreatKind = (kindId: number | string | undefined): number => {
+    if (kindId) {
+      kindId = +kindId;
+    } else {
+      kindId = 0;
+    }
 
-  const { register, handleSubmit, watch, errors } = useForm<Inputs>({
-    defaultValues: { ...treatment },
-  });
+    const t = treatments.find(t => t.id === kindId);
+
+    return t ? t.kind : 0;
+  };
+
+  const [kind, setKind] = useState(lookupTreatKind(treatment.id));
+
+  //   const { register, handleSubmit, watch, errors } = useForm<Inputs>({
+  //     defaultValues: { ...treatment },
+  //   });
 
   function handleTreatChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const t = treatments.find(t => t.id === +e.target.value);
+    // setValue("lastName", "Hopper", {
+    //     shouldValidate: true,
+    //     shouldDirty: true
+    //   })
 
-    t ? setKind(t.kind) : setKind(0);
+    //React.useEffect(() => {
+    //     setValue("nest", [
+    //       {
+    //         value: 0,
+    //         nestedArray: [
+    //           {
+    //             value: 8
+    //           }
+    //         ]
+    //       }
+    //     ]);
+    //   }, [setValue]);
 
-    console.log(e.target.value);
+    console.log('id', e.target.value);
+    setValue('treatments',   [{ id: e.target.value }]);
+    console.log('treatment.id', treatment.id);
+    setKind(lookupTreatKind(+e.target.value));
   }
 
   return (
@@ -34,16 +72,26 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
         <div className="col col-last">
           <div className="form-row">
             <div className="form-group col-md-4">
-              <label htmlFor="treatKind">סוג טיפול</label>
+              <label htmlFor={`treatments[${index}].id`}>סוג טיפול</label>
               <label className="mr-2 text-danger">*</label>
               <select
                 className="form-control"
-                id="treatKind"
+                id={`treatments[${index}].id`}
+                name={`treatments[${index}].id`}
                 onChange={handleTreatChange}
+                value={`${treatment.id}`}
+                defaultValue={`${treatment.id}`}
+                ref={register()}
               >
-                <option>בחירה</option>
+                <option selected={treatment.id == '0'} key={0} value={0}>
+                  בחירה
+                </option>
                 {treatments.map(e => (
-                  <option key={e.id} value={e.id}>
+                  <option
+                    selected={e.id + '' == treatment.id}
+                    key={e.id}
+                    value={e.id}
+                  >
                     {e.item}
                   </option>
                 ))}
@@ -51,29 +99,38 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
             </div>
 
             <div className="form-group col-md-3">
-              <label htmlFor="treatDate">תאריך הטיפול</label>
+              <label htmlFor={`treatments[${index}].treatDate`}>
+                תאריך הטיפול
+              </label>
               <label className="mr-2 text-danger">*</label>
+
               <input
-                name="treatDate"
+                name={`treatments[${index}].treatDate`}
                 type="date"
                 className="form-control"
-                id="treatDate"
+                id={`treatments[${index}].treatDate`}
+                defaultValue={`${treatment.treatDate}`}
                 aria-required="true"
                 required
+                ref={register()}
               />
             </div>
 
             <div className="col-md-3">
-              <label htmlFor="treatCost">עלות הטיפול</label>
+              <label htmlFor={`treatments[${index}].treatCost`}>
+                עלות הטיפול
+              </label>
               <label className="mr-2 text-danger">*</label>
               <div className="input-group">
                 <input
-                  name="treatCost"
+                  name={`treatments[${index}].treatCost`}
                   type="text"
                   className="form-control"
-                  id="treatCost"
+                  id={`treatments[${index}].treatCost`}
+                  defaultValue={`${treatment.treatCost}`}
                   aria-required="true"
                   required
+                  ref={register()}
                 />
                 <div className="input-group-append">
                   <span className="input-group-text">&#8362;</span>
@@ -91,14 +148,16 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
           <div className="form-row">
             {kind >= 2 && (
               <div className="form-group col-md-1">
-                <label htmlFor="tooth">מספר שן</label>
+                <label htmlFor={`treatments[${index}].tooth`}>מספר שן</label>
                 <label className="mr-2 text-danger">*</label>
 
                 <input
                   type="number"
                   className="form-control"
-                  id="tooth"
-                  name="tooth"
+                  id={`treatments[${index}].tooth`}
+                  name={`treatments[${index}].tooth`}
+                  defaultValue={`${treatment.tooth}`}
+                  ref={register()}
                 />
               </div>
             )}
@@ -114,12 +173,13 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      id="inlineCheckbox1"
-                      value="option1"
+                      id={`treatments[${index}].CL_V`}
+                      value={`${treatment.CL_V}`}
+                      ref={register()}
                     />
                     <label
                       className="form-check-label pr-4"
-                      htmlFor="inlineCheckbox1"
+                      htmlFor={`treatments[${index}].CL_V`}
                     >
                       CL/V
                     </label>
@@ -128,12 +188,13 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      id="inlineCheckbox2"
-                      value="option2"
+                      id={`treatments[${index}].L_P`}
+                      value={`${treatment.L_P}`}
+                      ref={register()}
                     />
                     <label
                       className="form-check-label pr-4"
-                      htmlFor="inlineCheckbox2"
+                      htmlFor={`treatments[${index}].L_P`}
                     >
                       L/P
                     </label>
@@ -142,12 +203,13 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      id="inlineCheckbox3"
-                      value="option3"
+                      id={`treatments[${index}].B`}
+                      value={`${treatment.B}`}
+                      ref={register()}
                     />
                     <label
                       className="form-check-label pr-4"
-                      htmlFor="inlineCheckbox3"
+                      htmlFor={`treatments[${index}].B`}
                     >
                       B
                     </label>
@@ -159,12 +221,13 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      id="inlineCheckbox4"
-                      value="option4"
+                      id={`treatments[${index}].D`}
+                      value={`${treatment.D}`}
+                      ref={register()}
                     />
                     <label
                       className="form-check-label pr-4"
-                      htmlFor="inlineCheckbox4"
+                      htmlFor={`treatments[${index}].D`}
                     >
                       D
                     </label>
@@ -174,12 +237,13 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      id="inlineCheckbox5"
-                      value="option5"
+                      id={`treatments[${index}].M`}
+                      value={`${treatment.M}`}
+                      ref={register()}
                     />
                     <label
                       className="form-check-label pr-4"
-                      htmlFor="inlineCheckbox5"
+                      htmlFor={`treatments[${index}].M`}
                     >
                       M
                     </label>
@@ -189,12 +253,13 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      id="inlineCheckbox6"
-                      value="option6"
+                      id={`treatments[${index}].O`}
+                      value={`${treatment.O}`}
+                      ref={register()}
                     />
                     <label
                       className="form-check-label pr-4"
-                      htmlFor="inlineCheckbox6"
+                      htmlFor={`treatments[${index}].O`}
                     >
                       O
                     </label>
@@ -206,16 +271,22 @@ function TreatComp({treatments, treatment}: Props): React.ReactElement {
 
             {kind >= 1 && (
               <div className="form-group col-md-4">
-                <label className="d-block" htmlFor="notes">
+                <label
+                  className="d-block"
+                  htmlFor={`treatments[${index}].notes`}
+                >
                   הערות רפואיות נוספות
                 </label>
                 <textarea
                   className="form-control"
-                  id="notes"
-                  name="notes"
+                  id={`treatments[${index}].notes`}
+                  name={`treatments[${index}].notes`}
                   rows={5}
                   cols={60}
-                ></textarea>
+                  ref={register()}
+                >
+                  {`treatments[${index}].notes`}
+                </textarea>
               </div>
             )}
             <div className="col-md-8 d-xs-none"></div>
