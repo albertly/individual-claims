@@ -15,10 +15,11 @@ type ActionMap<M extends { [index: string]: any }> = {
 export enum Types {
   SetIns = 'SET_DATA_INS',
   SetTreat = 'SET_DATA_TREAT',
+  AddTreatDetail = 'ADD_TREAT_DETAIL',
 }
 
 // Insured
-export type InsType  = {
+export type InsType = {
   insured: string;
   mobile: string;
   email: string;
@@ -31,7 +32,6 @@ type InsPayload = {
 export type InsActions = ActionMap<InsPayload>[keyof ActionMap<InsPayload>];
 
 const insReducer = (state: InsType, action: InsActions | TreatActions) => {
-
   switch (action.type) {
     case Types.SetIns:
       return { ...action.payload };
@@ -41,22 +41,42 @@ const insReducer = (state: InsType, action: InsActions | TreatActions) => {
 };
 
 // Treatment
+export type TreatDetail = {
+  id: number;
+  treatDate: Date;
+  cost: number;
+  notes: string;
+  tooth?: number;
+  CL_V?: boolean;
+  L_P?: boolean;
+  B?: boolean;
+  D?: boolean;
+  M?: boolean;
+  O?: boolean;
+};
 
-export type  TreatType = {
+export type TreatType = {
   invoice: number;
   doctorId?: number;
+  treatments: TreatDetail[];
 };
 
 type TreatPayload = {
   [Types.SetTreat]: TreatType;
+  [Types.AddTreatDetail]: TreatDetail;
 };
 
-export type TreatActions = ActionMap<TreatPayload>[keyof ActionMap<TreatPayload>];
+export type TreatActions = ActionMap<TreatPayload>[keyof ActionMap<
+  TreatPayload
+>];
 
 const treatReducer = (state: TreatType, action: InsActions | TreatActions) => {
+  
   switch (action.type) {
     case Types.SetTreat:
       return { ...action.payload };
+    case Types.AddTreatDetail:
+      return {...state, treatments: [...state.treatments, {...action.payload}]};
     default:
       return state;
   }
@@ -77,6 +97,7 @@ const initialState: InitialStateType = {
   treatment: {
     invoice: 0,
     doctorId: undefined,
+    treatments: [],
   },
 };
 
@@ -90,9 +111,8 @@ const mainReducer = (
   action: InsActions | TreatActions
 ) => ({
   insured: insReducer(insured, action),
-  treatment: treatReducer(treatment, action)
+  treatment: treatReducer(treatment, action),
 });
-
 
 // eslint-disable-next-line react/prop-types
 const DataProvider: React.FC = ({ children }) => {
