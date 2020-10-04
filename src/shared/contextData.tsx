@@ -42,7 +42,7 @@ const insReducer = (state: InsType, action: InsActions | TreatActions) => {
 
 // Treatment
 export type TreatDetail = {
-  id: number;
+  treatId: number;
   treatDate: Date;
   cost: number;
   notes: string;
