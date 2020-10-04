@@ -150,8 +150,16 @@ function TreatComp({
                 defaultValue={`${treatment.treatDate}`}
                 aria-required="true"
                 required
-                ref={register()}
+                ref={register({
+                  required: 'שדה חובה',
+                })}
               />
+
+              {errors.treatments && errors.treatments[index].treatDate && (
+                <div className="invalid-tooltip" role="alert">
+                  {errors.treatments[index].treatDate.message}
+                </div>
+              )}
             </div>
 
             <div className="col-md-3">
