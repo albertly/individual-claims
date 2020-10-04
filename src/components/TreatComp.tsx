@@ -1,37 +1,79 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { ArrayField, useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react';
+import { ArrayField, Controller } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { DataContext, TreatType as Inputs, Types } from '../shared/contextData';
-import { getTreatments, Treatment } from '../services/Treatments';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { Treatment } from '../services/Treatments';
 
 import Button from 'react-bootstrap/Button';
-import { debug } from 'console';
 
 type Props = {
+  key?: string;
+  treats: Treatment[];
   treatment: Partial<ArrayField<Record<string, any>, 'id'>>;
   index: number;
   register: any;
   control: any;
   setValue: any;
+  getValues: any;
+  remove: any;
+  errors: any;
 };
+
+function Checkbox({
+  ctlName,
+  lblName,
+  control,
+}: {
+  ctlName: string;
+  lblName: string;
+  control: any;
+}): React.ReactElement {
+  return (
+    <>
+      <Controller
+        control={control}
+        name={ctlName}
+        render={({ onChange, onBlur, value, name }) => (
+          <input
+            className="form-check-input"
+            onBlur={onBlur}
+            type="checkbox"
+            onChange={e => onChange(e.target.checked)}
+            checked={value}
+            name={name}
+            id={name}
+          />
+        )}
+      />
+
+      <label className="form-check-label pr-4" htmlFor={ctlName}>
+        {lblName}
+      </label>
+    </>
+  );
+}
+
 function TreatComp({
+  key,
+  treats,
   treatment,
   index,
   register,
   control,
   setValue,
+  getValues,
+  remove,
+  errors,
 }: Props): React.ReactElement {
-  const [treatments, setTreatments] = useState<Treatment[]>([]);
-
   const lookupTreatKind = (kindId: number | string | undefined): number => {
     if (kindId) {
+      //ToDo: not kindId but treatId
       kindId = +kindId;
     } else {
       kindId = 0;
     }
 
-    const t = treatments.find(t => t.id === kindId);
+    const t = treats.find(t => t.id === kindId);
 
     return t ? t.kind : 0;
   };
@@ -39,46 +81,61 @@ function TreatComp({
   const [kind, setKind] = useState(0);
 
   useEffect(() => {
-    console.log('treatment.id', treatment.id);
-
-    setTreatments(getTreatments());
-    setKind(lookupTreatKind(treatment.id));
-    console.log('kind', kind);
-  }, [treatments]);
-
-  function handleTreatChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setValue('treatments', [{ id: e.target.value }]);
-    setKind(lookupTreatKind(+e.target.value));
-  }
+    setKind(lookupTreatKind(treatment.treatId));
+  }, [treats]);
 
   return (
     <>
-      <section className="row">
+      <section key={key} className="row">
         <div className="col col-last">
           <div className="form-row">
             <div className="form-group col-md-4">
-              <label htmlFor={`treatments[${index}].id`}>סוג טיפול</label>
+              <label htmlFor={`treatments[${index}].treatId`}>סוג טיפול</label>
               <label className="mr-2 text-danger">*</label>
-              <select
-                className="form-control"
-                id={`treatments[${index}].id`}
-                name={`treatments[${index}].id`}
-                onChange={handleTreatChange}
-                value={`${treatment.id}`}
-                defaultValue={`${treatment.id}`}
-                ref={register()}
-              >
-                <option key={0} value={0}>
-                  בחירה
-                </option>
-                {treatments.map(e => (
-                  <option key={e.id} value={e.id}>
-                    {e.item}
-                  </option>
-                ))}
-              </select>
-            </div>
 
+              <Controller
+                control={control}
+                name={`treatments[${index}].treatId`}
+                rules={{
+                  validate: () => {
+                    console.log('getValues', getValues().treatments[index]);
+                    console.log('errors', errors);
+                    return (
+                      !!getValues().treatments[index].treatId ||
+                      'חובה לבחור סוג טיפול'
+                    );
+                  },
+                }}
+                render={({ onChange, onBlur, value, name }) => (
+                  <select
+                    className="form-control"
+                    id={name}
+                    name={name}
+                    // onChange={handleTreatChange}
+                    //value={treatment.treatId}
+                    onChange={e => {
+                      setKind(lookupTreatKind(+e.target.value));
+                      return onChange(e.target.value);
+                    }}
+                    value={value}
+                  >
+                    <option key={0} value={0}>
+                      בחירה
+                    </option>
+                    {treats.map(e => (
+                      <option key={e.id} value={e.id}>
+                        {e.item}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              />
+              {errors.treatments && errors.treatments[index].treatId && (
+                <div className="invalid-tooltip" role="alert">
+                  {errors.treatments[index].treatId.message}
+                </div>
+              )}
+            </div>
             <div className="form-group col-md-3">
               <label htmlFor={`treatments[${index}].treatDate`}>
                 תאריך הטיפול
@@ -98,17 +155,15 @@ function TreatComp({
             </div>
 
             <div className="col-md-3">
-              <label htmlFor={`treatments[${index}].treatCost`}>
-                עלות הטיפול
-              </label>
+              <label htmlFor={`treatments[${index}].cost`}>עלות הטיפול</label>
               <label className="mr-2 text-danger">*</label>
               <div className="input-group">
                 <input
-                  name={`treatments[${index}].treatCost`}
+                  name={`treatments[${index}].cost`}
                   type="text"
                   className="form-control"
-                  id={`treatments[${index}].treatCost`}
-                  defaultValue={`${treatment.treatCost}`}
+                  id={`treatments[${index}].cost`}
+                  defaultValue={`${treatment.cost}`}
                   aria-required="true"
                   required
                   ref={register()}
@@ -119,9 +174,12 @@ function TreatComp({
               </div>
             </div>
             <div className="col-md-2 d-xs-none">
-              <Button className="bg-transparent border-0 btn-sm">
+              <Button
+                className="bg-transparent border-0 btn-sm"
+                onClick={() => remove(index)}
+              >
                 <FontAwesomeIcon icon={faTrashAlt} size="sm" color="#006CB2" />
-                <small className="text-primary pr-1">הסרת טיפול</small>
+                <small className="link-icon-color pr-1">הסרת טיפול</small>
               </Button>
             </div>
           </div>
@@ -151,99 +209,51 @@ function TreatComp({
                 </div>
                 <div className="row">
                   <div className="form-check col-md-3">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id={`treatments[${index}].CL_V`}
-                      value={`${treatment.CL_V}`}
-                      ref={register()}
+                    <Checkbox
+                      ctlName={`treatments[${index}].CL_V`}
+                      lblName="CL_V"
+                      control={control}
                     />
-                    <label
-                      className="form-check-label pr-4"
-                      htmlFor={`treatments[${index}].CL_V`}
-                    >
-                      CL/V
-                    </label>
                   </div>
                   <div className="form-check col-md-3">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id={`treatments[${index}].L_P`}
-                      value={`${treatment.L_P}`}
-                      ref={register()}
+                    <Checkbox
+                      ctlName={`treatments[${index}].L_P`}
+                      lblName="L_P"
+                      control={control}
                     />
-                    <label
-                      className="form-check-label pr-4"
-                      htmlFor={`treatments[${index}].L_P`}
-                    >
-                      L/P
-                    </label>
                   </div>
                   <div className="form-check col-md-3">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id={`treatments[${index}].B`}
-                      value={`${treatment.B}`}
-                      ref={register()}
+                    <Checkbox
+                      ctlName={`treatments[${index}].B`}
+                      lblName="B"
+                      control={control}
                     />
-                    <label
-                      className="form-check-label pr-4"
-                      htmlFor={`treatments[${index}].B`}
-                    >
-                      B
-                    </label>
                   </div>
                   <div className="col-md-3 d-xs-none"></div>
                 </div>
                 <div className="row mt-md-4">
                   <div className="form-check col-md-3">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id={`treatments[${index}].D`}
-                      value={`${treatment.D}`}
-                      ref={register()}
+                    <Checkbox
+                      ctlName={`treatments[${index}].D`}
+                      lblName="D"
+                      control={control}
                     />
-                    <label
-                      className="form-check-label pr-4"
-                      htmlFor={`treatments[${index}].D`}
-                    >
-                      D
-                    </label>
                   </div>
 
                   <div className="form-check col-md-3">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id={`treatments[${index}].M`}
-                      value={`${treatment.M}`}
-                      ref={register()}
+                    <Checkbox
+                      ctlName={`treatments[${index}].M`}
+                      lblName="M"
+                      control={control}
                     />
-                    <label
-                      className="form-check-label pr-4"
-                      htmlFor={`treatments[${index}].M`}
-                    >
-                      M
-                    </label>
                   </div>
 
                   <div className="form-check col-md-3">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id={`treatments[${index}].O`}
-                      value={`${treatment.O}`}
-                      ref={register()}
+                    <Checkbox
+                      ctlName={`treatments[${index}].O`}
+                      lblName="O"
+                      control={control}
                     />
-                    <label
-                      className="form-check-label pr-4"
-                      htmlFor={`treatments[${index}].O`}
-                    >
-                      O
-                    </label>
                   </div>
                   <div className="col-md-3 d-xs-none"></div>
                 </div>
@@ -266,7 +276,7 @@ function TreatComp({
                   cols={60}
                   ref={register()}
                 >
-                  {`treatments[${index}].notes`}
+                  {treatment.notes}
                 </textarea>
               </div>
             )}
