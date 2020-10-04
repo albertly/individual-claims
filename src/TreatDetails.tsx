@@ -15,11 +15,11 @@ import { getTreatments, Treatment } from './services/Treatments';
 import TreatComp from './components/TreatComp';
 
 function TreadDetails(): React.ReactElement {
-  //const [treatments, setTreatments] = useState<Treatment[]>([]);
+  const [treatments, setTreatments] = useState<Treatment[]>([]);
   const [kind, setKind] = useState(0);
 
   useEffect(() => {
-    //setTreatments(getTreatments());
+    setTreatments(getTreatments());
     const values = getValues();
     console.log('values', values);
     if (
@@ -57,7 +57,7 @@ function TreadDetails(): React.ReactElement {
   );
 
   const treatDetailsDefaults: TreatDetail = {
-    id: 0,
+    treatId: 0,
     treatDate: new Date(),
     cost: 0,
     notes: '',
@@ -73,10 +73,11 @@ function TreadDetails(): React.ReactElement {
   const onSubmit = (data: Inputs) => {
     console.log('data', JSON.stringify(data));
     dispatch({ type: Types.SetTreat, payload: data });
+    history.push('/second/docs');
   };
 
   function handleClick() {
-    handleSubmit(onSubmit)().then(() => history.push('/second/docs'));
+    handleSubmit(onSubmit)()
   }
 
   function handleBackClick() {
@@ -85,7 +86,7 @@ function TreadDetails(): React.ReactElement {
 
   return (
     <>
-      <main aria-label="h2_treatDetails">
+      <main aria-labelledby="h2_treatDetails">
         <h2 id="h2_treatDetails" className="hidden">
           פרטי טיפול
         </h2>
@@ -126,7 +127,7 @@ function TreadDetails(): React.ReactElement {
                     type="text"
                     className="form-control"
                     id="doctorId"
-                    ref={register()}
+                    ref={register}
                   />
                   {errors.doctorId && (
                     <div className="invalid-tooltip" role="alert">
@@ -142,12 +143,17 @@ function TreadDetails(): React.ReactElement {
 
         {fields.map((item, index) => {
           return (
-            <TreatComp            
+            <TreatComp
+              key={item.id}
+              treats={treatments}
               treatment={item}
               index={index}
               register={register}
               control={control}
               setValue={setValue}
+              getValues={getValues}
+              remove={remove}
+              errors={errors}
             />
           );
         })}
@@ -160,8 +166,12 @@ function TreadDetails(): React.ReactElement {
                 append({ ...treatDetailsDefaults });
               }}
             >
-              <FontAwesomeIcon icon={faPlusSquare} size="sm" color="#006CB2" />
-              <small className="text-primary pr-1">הוספת טיפול</small>
+              <FontAwesomeIcon
+                className="link-icon-color"
+                icon={faPlusSquare}
+                size="sm"
+              />
+              <small className="link-icon-color pr-1">הוספת טיפול</small>
             </Button>
           </div>
         </div>
@@ -170,6 +180,7 @@ function TreadDetails(): React.ReactElement {
       <footer className="d-flex justify-content-end align-items-center">
         <nav>
           <a
+            className="link-icon-color"
             style={{ textDecoration: 'underline' }}
             href="#"
             onClick={handleBackClick}

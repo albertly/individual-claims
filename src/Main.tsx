@@ -63,10 +63,9 @@ function Main(): React.ReactElement {
             </div>
             <div className="row mt-3">
               <div className="col-12 col-text-help">
-                <FontAwesomeIcon
-                  className="icon-font-size va-m ml-2"
-                  icon={faExclamationCircle}
-                  color="#006CB2"
+                <FontAwesomeIcon                  
+                  className="icon-font-size va-m ml-2 link-icon-color"
+                  icon={faExclamationCircle}                  
                 />
                 עבור הטיפולים הללו אין צורך בטופס:
               </div>
@@ -106,10 +105,10 @@ function Main(): React.ReactElement {
             <div className="row mt-3">
               <div className="col-12 col-text-help">
                 <span className="fa-layers fa-fw icon-font-size va-m ml-2">
-                  <FontAwesomeIcon icon={faCircle} size="lg" color="#006CB2" />
-                  <FontAwesomeIcon icon={faFileAlt} size="xs" color="#006CB2" />
+                  <FontAwesomeIcon className="link-icon-color" icon={faCircle} size="lg"  />
+                  <FontAwesomeIcon className="link-icon-color" icon={faFileAlt} size="xs" />
                 </span>
-                <a style={{ color: '#006CB2' }} href="#">
+                <a className="link-icon-color" href="#">
                   טופס פירוט ההליך הרפואי
                 </a>
               </div>

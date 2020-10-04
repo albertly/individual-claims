@@ -1,7 +1,12 @@
 :root {
   --primary_one: #00427f;
   --info_color: #006cb2;
+  --link-icon-color: #006CB2;
   --main-size: 1rem;
+}
+
+.link-icon-color {
+  color: var(--link-icon-color);
 }
 
 @media (max-width: 576px) {
