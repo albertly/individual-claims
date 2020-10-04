@@ -15,11 +15,11 @@ import { getTreatments, Treatment } from './services/Treatments';
 import TreatComp from './components/TreatComp';
 
 function TreadDetails(): React.ReactElement {
-  const [treatments, setTreatments] = useState<Treatment[]>([]);
+  //const [treatments, setTreatments] = useState<Treatment[]>([]);
   const [kind, setKind] = useState(0);
 
   useEffect(() => {
-    setTreatments(getTreatments());
+    //setTreatments(getTreatments());
     const values = getValues();
     console.log('values', values);
     if (
@@ -57,7 +57,7 @@ function TreadDetails(): React.ReactElement {
   );
 
   const treatDetailsDefaults: TreatDetail = {
-    id: 2,
+    id: 0,
     treatDate: new Date(),
     cost: 0,
     notes: '',
@@ -81,14 +81,6 @@ function TreadDetails(): React.ReactElement {
 
   function handleBackClick() {
     history.push('/second');
-  }
-
-  function handleTreatChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const t = treatments.find(t => t.id === +e.target.value);
-
-    t ? setKind(t.kind) : setKind(0);
-
-    console.log(e.target.value);
   }
 
   return (
@@ -150,8 +142,7 @@ function TreadDetails(): React.ReactElement {
 
         {fields.map((item, index) => {
           return (
-            <TreatComp
-              treatments={treatments}
+            <TreatComp            
               treatment={item}
               index={index}
               register={register}

@@ -3,12 +3,12 @@ import { ArrayField, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { DataContext, TreatType as Inputs, Types } from '../shared/contextData';
-import { Treatment } from '../services/Treatments';
+import { getTreatments, Treatment } from '../services/Treatments';
 
 import Button from 'react-bootstrap/Button';
+import { debug } from 'console';
 
 type Props = {
-  treatments: Treatment[];
   treatment: Partial<ArrayField<Record<string, any>, 'id'>>;
   index: number;
   register: any;
@@ -16,13 +16,14 @@ type Props = {
   setValue: any;
 };
 function TreatComp({
-  treatments,
   treatment,
   index,
   register,
   control,
   setValue,
 }: Props): React.ReactElement {
+  const [treatments, setTreatments] = useState<Treatment[]>([]);
+
   const lookupTreatKind = (kindId: number | string | undefined): number => {
     if (kindId) {
       kindId = +kindId;
@@ -35,34 +36,18 @@ function TreatComp({
     return t ? t.kind : 0;
   };
 
-  const [kind, setKind] = useState(lookupTreatKind(treatment.id));
+  const [kind, setKind] = useState(0);
 
-  //   const { register, handleSubmit, watch, errors } = useForm<Inputs>({
-  //     defaultValues: { ...treatment },
-  //   });
+  useEffect(() => {
+    console.log('treatment.id', treatment.id);
+
+    setTreatments(getTreatments());
+    setKind(lookupTreatKind(treatment.id));
+    console.log('kind', kind);
+  }, [treatments]);
 
   function handleTreatChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    // setValue("lastName", "Hopper", {
-    //     shouldValidate: true,
-    //     shouldDirty: true
-    //   })
-
-    //React.useEffect(() => {
-    //     setValue("nest", [
-    //       {
-    //         value: 0,
-    //         nestedArray: [
-    //           {
-    //             value: 8
-    //           }
-    //         ]
-    //       }
-    //     ]);
-    //   }, [setValue]);
-
-    console.log('id', e.target.value);
-    setValue('treatments',   [{ id: e.target.value }]);
-    console.log('treatment.id', treatment.id);
+    setValue('treatments', [{ id: e.target.value }]);
     setKind(lookupTreatKind(+e.target.value));
   }
 
@@ -83,15 +68,11 @@ function TreatComp({
                 defaultValue={`${treatment.id}`}
                 ref={register()}
               >
-                <option selected={treatment.id == '0'} key={0} value={0}>
+                <option key={0} value={0}>
                   בחירה
                 </option>
                 {treatments.map(e => (
-                  <option
-                    selected={e.id + '' == treatment.id}
-                    key={e.id}
-                    value={e.id}
-                  >
+                  <option key={e.id} value={e.id}>
                     {e.item}
                   </option>
                 ))}
