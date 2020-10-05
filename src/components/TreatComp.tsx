@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrayField, Controller } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { Treatment } from '../services/Treatments';
 
@@ -52,6 +53,11 @@ function Checkbox({
     </>
   );
 }
+
+const msgAnother = `כדי להגיש את התביעה נדרש טופס פירוט ההליך הרפואי כפי שמולא על ידי מרפאת השיניים.
+אם לא קיבלת את הטופס,  ניתן להסיר את הטיפול מרשימת הטיפולים כעת ולהגיש תביעה לגבי
+טיפול זה במועד מאוחר יותר.
+`;
 
 function TreatComp({
   key,
@@ -136,51 +142,69 @@ function TreatComp({
                 </div>
               )}
             </div>
-            <div className="form-group col-md-3">
-              <label htmlFor={`treatments[${index}].treatDate`}>
-                תאריך הטיפול
-              </label>
-              <label className="mr-2 text-danger">*</label>
 
-              <input
-                name={`treatments[${index}].treatDate`}
-                type="date"
-                className="form-control"
-                id={`treatments[${index}].treatDate`}
-                defaultValue={`${treatment.treatDate}`}
-                aria-required="true"
-                required
-                ref={register({
-                  required: 'שדה חובה',
-                })}
-              />
+            {kind !== 4 && (
+              <>
+                <div className="form-group col-md-3">
+                  <label htmlFor={`treatments[${index}].treatDate`}>
+                    תאריך הטיפול
+                  </label>
+                  <label className="mr-2 text-danger">*</label>
 
-              {errors.treatments && errors.treatments[index].treatDate && (
-                <div className="invalid-tooltip" role="alert">
-                  {errors.treatments[index].treatDate.message}
+                  <input
+                    name={`treatments[${index}].treatDate`}
+                    type="date"
+                    className="form-control"
+                    id={`treatments[${index}].treatDate`}
+                    defaultValue={`${treatment.treatDate}`}
+                    aria-required="true"
+                    required
+                    ref={register({
+                      required: 'שדה חובה',
+                    })}
+                  />
+
+                  {errors.treatments && errors.treatments[index].treatDate && (
+                    <div className="invalid-tooltip" role="alert">
+                      {errors.treatments[index].treatDate.message}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            <div className="col-md-3">
-              <label htmlFor={`treatments[${index}].cost`}>עלות הטיפול</label>
-              <label className="mr-2 text-danger">*</label>
-              <div className="input-group">
-                <input
-                  name={`treatments[${index}].cost`}
-                  type="text"
-                  className="form-control"
-                  id={`treatments[${index}].cost`}
-                  defaultValue={`${treatment.cost}`}
-                  aria-required="true"
-                  required
-                  ref={register()}
+                <div className="col-md-3">
+                  <label htmlFor={`treatments[${index}].cost`}>
+                    עלות הטיפול
+                  </label>
+                  <label className="mr-2 text-danger">*</label>
+                  <div className="input-group">
+                    <input
+                      name={`treatments[${index}].cost`}
+                      type="text"
+                      className="form-control"
+                      id={`treatments[${index}].cost`}
+                      defaultValue={`${treatment.cost}`}
+                      aria-required="true"
+                      required
+                      ref={register()}
+                    />
+                    <div className="input-group-append">
+                      <span className="input-group-text">&#8362;</span>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {kind === 4 && (
+              <div className="col-md-6 d-flex justify-content-start">
+                <FontAwesomeIcon
+                  className="icon-font-size va-m ml-2 link-icon-color d-inline"
+                  icon={faExclamationCircle}
                 />
-                <div className="input-group-append">
-                  <span className="input-group-text">&#8362;</span>
-                </div>
+                <p className="d-inline11">{msgAnother}</p>
               </div>
-            </div>
+            )}
+
             <div className="col-md-2 d-xs-none">
               <Button
                 className="bg-transparent border-0 btn-sm"
@@ -193,7 +217,7 @@ function TreatComp({
           </div>
 
           <div className="form-row">
-            {kind >= 2 && (
+            {kind >= 2 && kind !== 4 && (
               <div className="form-group col-md-1">
                 <label htmlFor={`treatments[${index}].tooth`}>מספר שן</label>
                 <label className="mr-2 text-danger">*</label>
@@ -209,7 +233,7 @@ function TreatComp({
               </div>
             )}
 
-            {kind >= 3 && (
+            {kind >= 3 && kind !== 4 && (
               <div className="form-group col-md-3">
                 <div className="row">
                   <label htmlFor="surface">משטח</label>
@@ -268,7 +292,7 @@ function TreatComp({
               </div>
             )}
 
-            {kind >= 1 && (
+            {kind >= 1 && kind !== 4 && (
               <div className="form-group col-md-4">
                 <label
                   className="d-block"
@@ -288,6 +312,7 @@ function TreatComp({
                 </textarea>
               </div>
             )}
+
             <div className="col-md-8 d-xs-none"></div>
           </div>
         </div>

@@ -8,7 +8,6 @@ import { faFileAlt, faCircle } from '@fortawesome/free-regular-svg-icons';
 import { getCares, ICare } from './services/Cares';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './Main.module.css';
 
 function Main(): React.ReactElement {
   let history = useHistory();
