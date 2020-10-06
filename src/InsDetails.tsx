@@ -24,7 +24,7 @@ function InsDetails(): React.ReactElement {
   }
 
   return (
-    <>
+    <div>
       <main aria-labelledby="h2_insDetails">
         <h2 id="h2_insDetails" className="hidden">
           פרטי המבוטח
@@ -184,7 +184,7 @@ function InsDetails(): React.ReactElement {
           </Button>
         </nav>
       </footer>
-    </>
+    </div>
   );
 }
 export default InsDetails;

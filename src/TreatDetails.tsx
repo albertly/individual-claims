@@ -77,7 +77,7 @@ function TreadDetails(): React.ReactElement {
   };
 
   function handleClick() {
-    handleSubmit(onSubmit)()
+    handleSubmit(onSubmit)();
   }
 
   function handleBackClick() {
@@ -85,7 +85,7 @@ function TreadDetails(): React.ReactElement {
   }
 
   return (
-    <>
+    <div>
       <main aria-labelledby="h2_treatDetails">
         <h2 id="h2_treatDetails" className="hidden">
           פרטי טיפול
@@ -193,7 +193,7 @@ function TreadDetails(): React.ReactElement {
           </Button>
         </nav>
       </footer>
-    </>
+    </div>
   );
 }
 export default TreadDetails;

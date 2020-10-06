@@ -22,7 +22,7 @@ function Main(): React.ReactElement {
   }
 
   return (
-    <>
+    <div>
       <main aria-labelledby="h2_p1">
         <h2 id="h2_p1" className="hidden">
           דף נחיתה
@@ -122,7 +122,7 @@ function Main(): React.ReactElement {
           </Button>
         </nav>
       </footer>
-    </>
+    </div>
   );
 }
 export default Main;

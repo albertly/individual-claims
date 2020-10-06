@@ -13,7 +13,7 @@ function Payment(): React.ReactElement {
     history.push('/second/docs');
   }
   return (
-    <>
+    <div>
       <main aria-labelledby="h2_payment">
         <h2 id="h2_payment" className="hidden">
           תשלום
@@ -44,7 +44,7 @@ function Payment(): React.ReactElement {
           </Button>
         </nav>
       </footer>
-    </>
+    </div>
   );
 }
 export default Payment;

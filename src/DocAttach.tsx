@@ -19,7 +19,7 @@ function DocAttach(): React.ReactElement {
   };
 
   return (
-    <>
+    <div>
       <main aria-labelledby="h2_p1">
         <h2 id="h2_p1" className="hidden">
           צירוף מסמכים
@@ -109,7 +109,7 @@ function DocAttach(): React.ReactElement {
           </Button>
         </nav>
       </footer>
-    </>
+    </div>
   );
 }
 export default DocAttach;
