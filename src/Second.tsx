@@ -7,6 +7,7 @@ import InsDetails from './InsDetails';
 import TreatDetails from './TreatDetails';
 import DocAttach from './DocAttach';
 import Payment from './Payment';
+import Finish from './Finish';
 import { Pages } from './shared/constants';
 
 import './Second.css';
@@ -57,6 +58,9 @@ function Second(props: any): React.ReactElement {
               </Route>
               <Route exact path={`${path}/payment`}>
                 <Payment />
+              </Route>
+              <Route exact path={`${path}/finish`}>
+                <Finish />
               </Route>
             </Switch>
           </CSSTransition>

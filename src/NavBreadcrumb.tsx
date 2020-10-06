@@ -32,6 +32,7 @@ function NavBreadcrumb(): React.ReactElement {
         prop = 'l3';
         break;
       case '/second/payment':
+      case '/second/finish':
         prop = 'l4';
         break;
     }

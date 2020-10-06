@@ -6,7 +6,7 @@ function Payment(): React.ReactElement {
   let history = useHistory();
 
   function handleClick() {
-    history.push('/second');
+    history.push('/second/finish');
   }
 
   function handleBackClick() {
