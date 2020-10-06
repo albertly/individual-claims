@@ -31,6 +31,9 @@ function NavBreadcrumb(): React.ReactElement {
       case '/second/docs':
         prop = 'l3';
         break;
+      case '/second/payment':
+        prop = 'l4';
+        break;
     }
     setActive({ ...obj, [prop]: true });
   }, [window.location.pathname]);
@@ -59,6 +62,9 @@ function NavBreadcrumb(): React.ReactElement {
         break;
       case 'l3':
         history.push('/second/docs');
+        break;
+      case 'l4':
+        history.push('/second/payment');
         break;
     }
   };

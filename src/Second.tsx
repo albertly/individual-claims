@@ -6,6 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import InsDetails from './InsDetails';
 import TreatDetails from './TreatDetails';
 import DocAttach from './DocAttach';
+import Payment from './Payment'
 
 import './Second.css';
 
@@ -31,6 +32,9 @@ function Second(props: any): React.ReactElement {
               </Route>
               <Route exact path={`${path}/docs`}>
                 <DocAttach />
+              </Route>
+              <Route exact path={`${path}/payment`}>
+                <Payment />
               </Route>
             </Switch>
           </CSSTransition>

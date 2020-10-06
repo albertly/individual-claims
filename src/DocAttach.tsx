@@ -11,7 +11,7 @@ function DocAttach(): React.ReactElement {
   let history = useHistory();
 
   function handleClick() {
-    history.push('/second');
+    history.push('/second/payment');
   }
 
   const fileSelectedHandler = (event: any) => {

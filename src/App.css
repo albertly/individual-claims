@@ -1,7 +1,7 @@
 :root {
   --primary_one: #00427f;
   --info_color: #006cb2;
-  --link-icon-color: #006CB2;
+  --link-icon-color: #006cb2;
   --main-size: 1rem;
 }
 
@@ -13,7 +13,6 @@
   :root {
     --main-size: 0.9rem;
   }
-  
 }
 
 h1 {
@@ -50,11 +49,10 @@ section {
 }
 
 .row {
-  margin: 0;  
+  margin: 0;
 }
 
-section.row
-{
+section.row {
   margin-bottom: 1rem;
 }
 
@@ -105,7 +103,7 @@ footer {
 .col-text-info {
   font-size: 1.5rem;
   font-weight: 500;
-  color: var(--info_color);  
+  color: var(--info_color);
 }
 
 .col-first {
@@ -125,6 +123,22 @@ input[type='radio'] {
   display: block;
 }
 
+
+
+.va-m {
+  vertical-align: middle;
+}
+
+/* Utilites */
+.hidden {
+  position: absolute;
+  clip: 1px, 1px, 1px, 1px;
+}
+
+.min-vh-50 {
+  min-height: 50vh;
+}
+
 /* xs size */
 @media (max-width: 576px) {
   .icon-font-size {
@@ -140,8 +154,7 @@ input[type='radio'] {
   .col-2,
   .col-md-2,
   .col-md-3,
-  .col-md-4
-  .col-md-5,
+  .col-md-4 .col-md-5,
   .col-md-6,
   .col-md-7,
   .col-md-9,
@@ -153,14 +166,9 @@ input[type='radio'] {
     padding-right: 1rem;
     padding-left: 1rem;
   }
-}
 
-.va-m {
-  vertical-align: middle;
+  /* Utilites */
+  .min-vh-50 {
+    min-height: auto;
+  }
 }
-
-/* Utilites */
-.hidden {
-  position: absolute;
-  clip: 1px, 1px, 1px, 1px;
- }
