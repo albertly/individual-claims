@@ -106,8 +106,9 @@ function TreatComp({
                   validate: () => {
                     console.log('getValues', getValues().treatments[index]);
                     console.log('errors', errors);
+                    console.log('!!getValues().treatments[index].treatId', getValues().treatments[index].treatId);
                     return (
-                      !!getValues().treatments[index].treatId ||
+                      (getValues().treatments[index].treatId && getValues().treatments[index].treatId != 0) ||
                       'חובה לבחור סוג טיפול'
                     );
                   },
@@ -196,7 +197,7 @@ function TreatComp({
             )}
 
             {kind === 4 && (
-              <div className="col-md-6 d-flex justify-content-start">
+              <div className="col-md-6 d-flex pt-md-3 pr-md-2">
                 <FontAwesomeIcon
                   className="icon-font-size va-m ml-2 link-icon-color d-inline"
                   icon={faExclamationCircle}
