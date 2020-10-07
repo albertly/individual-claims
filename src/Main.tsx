@@ -103,7 +103,7 @@ function Main(): React.ReactElement {
             </div>
             <div className="row mt-3">
               <div className="col-12 col-text-help">
-                <span className="fa-layers fa-fw icon-font-size va-m ml-2">
+                <span className="fa-layers fa-fw icon-font-size va-m ml-2 mb-2">
                   <FontAwesomeIcon className="link-icon-color" icon={faCircle} size="lg"  />
                   <FontAwesomeIcon className="link-icon-color" icon={faFileAlt} size="xs" />
                 </span>
