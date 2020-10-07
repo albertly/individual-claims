@@ -18,7 +18,7 @@ const mimeWhiteList = [
 const FileUploader = (props: any): React.ReactElement => {
   // Create a reference to the hidden file input element
   const hiddenFileInput: any = useRef(null);
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File | null | undefined>(props.value);
 
   // Programatically click the hidden file input element
   // when the Button component is clicked
@@ -52,7 +52,7 @@ const FileUploader = (props: any): React.ReactElement => {
         />
         <label className="link-icon-color pr-1">צירוף קובץ</label>
       </Button>
-      {file && <p className="d-inline px-5">{file.name}</p>}
+      <p className="d-inline px-5">{file ? file.name : 'לא נבחר קובץ'}</p>
       {/* <Image.AddButton className="link-icon-color" style={{height: '1rem', width: '1rem'}} src={Image.AddButton} /> */}
       <input
         type="file"
@@ -61,6 +61,13 @@ const FileUploader = (props: any): React.ReactElement => {
         accept={mimeWhiteList.join(', ')}
         style={{ display: 'none' }}
       />
+
+      {file && (
+        <img
+          style={{ width: '2rem', height: '2rem' }}
+          src={URL.createObjectURL(file)}
+        ></img>
+      )}
     </>
   );
 };

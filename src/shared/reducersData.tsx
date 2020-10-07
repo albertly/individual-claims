@@ -13,6 +13,7 @@ export enum Types {
   SetIns = 'SET_DATA_INS',
   SetTreat = 'SET_DATA_TREAT',
   AddTreatDetail = 'ADD_TREAT_DETAIL',
+  AddDoc = 'ADD_DOC',
 }
 
 // Insured
@@ -30,7 +31,7 @@ export type InsActions = ActionMap<InsPayload>[keyof ActionMap<InsPayload>];
 
 export const insReducer = (
   state: InsType,
-  action: InsActions | TreatActions
+  action: DocsActions | InsActions | TreatActions
 ) => {
   switch (action.type) {
     case Types.SetIns:
@@ -72,7 +73,7 @@ export type TreatActions = ActionMap<TreatPayload>[keyof ActionMap<
 
 export const treatReducer = (
   state: TreatType,
-  action: InsActions | TreatActions
+  action: DocsActions | InsActions | TreatActions
 ) => {
   switch (action.type) {
     case Types.SetTreat:
@@ -82,6 +83,32 @@ export const treatReducer = (
         ...state,
         treatments: [...state.treatments, { ...action.payload }],
       };
+    default:
+      return state;
+  }
+};
+
+// Docs
+export type DocsType = {
+  invoice?: File | string;
+  medical?: File;
+  miscellaneous: File[];
+  temp: string;
+};
+
+type DocsPayload = {
+  [Types.AddDoc]: DocsType;
+};
+
+export type DocsActions = ActionMap<DocsPayload>[keyof ActionMap<DocsPayload>];
+
+export const docsReducer = (
+  state: DocsType,
+  action: DocsActions | InsActions | TreatActions
+) => {
+  switch (action.type) {
+    case Types.AddDoc:      
+      return {...action.payload};
     default:
       return state;
   }
