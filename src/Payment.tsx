@@ -22,8 +22,8 @@ function Payment(): React.ReactElement {
           <h3 id="paymentBefore" className="col-md-3 col-xs-12 col-first">
             אמצעי להעברת תשלום
           </h3>
-          <div className="col-md-9 col-xs-12 col-last col-text-help">
-            <p>תשלומי התביעה יועברו בהעברה בנקאית למשלם הפוליסה</p>
+          <div className="col-md-9 col-xs-12 col-last">
+            <p className="text-secondary h5 pt-2">תשלומי התביעה יועברו בהעברה בנקאית למשלם הפוליסה</p>
           </div>
         </section>
       </main>
