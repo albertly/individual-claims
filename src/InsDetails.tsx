@@ -15,12 +15,23 @@ function InsDetails(): React.ReactElement {
     defaultValues: { ...state.insured },
   });
 
+  // const onSubmit = (data: Inputs) => {
+  //   console.log('data', JSON.stringify(data));
+  //   dispatch({ type: Types.SetTreat, payload: data });
+  //   history.push('/second/docs');
+  // };
+
+  // function handleClick() {
+  //   handleSubmit(onSubmit)();
+  // }
+
   const onSubmit = (data: Inputs) => {
     dispatch({ type: Types.SetIns, payload: { ...data } });
+    history.push('/second/treatdetails');
   };
 
   function handleClick() {
-    handleSubmit(onSubmit)().then(() => history.push('/second/treatdetails'));
+    handleSubmit(onSubmit)();
   }
 
   return (
