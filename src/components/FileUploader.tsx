@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-
 import { ReactComponent as AddButton } from '../shared/img/add-button.svg';
+import { MinusImg, AddImg } from '../shared/img';
 
 // Style the Button component
 
@@ -14,6 +14,16 @@ const mimeWhiteList = [
   'image/tiff',
   'application/pdf',
 ];
+
+const getThumbnail = (file: File): string => {
+  if (file.type === 'application/pdf') {
+    return '/img/pdf.svg';
+  }
+  if (file.type === 'image/tiff') {
+    return '/img/tiff.svg';
+  }
+  return URL.createObjectURL(file);
+};
 
 const FileUploader = (props: any): React.ReactElement => {
   // Create a reference to the hidden file input element
@@ -40,19 +50,40 @@ const FileUploader = (props: any): React.ReactElement => {
         className="bg-transparent border-0 px-0 py-0"
         onClick={handleClick}
       >
-        {/* <FontAwesomeIcon
-          className="link-icon-color d-inline"
-          icon={faPlusSquare}
-        /> */}
-        <AddButton
-          className="link-icon-color"
-          style={{ height: '1.2rem', width: '1.2rem' }}
-          stroke="#006CB2"
-          fill="#006CB2"
-        />
-        <label className="link-icon-color pr-1">צירוף קובץ</label>
+        {!file && (
+          <>
+            <AddImg />
+            <label
+              style={{ cursor: 'inherit' }}
+              className="link-icon-color pr-1"
+            >
+              צירוף קובץ
+            </label>
+          </>
+        )}
+
+        {file && (
+          <>
+            <MinusImg />
+            <label
+              style={{ cursor: 'inherit' }}
+              className="link-icon-color pr-1"
+            >
+              חסר קובץ
+            </label>
+          </>
+        )}
       </Button>
-      <p className="d-inline px-5">{file ? file.name : 'לא נבחר קובץ'}</p>
+
+      {file && (
+        <img
+          className="mx-2"
+          style={{ width: '2rem', height: '2rem' }}
+          src={getThumbnail(file)}
+          alt={file.name}
+        ></img>
+      )}
+      <p className="d-inline px-2">{file ? file.name : 'לא נבחר קובץ'}</p>
       {/* <Image.AddButton className="link-icon-color" style={{height: '1rem', width: '1rem'}} src={Image.AddButton} /> */}
       <input
         type="file"
@@ -61,13 +92,6 @@ const FileUploader = (props: any): React.ReactElement => {
         accept={mimeWhiteList.join(', ')}
         style={{ display: 'none' }}
       />
-
-      {file && (
-        <img
-          style={{ width: '2rem', height: '2rem' }}
-          src={URL.createObjectURL(file)}
-        ></img>
-      )}
     </>
   );
 };
