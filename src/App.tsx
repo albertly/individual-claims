@@ -1,32 +1,18 @@
 import React from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 
 import { DataProvider } from './shared/contextData';
 import Main from './Main';
 import Second from './Second';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 
 function App(): React.ReactElement {
-  let history = useHistory();
-
-  function handleClick() {
-    switch (window.location.pathname) {
-      case '/':
-        history.push('/second');
-        break;
-      case '/second':
-        history.push('/second/treatdetails');
-        break;
-    }
-  }
-
   return (
     <DataProvider>
-      <header style={{ backgroundColor: '#CFE4FE' }}>
-        <div style={{ backgroundColor: '#003F80' }}>
+      <header className="bg-main">
+        {/* --------------------  Logo Line --------------------- */}
+        <div className="bg-primary">
           <svg
             className="mx-1 my-1"
             focusable="false"
@@ -67,52 +53,51 @@ function App(): React.ReactElement {
             ></path>
           </svg>
         </div>
-        <div style={{ height: '2rem', backgroundColor: '#CFE4FE' }}></div>
-        <div
-          className="text-right align-middle d-flex"
-          style={{
-            marginRight: '0.2rem',
-            marginLeft: '0.2rem',
-            height: '4rem',
-            backgroundColor: '#003F80',
-            color: 'white',
-          }}
-        >
-          <h1
-            // className="display-4"
-            style={{
-              // marginTop: 'auto',
-              // marginBottom: 'auto',
-              paddingRight: '1.5rem',
-              alignSelf: 'center',
-            }}
-          >
+
+        {/* -------------------- Empty Background --------------------- */}
+        <div className="bg-main second-line-empty-min-height"></div>
+
+        {/* -------------------- Main Header --------------------- */}
+        <div className="bg-header text-white d-flex mr-main main-header-min-height">
+          <h1 className="align-self-center text-right pr-main">
             הגשת תביעה לביטוח שיניים
           </h1>
         </div>
-        <div style={{ height: '1rem', backgroundColor: '#CFE4FE' }}></div>
-        <aside
-          className="align-top text-right"
+
+        {/* -------------------- Empty Background --------------------- */}
+        <div className="bg-main" style={{ height: '1rem' }}></div>
+
+        {/* -------------------- Warning Line --------------------- */}
+        <div
+          className="text-right bg-white mr-main"
           style={{
-            height: '2rem',
-            marginRight: '0.2rem',
-            backgroundColor: 'white',
+            minHeight: '2rem',
+            // marginRight: '0.2rem',
           }}
         >
           <span
-            className="mr-2 align-top text-right"
-            style={{ fontSize: '1rem', fontWeight: 500, textAlign: 'right' }}
+            className="d-none d-sm-inline pr-main text-muted main-font-size"
+            style={{ fontWeight: 500 }}
           >
             שדות בטופס המסומנים בכוכבית הינם שדות חובה
           </span>
           <span
-            className="mr-2 text-danger align-top text-right"
-            style={{ fontSize: '1rem', fontWeight: 900, textAlign: 'right' }}
+            className="d-inline d-sm-none pr-main text-muted main-font-size"
+            style={{ fontWeight: 500 }}
+          >
+            שדות המסומנים בכוכבית הינם שדות חובה
+          </span>
+
+          <span
+            className="mr-2 text-danger"
+            style={{ fontSize: '1rem', fontWeight: 900 }}
           >
             *
           </span>
-        </aside>
-        <div style={{ height: '1rem', backgroundColor: '#CFE4FE' }}></div>
+        </div>
+
+        {/* -------------------- Empty Background --------------------- */}
+        <div className="bg-main" style={{ height: '1rem' }}></div>
       </header>
 
       <Switch>
