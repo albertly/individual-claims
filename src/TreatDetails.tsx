@@ -21,7 +21,6 @@ function TreadDetails(): React.ReactElement {
   useEffect(() => {
     setTreatments(getTreatments());
     const values = getValues();
-    console.log('values', values);
     if (
       !values.treatments ||
       (values.treatments && values.treatments.length === 0)

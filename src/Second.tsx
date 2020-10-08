@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import NavBreadcrumb from './NavBreadcrumb';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { PageTransition } from '@steveeeie/react-page-transition';
 
 import InsDetails from './InsDetails';
 import TreatDetails from './TreatDetails';
@@ -10,62 +10,94 @@ import Payment from './Payment';
 import Finish from './Finish';
 import { Pages } from './shared/constants';
 
-import './Second.css';
+import {
+  AppContext,
+  NavigationType,
+  Types,
+  Direction,
+} from './shared/contexApp';
 
-enum Direction {
-  Forward = 0,
-  Back = 1,
-}
+import './Second.css';
 
 function Second(props: any): React.ReactElement {
   const [direction, setDirection] = useState(Direction.Forward);
   const [page, setPage] = useState<number>(0);
+  const { state, dispatch } = useContext(AppContext);
 
   let { path, url } = useRouteMatch();
 
+  // useEffect(() => {
 
-  useEffect(() => {
-    setDirection(
-      Pages[props.location.pathname] - page > 0
-        ? Direction.Forward
-        : Direction.Back
-    );
-    setPage(Pages[props.location.pathname]);
-  }, [props.location]);
+  //   setDirection(
+  //     Pages[props.location.pathname] - page > 0
+  //       ? Direction.Forward
+  //       : Direction.Back
+  //   );
+  //   console.log('Page old', page);
+  //   console.log('Page New', Pages[props.location.pathname]);
+  //   setTimeout(p => setPage(p), 0, Pages[props.location.pathname]);
 
+  // }, [props.location.pathname]);
 
   return (
     <>
       <NavBreadcrumb />
-      <div style={{ position: 'relative' }}>
-        <TransitionGroup>
-          <CSSTransition            
+      {/* <div data-style={{ position: 'relative' }}> */}
+      {/* <CSSTransition            
             key={props.location.key}            
             classNames={
               direction === Direction.Forward ? 'slide' : 'slide-back'
             }
             timeout={1000}
-          >
-            <Switch location={props.location}>
-              <Route exact path={`${path}`}>
-                <InsDetails />
-              </Route>
-              <Route exact path={`${path}/treatdetails`}>
-                <TreatDetails />
-              </Route>
-              <Route exact path={`${path}/docs`}>
-                <DocAttach />
-              </Route>
-              <Route exact path={`${path}/payment`}>
-                <Payment />
-              </Route>
-              <Route exact path={`${path}/finish`}>
-                <Finish />
-              </Route>
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
-      </div>
+          > */}
+
+      <Route
+        render={  ({ location }) => {
+          console.log('Current page', location.pathname);
+          console.log(
+            'direction',
+            state.navigation.direction === Direction.Forward
+              ? 'moveToLeftFromRight'
+              : 'moveToRightFromLeft'
+          );
+          return  (
+            <>
+              <PageTransition
+                preset={
+                  state.navigation.direction === Direction.Forward
+                    ? 'moveToLeftFromRight'
+                    : 'moveToRightFromLeft'
+                }
+                // enterAnimation={
+                //   state.navigation.direction === Direction.Forward
+                //     ? 'moveToLeft'
+                //     : 'moveToRight'
+                // }
+                // exitAnimation={
+                //   state.navigation.direction === Direction.Forward
+                //     ? 'moveToLeft'
+                //     : 'moveToRight'
+                // }
+                transitionKey={location.key}
+              >
+                <Switch location={location}>
+                <Route exact path={`${path}`} component={InsDetails} />
+
+                <Route
+                  exact
+                  path={`${path}/treatdetails`}
+                  component={TreatDetails}
+                />
+                <Route exact path={`${path}/docs`} component={DocAttach} />
+                <Route exact path={`${path}/payment`} component={Payment} />
+                <Route exact path={`${path}/finish`} component={Finish} />
+                </Switch>
+              </PageTransition>
+            </>
+          );
+        }}
+      />
+      {/* </div> */}
     </>
   );
 }

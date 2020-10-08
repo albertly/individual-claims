@@ -1,7 +1,8 @@
 import React from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory, useParams } from 'react-router-dom';
 
 import { DataProvider } from './shared/contextData';
+import { AppProvider } from "./shared/contexApp";
 import Main from './Main';
 import Second from './Second';
 
@@ -9,6 +10,7 @@ import './App.scss';
 
 function App(): React.ReactElement {
   return (
+    <AppProvider>
     <DataProvider>
       <header className="bg-main">
         {/* --------------------  Logo Line --------------------- */}
@@ -105,6 +107,7 @@ function App(): React.ReactElement {
         <Route path="/second" component={Second} />
       </Switch>
     </DataProvider>
+    </AppProvider>
   );
 }
 

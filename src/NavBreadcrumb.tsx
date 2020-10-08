@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Badge from 'react-bootstrap/Badge';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+
+import {
+  AppContext,
+  NavigationType,
+  Types,
+  Direction,
+} from './shared/contexApp';
+import { Pages } from './shared/constants';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import './NavBreadcrumb.css';
@@ -11,6 +19,8 @@ interface IActive {
 }
 
 function NavBreadcrumb(): React.ReactElement {
+  const { state, dispatch } = useContext(AppContext);
+
   const [active, setActive] = useState<IActive>({
     l1: false,
     l2: false,
@@ -56,16 +66,44 @@ function NavBreadcrumb(): React.ReactElement {
 
     switch (prop) {
       case 'l1':
-        history.push('/second');
+        dispatch({
+          type: Types.SetPage,
+          payload: { page: Pages['/second'], direction: Direction.Forward },
+        });
+        setTimeout(()=>history.push('/second'), 0);
+        
         break;
       case 'l2':
-        history.push('/second/treatdetails');
+        dispatch({
+          type: Types.SetPage,
+          payload: {
+            page: Pages['/second/treatdetails'],
+            direction: Direction.Forward,
+          },
+        });
+        setTimeout(()=>history.push('/second/treatdetails'), 0);
+
         break;
       case 'l3':
-        history.push('/second/docs');
+        dispatch({
+          type: Types.SetPage,
+          payload: {
+            page: Pages['/second/docs'],
+            direction: Direction.Forward,
+          },
+        });
+        setTimeout(()=>history.push('/second/docs'), 0);
+
         break;
       case 'l4':
-        history.push('/second/payment');
+        dispatch({
+          type: Types.SetPage,
+          payload: {
+            page: Pages['/second/payment'],
+            direction: Direction.Forward,
+          },
+        });
+        setTimeout(()=>history.push('/second/payment'), 0);
         break;
     }
   };

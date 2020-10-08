@@ -17,7 +17,6 @@ function DocAttach(): React.ReactElement {
   });
 
   const onSubmit = (data: Inputs) => {
-    console.log('Files data', data);
     dispatch({ type: Types.AddDoc, payload: { ...data } });
     history.push('/second/payment');
   };
