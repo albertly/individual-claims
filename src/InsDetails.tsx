@@ -6,7 +6,7 @@ import { Form } from 'react-bootstrap';
 
 import { DataContext, InsType as Inputs, Types } from './shared/contextData';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function InsDetails(): React.ReactElement {
   let history = useHistory();
