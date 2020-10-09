@@ -1,5 +1,6 @@
 $theme-colors: (
   'primary': #003f80,
+  'link-icon': #006cb2,
 );
 
 $header-color: #002447;
@@ -73,6 +74,7 @@ $main-background-color: #cfe4fe;
   --main-size: 1rem;
 }
 
+//ToDo: changed to link-icon variable
 .link-icon-color {
   color: var(--link-icon-color);
 }
@@ -87,6 +89,7 @@ h1 {
   font-size: 1.75rem;
 }
 
+// ToDo: h3 ?
 h3 {
   font-size: 1.5rem;
   padding-right: 1.5rem;
@@ -164,9 +167,9 @@ footer {
   background-color: white;
 }
 
-.col-text-help {
-  font-size: 1rem;
-}
+// .col-text-help {
+//   font-size: 1rem;
+// }
 .col-text-info {
   font-size: 1.5rem;
   font-weight: 500;

@@ -39,12 +39,12 @@ function Main(): React.ReactElement {
           <h3 id="mainBefore" className="col-md-3 col-xs-12 col-first">
             רגע לפני שמתחילים...
           </h3>
-          <div className="col-md-9 col-xs-12 col-last col-text-help">
-            <p>
+          <div className="col-md-9 col-xs-12 col-last">
+            <p className="text-secondary">
               כדי שנוכל להתקדם בזריזות, אנחנו מבקשים שסריקה או צילום של המסמכים
               תהיה ההישג ידך:
             </p>
-            <ul>
+            <ul className="text-secondary">
               <li>
                 חשבונית על טיפול השיניים שעברת (לא יתקבלות קבלות אלא חשבוניות
                 בלבד)
@@ -63,25 +63,29 @@ function Main(): React.ReactElement {
           </h3>
           <div className="col-md-9 col-xs-12 col-last">
             <div className="row">
-              <div className="col-12 col-text-help">
-                כדי להגיש את התביעה עבור חלק מהטיפולים נדרש טופס פירוט ההליך
-                הרפואי כפי שמולא על ידי מרפאת השיניים.
+              <div className="col-12 pr-0">
+                <p className="text-secondary">
+                  כדי להגיש את התביעה עבור חלק מהטיפולים נדרש טופס פירוט ההליך
+                  הרפואי כפי שמולא על ידי מרפאת השיניים.
+                </p>
               </div>
             </div>
-            <div className="row mt-3">
-              <div className="col-12 col-text-help">
+            <div className="row mt-2 mt-md-3">
+              <div className="col-12 pr-0 d-flex">
                 <FontAwesomeIcon
                   className="icon-font-size va-m ml-2 link-icon-color"
                   icon={faExclamationCircle}
                 />
-                עבור הטיפולים הללו אין צורך בטופס:
+                <p className="text-secondary">
+                  עבור הטיפולים הללו אין צורך בטופס:
+                </p>
               </div>
             </div>
             <div className="row">
-              <div className="col col-text-help">
+              <div className="col">
                 <div className="row">
                   <div className="col-xs-12 col-md-4">
-                    <ul>
+                    <ul className="text-secondary">
                       {cares.map((el: ICare, i: number) => {
                         const count = Math.floor(cares.length / 2);
                         return i < count ? (
@@ -91,7 +95,7 @@ function Main(): React.ReactElement {
                     </ul>
                   </div>
                   <div className="col-sx-12 col-md-4">
-                    <ul>
+                    <ul className="text-secondary">
                       {cares.map((el: ICare, i: number) => {
                         const count = Math.ceil(cares.length / 2);
                         return i >= count ? (
@@ -105,25 +109,27 @@ function Main(): React.ReactElement {
               </div>
             </div>
             <div className="row">
-              <div className="col-12 col-text-help">
-                אם לא קיבלת את הטופס, ניתן להורידו ולהעביר אותו למרפאה למילוי:
+              <div className="col-12 pr-0">
+                <p className="text-secondary">
+                  אם לא קיבלת את הטופס, ניתן להורידו ולהעביר אותו למרפאה למילוי:
+                </p>
               </div>
             </div>
-            <div className="row mt-3">
-              <div className="col-12 col-text-help">
+            <div className="row mt-2 mt-md-3 mb-2 mb-md-3">
+              <div className="col-12 pr-0">
                 <span className="fa-layers fa-fw icon-font-size va-m ml-2 mb-2">
                   <FontAwesomeIcon
-                    className="link-icon-color"
+                    className="text-link-icon"
                     icon={faCircle}
                     size="lg"
                   />
                   <FontAwesomeIcon
-                    className="link-icon-color"
+                    className="text-link-icon"
                     icon={faFileAlt}
                     size="xs"
                   />
                 </span>
-                <a className="link-icon-color" href="#">
+                <a className="text-link-icon" href="#">
                   טופס פירוט ההליך הרפואי
                 </a>
               </div>
