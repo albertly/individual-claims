@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,11 +6,12 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { faFileAlt, faCircle } from '@fortawesome/free-regular-svg-icons';
 
 import { getCares, ICare } from './services/Cares';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { AppContext, Types as AppTypes, Direction } from './shared/contexApp';
+import { Pages, Paths } from './shared/constants';
 
 function Main(): React.ReactElement {
   let history = useHistory();
+  const { state: stateApp, dispatch: dispatchApp } = useContext(AppContext);
   const [cares, setCares] = useState<ICare[]>([]);
 
   useEffect(() => {
@@ -18,7 +19,14 @@ function Main(): React.ReactElement {
   }, []);
 
   function handleClick() {
-    history.push('/second');
+    dispatchApp({
+      type: AppTypes.SetPage,
+      payload: {
+        page: Pages[Paths.INSURED],
+        direction: Direction.Forward,
+      },
+    });
+    setTimeout(() => history.push(Paths.INSURED), 0);
   }
 
   return (
@@ -62,9 +70,9 @@ function Main(): React.ReactElement {
             </div>
             <div className="row mt-3">
               <div className="col-12 col-text-help">
-                <FontAwesomeIcon                  
+                <FontAwesomeIcon
                   className="icon-font-size va-m ml-2 link-icon-color"
-                  icon={faExclamationCircle}                  
+                  icon={faExclamationCircle}
                 />
                 עבור הטיפולים הללו אין צורך בטופס:
               </div>
@@ -104,8 +112,16 @@ function Main(): React.ReactElement {
             <div className="row mt-3">
               <div className="col-12 col-text-help">
                 <span className="fa-layers fa-fw icon-font-size va-m ml-2 mb-2">
-                  <FontAwesomeIcon className="link-icon-color" icon={faCircle} size="lg"  />
-                  <FontAwesomeIcon className="link-icon-color" icon={faFileAlt} size="xs" />
+                  <FontAwesomeIcon
+                    className="link-icon-color"
+                    icon={faCircle}
+                    size="lg"
+                  />
+                  <FontAwesomeIcon
+                    className="link-icon-color"
+                    icon={faFileAlt}
+                    size="xs"
+                  />
                 </span>
                 <a className="link-icon-color" href="#">
                   טופס פירוט ההליך הרפואי

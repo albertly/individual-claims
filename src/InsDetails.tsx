@@ -5,33 +5,43 @@ import { useForm } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 
 import { DataContext, InsType as Inputs, Types } from './shared/contextData';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { AppContext, Types as AppTypes, Direction } from './shared/contexApp';
+import { Pages, Paths } from './shared/constants';
 
 function InsDetails(): React.ReactElement {
   let history = useHistory();
   const { state, dispatch } = useContext(DataContext);
+  const { state: stateApp, dispatch: dispatchApp } = useContext(AppContext);
+
   const { register, handleSubmit, watch, errors } = useForm<Inputs>({
     defaultValues: { ...state.insured },
   });
 
-  // const onSubmit = (data: Inputs) => {
-  //   console.log('data', JSON.stringify(data));
-  //   dispatch({ type: Types.SetTreat, payload: data });
-  //   history.push('/second/docs');
-  // };
-
-  // function handleClick() {
-  //   handleSubmit(onSubmit)();
-  // }
-
   const onSubmit = (data: Inputs) => {
-    dispatch({ type: Types.SetIns, payload: { ...data } });
-    history.push('/second/treatdetails');
+    dispatch({ type: Types.SetIns, payload: { ...data } }); //ToDo: Submit
+    dispatchApp({
+      type: AppTypes.SetPage,
+      payload: {
+        page: Pages[Paths.TREATMENT],
+        direction: Direction.Forward,
+      },
+    });
+    setTimeout(() => history.push(Paths.TREATMENT), 0);
   };
 
   function handleClick() {
     handleSubmit(onSubmit)();
+  }
+
+  function handleBackClick() {
+    dispatchApp({
+      type: AppTypes.SetPage,
+      payload: {
+        page: Pages[Paths.INSURED],
+        direction: Direction.Back,
+      },
+    });
+    setTimeout(() => history.push(Paths.INSURED), 0);    
   }
 
   return (

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import Button from 'react-bootstrap/Button';
 
 import {
@@ -11,11 +11,17 @@ import {
   TreatDetail,
   Types,
 } from './shared/contextData';
+import GoBack from './components/GoBack';
+import { AppContext, Types as AppTypes, Direction } from './shared/contexApp';
+import { Pages, Paths } from './shared/constants';
+
 import { getTreatments, Treatment } from './services/Treatments';
 import TreatComp from './components/TreatComp';
 
 function TreadDetails(): React.ReactElement {
   const [treatments, setTreatments] = useState<Treatment[]>([]);
+  const { state: stateApp, dispatch: dispatchApp } = useContext(AppContext);
+
   const [kind, setKind] = useState(0);
 
   useEffect(() => {
@@ -70,9 +76,15 @@ function TreadDetails(): React.ReactElement {
   };
 
   const onSubmit = (data: Inputs) => {
-    console.log('data', JSON.stringify(data));
-    dispatch({ type: Types.SetTreat, payload: data });
-    history.push('/second/docs');
+    dispatch({ type: Types.SetTreat, payload: { ...data } }); //ToDo: Submit
+    dispatchApp({
+      type: AppTypes.SetPage,
+      payload: {
+        page: Pages[Paths.DOCS],
+        direction: Direction.Forward,
+      },
+    });
+    setTimeout(() => history.push(Paths.DOCS), 0);
   };
 
   function handleClick() {
@@ -80,8 +92,16 @@ function TreadDetails(): React.ReactElement {
   }
 
   function handleBackClick() {
-    history.push('/second');
+    dispatchApp({
+      type: AppTypes.SetPage,
+      payload: {
+        page: Pages[Paths.INSURED],
+        direction: Direction.Back,
+      },
+    });
+    setTimeout(() => history.push(Paths.INSURED), 0);    
   }
+
 
   return (
     <div>
@@ -178,15 +198,7 @@ function TreadDetails(): React.ReactElement {
 
       <footer className="d-flex justify-content-end align-items-center">
         <nav>
-          <a
-            className="link-icon-color"
-            style={{ textDecoration: 'underline' }}
-            href="#"
-            onClick={handleBackClick}
-          >
-            חזרה אחורה
-          </a>
-          <span className="px-2">או</span>
+          <GoBack  handleBackClick={handleBackClick} />      
           <Button variant="primary" onClick={handleClick}>
             המשך
           </Button>

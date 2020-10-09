@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 
+import { AppContext, Types as AppTypes, Direction } from './shared/contexApp';
+import { Pages, Paths } from './shared/constants';
+
 function Finish(): React.ReactElement {
   let history = useHistory();
+  const { state: stateApp, dispatch: dispatchApp } = useContext(AppContext);
+
+  const onSubmit = (/*data: Inputs*/) => {
+    // dispatch({ type: Types.AddDoc, payload: { ...data } }); //ToDo: Submit
+    dispatchApp({
+      type: AppTypes.SetPage,
+      payload: {
+        page: Pages[Paths.MAIN],
+        direction: Direction.Forward,
+      },
+    });
+    setTimeout(() => history.push(Paths.MAIN), 0);
+  };
 
   function handleClick() {
-    history.push('/second');
+    // handleSubmit(onSubmit)(); //ToDo
+    onSubmit();
   }
 
-  function handleBackClick() {
-    history.push('/second/docs');
-  }
   return (
     <div>
       <main aria-labelledby="h2_finish">
@@ -42,7 +56,11 @@ function Finish(): React.ReactElement {
               עבודה.
             </p>
 
-            <a className="mt-md-4 mt-xs-1 link-icon-color h5" href="#">
+            <a
+              className="mt-md-4 mt-xs-1 link-icon-color h5"
+              href="#"
+              onClick={handleClick}
+            >
               להגשת תביעת עבור חשבונית נוסופות
             </a>
           </div>

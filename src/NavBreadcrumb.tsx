@@ -9,7 +9,7 @@ import {
   Types,
   Direction,
 } from './shared/contexApp';
-import { Pages } from './shared/constants';
+import { Pages, Paths } from './shared/constants';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import './NavBreadcrumb.css';
@@ -30,20 +30,20 @@ function NavBreadcrumb(): React.ReactElement {
 
   useEffect(() => {
     const obj: IActive = { l1: false, l2: false, l3: false, l4: false };
-    let prop = 'l1';
-    switch (window.location.pathname) {
-      case '/second':
-        prop = 'l1';
+    let prop = `l${Pages[Paths.INSURED]}`;
+    switch (window.location.pathname) {  //ToDo: Refactor! No need for switch
+      case Paths.INSURED:
+        prop =  `l${Pages[Paths.INSURED]}`;
         break;
-      case '/second/treatdetails':
-        prop = 'l2';
+      case Paths.TREATMENT:
+        prop = `l${Pages[Paths.TREATMENT]}`;
         break;
-      case '/second/docs':
-        prop = 'l3';
+      case Paths.DOCS:
+        prop = `l${Pages[Paths.DOCS]}`;
         break;
-      case '/second/payment':
-      case '/second/finish':
-        prop = 'l4';
+      case Paths.PAYMENT:
+      case Paths.FINISH:
+        prop = `l${Pages[Paths.PAYMENT]}`;
         break;
     }
     setActive({ ...obj, [prop]: true });
@@ -55,7 +55,7 @@ function NavBreadcrumb(): React.ReactElement {
     event: React.SyntheticEvent
   ) => {
     event.preventDefault();
-    const e: any = event.currentTarget;
+    const e: any = event.currentTarget;              //ToDo: Why? obj1 - no use
     const obj: IActive = { l1: false, l2: false, l3: false, l4: false };
     const prop: string = e.id;
     obj[prop] = true;
@@ -64,46 +64,46 @@ function NavBreadcrumb(): React.ReactElement {
 
     //  setActive(obj1);
 
-    switch (prop) {
-      case 'l1':
+    switch (prop) {                                   //ToDo: Refactor! No need for switch
+      case `l${Pages[Paths.INSURED]}`:
         dispatch({
           type: Types.SetPage,
-          payload: { page: Pages['/second'], direction: Direction.Forward },
+          payload: { page: Pages[Paths.INSURED], direction: Direction.Forward },
         });
-        setTimeout(()=>history.push('/second'), 0);
+        setTimeout(()=>history.push(Paths.INSURED), 0);
         
         break;
-      case 'l2':
+      case `l${Pages[Paths.TREATMENT]}`:
         dispatch({
           type: Types.SetPage,
           payload: {
-            page: Pages['/second/treatdetails'],
+            page: Pages[Paths.TREATMENT],
             direction: Direction.Forward,
           },
         });
-        setTimeout(()=>history.push('/second/treatdetails'), 0);
+        setTimeout(()=>history.push(Paths.TREATMENT), 0);
 
         break;
-      case 'l3':
+      case `l${Pages[Paths.DOCS]}`:
         dispatch({
           type: Types.SetPage,
           payload: {
-            page: Pages['/second/docs'],
+            page: Pages[Paths.DOCS],
             direction: Direction.Forward,
           },
         });
-        setTimeout(()=>history.push('/second/docs'), 0);
+        setTimeout(()=>history.push(Paths.DOCS), 0);
 
         break;
-      case 'l4':
+      case `l${Pages[Paths.PAYMENT]}`:
         dispatch({
           type: Types.SetPage,
           payload: {
-            page: Pages['/second/payment'],
+            page: Pages[Paths.PAYMENT],
             direction: Direction.Forward,
           },
         });
-        setTimeout(()=>history.push('/second/payment'), 0);
+        setTimeout(()=>history.push(Paths.PAYMENT), 0);
         break;
     }
   };

@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 import React, { useReducer } from 'react';
-
+import { Pages, Paths } from './constants';
 import {
   navigationReducer,
   NavigationActions,
@@ -17,13 +17,13 @@ type InitialStateType = {
 const initialState: InitialStateType = {
   navigation: {
     direction: Direction.Forward,
-    page: 0,
+    page: Pages[Paths.MAIN],
   },
 };
 
 const AppContext = React.createContext<{
   state: InitialStateType;
-  dispatch:  React.Dispatch<NavigationActions>;
+  dispatch: React.Dispatch<NavigationActions>;
 }>({ state: initialState, dispatch: async () => null });
 
 const mainReducer = (
@@ -43,7 +43,6 @@ const AppProvider: React.FC = ({ children }) => {
     </AppContext.Provider>
   );
 };
-
 
 export { AppContext, AppProvider, Types, Direction };
 export type { NavigationType };

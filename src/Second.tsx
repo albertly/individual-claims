@@ -26,19 +26,6 @@ function Second(props: any): React.ReactElement {
 
   let { path, url } = useRouteMatch();
 
-  // useEffect(() => {
-
-  //   setDirection(
-  //     Pages[props.location.pathname] - page > 0
-  //       ? Direction.Forward
-  //       : Direction.Back
-  //   );
-  //   console.log('Page old', page);
-  //   console.log('Page New', Pages[props.location.pathname]);
-  //   setTimeout(p => setPage(p), 0, Pages[props.location.pathname]);
-
-  // }, [props.location.pathname]);
-
   return (
     <>
       <NavBreadcrumb />
