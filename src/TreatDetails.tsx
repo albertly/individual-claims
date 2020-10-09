@@ -11,12 +11,14 @@ import {
   TreatDetail,
   Types,
 } from './shared/contextData';
+import NavBarBottom from './components/NavBarBottom';
 import GoBack from './components/GoBack';
 import { AppContext, Types as AppTypes, Direction } from './shared/contexApp';
 import { Pages, Paths } from './shared/constants';
 
 import { getTreatments, Treatment } from './services/Treatments';
 import TreatComp from './components/TreatComp';
+import NavBreadcrumb from './NavBreadcrumb';
 
 function TreadDetails(): React.ReactElement {
   const [treatments, setTreatments] = useState<Treatment[]>([]);
@@ -197,12 +199,13 @@ function TreadDetails(): React.ReactElement {
       </main>
 
       <footer className="d-flex justify-content-end align-items-center">
-        <nav>
+        {/* <nav>
           <GoBack  handleBackClick={handleBackClick} />      
           <Button variant="primary" onClick={handleClick}>
             המשך
           </Button>
-        </nav>
+        </nav> */}
+        <NavBarBottom handleClick={handleClick} handleBackClick={handleBackClick} />
       </footer>
     </div>
   );
