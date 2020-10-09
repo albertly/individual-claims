@@ -116,7 +116,7 @@ function App(): React.ReactElement {
 
         <Switch>
           <Route exact path={Paths.MAIN} component={Main} />
-          <Route path={Paths.INSURED} component={Second} />
+          <Route  component={Second} />
         </Switch>
       </DataProvider>
     </AppProvider>

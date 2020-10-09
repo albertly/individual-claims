@@ -16,30 +16,27 @@
 
 // ???type PagesPathEnum = Record<PagesPath, PagesPathEnum>
 
-
 export enum Paths {
   MAIN = '/',
-  INSURED = '/second',
-  TREATMENT = '/second/treatdetails',
-  DOCS = '/second/docs',
-  PAYMENT = '/second/payment',
-  FINISH = '/second/finish',
+  INSURED = '/insured',
+  TREATMENT = '/treatments',
+  DOCS = '/docs',
+  PAYMENT = '/payment',
+  FINISH = '/finish',
 }
 
 type PagesType = {
   [key in Paths]: number; // Note that "key in".
 };
 
-
-
 export const Pages: PagesType = {
-  [Paths.MAIN] : 0,
+  [Paths.MAIN]: 0,
   [Paths.INSURED]: 1,
   [Paths.TREATMENT]: 2,
   [Paths.DOCS]: 3,
   [Paths.PAYMENT]: 4,
-  [Paths.FINISH]: 5,  
-}
+  [Paths.FINISH]: 5,
+};
 
 //ToDo: make type
 // export const Pages:  PagesType = {

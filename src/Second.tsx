@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import NavBreadcrumb from './NavBreadcrumb';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import { PageTransition } from '@steveeeie/react-page-transition';
+import PageTransition from './components/PageTransition';
 
 import InsDetails from './InsDetails';
 import TreatDetails from './TreatDetails';
 import DocAttach from './DocAttach';
 import Payment from './Payment';
 import Finish from './Finish';
-import { Pages } from './shared/constants';
+import { Pages, Paths } from './shared/constants';
 
 import {
   AppContext,
@@ -39,7 +39,7 @@ function Second(props: any): React.ReactElement {
           > */}
 
       <Route
-        render={  ({ location }) => {
+        render={({ location }) => {
           console.log('Current page', location.pathname);
           console.log(
             'direction',
@@ -47,9 +47,10 @@ function Second(props: any): React.ReactElement {
               ? 'moveToLeftFromRight'
               : 'moveToRightFromLeft'
           );
-          return  (
+          return (
             <>
               <PageTransition
+                disabled={true}
                 preset={
                   state.navigation.direction === Direction.Forward
                     ? 'moveToLeftFromRight'
@@ -68,16 +69,16 @@ function Second(props: any): React.ReactElement {
                 transitionKey={location.key}
               >
                 <Switch location={location}>
-                <Route exact path={`${path}`} component={InsDetails} />
+                  <Route exact path={Paths.INSURED} component={InsDetails} />
 
-                <Route
-                  exact
-                  path={`${path}/treatdetails`}
-                  component={TreatDetails}
-                />
-                <Route exact path={`${path}/docs`} component={DocAttach} />
-                <Route exact path={`${path}/payment`} component={Payment} />
-                <Route exact path={`${path}/finish`} component={Finish} />
+                  <Route
+                    exact
+                    path={Paths.TREATMENT}
+                    component={TreatDetails}
+                  />
+                  <Route exact path={Paths.DOCS} component={DocAttach} />
+                  <Route exact path={Paths.PAYMENT} component={Payment} />
+                  <Route exact path={Paths.FINISH} component={Finish} />
                 </Switch>
               </PageTransition>
             </>
