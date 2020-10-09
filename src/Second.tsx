@@ -56,16 +56,6 @@ function Second(props: any): React.ReactElement {
                     ? 'moveToLeftFromRight'
                     : 'moveToRightFromLeft'
                 }
-                // enterAnimation={
-                //   state.navigation.direction === Direction.Forward
-                //     ? 'moveToLeft'
-                //     : 'moveToRight'
-                // }
-                // exitAnimation={
-                //   state.navigation.direction === Direction.Forward
-                //     ? 'moveToLeft'
-                //     : 'moveToRight'
-                // }
                 transitionKey={location.key}
               >
                 <Switch location={location}>

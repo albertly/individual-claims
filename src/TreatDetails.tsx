@@ -199,13 +199,13 @@ function TreadDetails(): React.ReactElement {
       </main>
 
       <footer className="d-flex justify-content-end align-items-center">
-        {/* <nav>
+        <nav>
           <GoBack  handleBackClick={handleBackClick} />      
           <Button variant="primary" onClick={handleClick}>
             המשך
           </Button>
-        </nav> */}
-        <NavBarBottom handleClick={handleClick} handleBackClick={handleBackClick} />
+        </nav>
+        {/* <NavBarBottom handleClick={handleClick} handleBackClick={handleBackClick} /> */}
       </footer>
     </div>
   );
