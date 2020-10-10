@@ -47,7 +47,7 @@ function Checkbox({
         )}
       />
 
-      <label className="form-check-label pr-4" htmlFor={ctlName}>
+      <label className="form-check-label primary-font pr-4" htmlFor={ctlName}>
         {lblName}
       </label>
     </>
@@ -96,7 +96,7 @@ function TreatComp({
         <div className="col col-last">
           <div className="form-row">
             <div className="form-group col-md-4">
-              <label htmlFor={`treatments[${index}].treatId`}>סוג טיפול</label>
+              <label className="primary-font" htmlFor={`treatments[${index}].treatId`}>סוג טיפול</label>
               <label className="mr-2 text-danger">*</label>
 
               <Controller
@@ -147,7 +147,7 @@ function TreatComp({
             {kind !== 4 && (
               <>
                 <div className="form-group col-md-3">
-                  <label htmlFor={`treatments[${index}].treatDate`}>
+                  <label className="primary-font" htmlFor={`treatments[${index}].treatDate`}>
                     תאריך הטיפול
                   </label>
                   <label className="mr-2 text-danger">*</label>
@@ -173,7 +173,7 @@ function TreatComp({
                 </div>
 
                 <div className="col-md-3">
-                  <label htmlFor={`treatments[${index}].cost`}>
+                  <label className="primary-font" htmlFor={`treatments[${index}].cost`}>
                     עלות הטיפול
                   </label>
                   <label className="mr-2 text-danger">*</label>
@@ -220,7 +220,7 @@ function TreatComp({
           <div className="form-row">
             {kind >= 2 && kind !== 4 && (
               <div className="form-group col-md-1">
-                <label htmlFor={`treatments[${index}].tooth`}>מספר שן</label>
+                <label className="primary-font" htmlFor={`treatments[${index}].tooth`}>מספר שן</label>
                 <label className="mr-2 text-danger">*</label>
 
                 <input
@@ -237,7 +237,7 @@ function TreatComp({
             {kind >= 3 && kind !== 4 && (
               <div className="form-group col-md-3">
                 <div className="row">
-                  <label htmlFor="surface">משטח</label>
+                  <label className="primary-font" htmlFor="surface">משטח</label>
                   <label className="mr-2 text-danger">*</label>
                 </div>
                 <div className="row">
@@ -296,7 +296,7 @@ function TreatComp({
             {kind >= 1 && kind !== 4 && (
               <div className="form-group col-md-4">
                 <label
-                  className="d-block"
+                  className="d-block primary-font"
                   htmlFor={`treatments[${index}].notes`}
                 >
                   הערות רפואיות נוספות
