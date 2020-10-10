@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { useForm } from 'react-hook-form';
@@ -59,6 +59,15 @@ function InsDetails(): React.ReactElement {
   const { state, dispatch } = useContext(DataContext);
   const { state: stateApp, dispatch: dispatchApp } = useContext(AppContext);
 
+  useEffect(() => {
+    dispatchApp({
+      type: AppTypes.SetNumber,
+      payload: {
+        page: Pages[Paths.INSURED],
+      },
+    });
+  }, []);
+
   const { register, handleSubmit, watch, errors } = useForm<Inputs>({
     defaultValues: { ...state.insured },
   });
@@ -69,7 +78,7 @@ function InsDetails(): React.ReactElement {
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.TREATMENT],
-        direction: Direction.Forward,
+        // direction: Direction.Forward,
       },
     });
     setTimeout(() => history.push(Paths.TREATMENT), 0);
@@ -135,7 +144,9 @@ function InsDetails(): React.ReactElement {
             <div className="col-md-9 col-xs-12 align-self-center col-last">
               <div className="form-row">
                 <div className="form-group col-md-4">
-                  <label className="primary-font" htmlFor="mobile">מספר טלפון נייד</label>
+                  <label className="primary-font" htmlFor="mobile">
+                    מספר טלפון נייד
+                  </label>
                   <label className="mr-2 text-danger">*</label>
                   <input
                     name="mobile"
@@ -155,7 +166,9 @@ function InsDetails(): React.ReactElement {
                   )}
                 </div>
                 <div className="form-group col-md-7">
-                  <label className="primary-font" htmlFor="email">כתובת דואר אלקטרוני</label>
+                  <label className="primary-font" htmlFor="email">
+                    כתובת דואר אלקטרוני
+                  </label>
                   <label className="mr-2 text-danger">*</label>
                   <input
                     name="email"

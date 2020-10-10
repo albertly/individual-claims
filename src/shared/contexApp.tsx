@@ -16,8 +16,9 @@ type InitialStateType = {
 
 const initialState: InitialStateType = {
   navigation: {
-    direction: Direction.Forward,
     page: Pages[Paths.MAIN],
+    direction: Direction.Forward,    
+    sm: [true, false, false, false, false, false],
   },
 };
 

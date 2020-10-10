@@ -23,7 +23,7 @@ function Main(): React.ReactElement {
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.INSURED],
-        direction: Direction.Forward,
+        //direction: Direction.Forward,
       },
     });
     setTimeout(() => history.push(Paths.INSURED), 0);

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import Button from 'react-bootstrap/Button';
@@ -20,13 +20,27 @@ function DocAttach(): React.ReactElement {
     defaultValues: { ...state.docs },
   });
 
+  useEffect(() => {
+    if (stateApp.navigation.sm[Pages[Paths.TREATMENT]]) {
+      dispatchApp({
+        type: AppTypes.SetNumber,
+        payload: {
+          page: Pages[Paths.DOCS],         
+        },
+      });      
+    }
+    else {
+      history.push(Paths.MAIN);
+    }
+  }, []);
+
   const onSubmit = (data: Inputs) => {
     dispatch({ type: Types.AddDoc, payload: { ...data } });
     dispatchApp({
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.PAYMENT],
-        direction: Direction.Forward,
+        // direction: Direction.Forward,
       },
     });
     setTimeout(() => history.push(Paths.PAYMENT), 0);
@@ -41,7 +55,7 @@ function DocAttach(): React.ReactElement {
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.TREATMENT],
-        direction: Direction.Back,
+        // direction: Direction.Back,
       },
     });
     setTimeout(() => history.push(Paths.TREATMENT), 0);

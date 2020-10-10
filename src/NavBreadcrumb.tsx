@@ -51,6 +51,11 @@ function NavBreadcrumb(): React.ReactElement {
 
   let history = useHistory();
 
+  function getPath() {
+    const o = Object.entries(Pages).find(e => e[1] === state.navigation.page);
+    return  o ? o[0] as Paths : Paths.MAIN;
+  }
+
   const handleClick: React.ReactEventHandler = (
     event: React.SyntheticEvent
   ) => {
@@ -68,7 +73,7 @@ function NavBreadcrumb(): React.ReactElement {
       case `l${Pages[Paths.INSURED]}`:
         dispatch({
           type: Types.SetPage,
-          payload: { page: Pages[Paths.INSURED], direction: Direction.Forward },
+          payload: { page: Pages[Paths.INSURED]},
         });
         setTimeout(()=>history.push(Paths.INSURED), 0);
         
@@ -76,10 +81,7 @@ function NavBreadcrumb(): React.ReactElement {
       case `l${Pages[Paths.TREATMENT]}`:
         dispatch({
           type: Types.SetPage,
-          payload: {
-            page: Pages[Paths.TREATMENT],
-            direction: Direction.Forward,
-          },
+          payload: { page: Pages[Paths.TREATMENT]},
         });
         setTimeout(()=>history.push(Paths.TREATMENT), 0);
 
@@ -87,10 +89,7 @@ function NavBreadcrumb(): React.ReactElement {
       case `l${Pages[Paths.DOCS]}`:
         dispatch({
           type: Types.SetPage,
-          payload: {
-            page: Pages[Paths.DOCS],
-            direction: Direction.Forward,
-          },
+          payload: {page: Pages[Paths.DOCS]},
         });
         setTimeout(()=>history.push(Paths.DOCS), 0);
 
@@ -98,10 +97,7 @@ function NavBreadcrumb(): React.ReactElement {
       case `l${Pages[Paths.PAYMENT]}`:
         dispatch({
           type: Types.SetPage,
-          payload: {
-            page: Pages[Paths.PAYMENT],
-            direction: Direction.Forward,
-          },
+          payload: {page: Pages[Paths.PAYMENT]},
         });
         setTimeout(()=>history.push(Paths.PAYMENT), 0);
         break;

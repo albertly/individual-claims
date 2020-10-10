@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,13 +11,29 @@ function Finish(): React.ReactElement {
   let history = useHistory();
   const { state: stateApp, dispatch: dispatchApp } = useContext(AppContext);
 
+  useEffect(() => {
+    if (stateApp.navigation.sm[Pages[Paths.PAYMENT]]) {
+      dispatchApp({
+        type: AppTypes.SetNumber,
+        payload: {
+          page: Pages[Paths.FINISH],         
+        },
+      });      
+    }
+    else {
+      history.push(Paths.MAIN);
+    }
+  }, []);
+
+
+
   const onSubmit = (/*data: Inputs*/) => {
     // dispatch({ type: Types.AddDoc, payload: { ...data } }); //ToDo: Submit
     dispatchApp({
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.MAIN],
-        direction: Direction.Forward,
+        //direction: Direction.Forward,
       },
     });
     setTimeout(() => history.push(Paths.MAIN), 0);

@@ -18,7 +18,6 @@ import { Pages, Paths } from './shared/constants';
 
 import { getTreatments, Treatment } from './services/Treatments';
 import TreatComp from './components/TreatComp';
-import NavBreadcrumb from './NavBreadcrumb';
 
 function TreadDetails(): React.ReactElement {
   const [treatments, setTreatments] = useState<Treatment[]>([]);
@@ -34,6 +33,20 @@ function TreadDetails(): React.ReactElement {
       (values.treatments && values.treatments.length === 0)
     ) {
       append({ ...treatDetailsDefaults });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (stateApp.navigation.sm[Pages[Paths.INSURED]]) {
+      dispatchApp({
+        type: AppTypes.SetNumber,
+        payload: {
+          page: Pages[Paths.TREATMENT],         
+        },
+      });      
+    }
+    else {
+      history.push(Paths.MAIN);
     }
   }, []);
 
@@ -83,7 +96,7 @@ function TreadDetails(): React.ReactElement {
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.DOCS],
-        direction: Direction.Forward,
+        //  direction: Direction.Forward,
       },
     });
     setTimeout(() => history.push(Paths.DOCS), 0);
@@ -98,12 +111,11 @@ function TreadDetails(): React.ReactElement {
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.INSURED],
-        direction: Direction.Back,
+        //direction: Direction.Back,
       },
     });
-    setTimeout(() => history.push(Paths.INSURED), 0);    
+    setTimeout(() => history.push(Paths.INSURED), 0);
   }
-
 
   return (
     <div>
@@ -200,7 +212,7 @@ function TreadDetails(): React.ReactElement {
 
       <footer className="d-flex justify-content-end align-items-center">
         <nav>
-          <GoBack  handleBackClick={handleBackClick} />      
+          <GoBack handleBackClick={handleBackClick} />
           <Button variant="primary" onClick={handleClick}>
             המשך
           </Button>

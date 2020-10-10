@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
@@ -10,13 +10,27 @@ function Payment(): React.ReactElement {
   let history = useHistory();
   const { state: stateApp, dispatch: dispatchApp } = useContext(AppContext);
 
+  useEffect(() => {
+    if (stateApp.navigation.sm[Pages[Paths.DOCS]]) {
+      dispatchApp({
+        type: AppTypes.SetNumber,
+        payload: {
+          page: Pages[Paths.PAYMENT],         
+        },
+      });      
+    }
+    else {
+      history.push(Paths.MAIN);
+    }
+  }, []);
+
   const onSubmit = (/*data: Inputs*/) => {
     // dispatch({ type: Types.AddDoc, payload: { ...data } }); //ToDo: Submit
     dispatchApp({
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.FINISH],
-        direction: Direction.Forward,
+        // direction: Direction.Forward,
       },
     });
     setTimeout(() => history.push(Paths.FINISH), 0);
@@ -32,7 +46,7 @@ function Payment(): React.ReactElement {
       type: AppTypes.SetPage,
       payload: {
         page: Pages[Paths.DOCS],
-        direction: Direction.Back,
+        // direction: Direction.Back,
       },
     });
     setTimeout(() => history.push(Paths.DOCS), 0);
