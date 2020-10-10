@@ -8,6 +8,52 @@ import { DataContext, InsType as Inputs, Types } from './shared/contextData';
 import { AppContext, Types as AppTypes, Direction } from './shared/contexApp';
 import { Pages, Paths } from './shared/constants';
 
+function Checkbox(
+  name: string,
+  register: any,
+  errors: any
+): (
+  value: string,
+  text: string,
+  showErrorOnce?: boolean
+) => React.ReactElement {
+  let counter = 0;
+
+  return (
+    value: string,
+    text: string,
+    showErrorOnce?: boolean
+  ): React.ReactElement => {
+    counter = +1;
+    return (
+      <div className="col-md-4 pb-md-4 col-xs-12 checkbox-border col-text-info">
+        <div className="mt-md-4">
+          <Form.Check
+            name={name}
+            className="pl-4"
+            inline
+            type="radio"
+            id={`${name}--${counter}`}
+            ref={register({
+              required: 'נא לבחור מבוטח',
+            })}
+            value={value}
+          />
+          <label className="pt-2 mb-0" htmlFor={`${name}--${counter}`}>
+            {value}
+          </label>
+          <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
+          {showErrorOnce && errors[name] && (
+            <div className="invalid-tooltip" role="alert">
+              {errors[name].message}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+}
+
 function InsDetails(): React.ReactElement {
   let history = useHistory();
   const { state, dispatch } = useContext(DataContext);
@@ -33,16 +79,7 @@ function InsDetails(): React.ReactElement {
     handleSubmit(onSubmit)();
   }
 
-  function handleBackClick() {
-    dispatchApp({
-      type: AppTypes.SetPage,
-      payload: {
-        page: Pages[Paths.INSURED],
-        direction: Direction.Back,
-      },
-    });
-    setTimeout(() => history.push(Paths.INSURED), 0);    
-  }
+  const buildCheckbox = Checkbox('insured', register, errors);
 
   return (
     <div>
@@ -58,7 +95,8 @@ function InsDetails(): React.ReactElement {
 
             <div className="col-md-9 col-xs-12">
               <div className="row">
-                <div className="col-md-4 pb-md-4 col-xs-12 col-bl col-bb col-text-info">
+                {buildCheckbox('123456789', '', true)}
+                {/* <div className="col-md-4 pb-md-4 col-xs-12 checkbox-border col-text-info">
                   <div className="mt-md-4">
                     <Form.Check
                       name="insured"
@@ -81,62 +119,10 @@ function InsDetails(): React.ReactElement {
                       </div>
                     )}
                   </div>
-                </div>
-
-                <div className="col-md-4 pb-md-4 col-xs-12 col-bl col-bb col-text-info">
-                  <div className="mt-md-4">
-                    <Form.Check
-                      name="insured"
-                      className="pl-4"
-                      inline
-                      type="radio"
-                      id={`inline--2`}
-                      ref={register}
-                      value="123456788"
-                    />
-                    <label className="pt-2 mb-0" htmlFor={`inline--2`}>
-                      123456788
-                    </label>
-                    <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
-                  </div>
-                </div>
-
-                <div className="col-md-4 pb-md-4 col-xs-12 col-bl col-bb col-text-info">
-                  <div className="mt-md-4">
-                    <Form.Check
-                      name="insured"
-                      className="pl-4"
-                      inline
-                      type="radio"
-                      id={`inline--3`}
-                      ref={register}
-                      value="123456787"
-                    />
-                    <label className="pt-2 mb-0" htmlFor={`inline--3`}>
-                      123456787
-                    </label>
-                    <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
-                  </div>
-                </div>
-
-                <div className="col-md-4 pb-md-4 col-xs-12 col-bl col-bb col-text-info">
-                  <div className="mt-md-4">
-                    <Form.Check
-                      name="insured"
-                      className="pl-4"
-                      inline
-                      type="radio"
-                      id={`inline--4`}
-                      ref={register}
-                      value="123456786"
-                    />
-                    <label className="pt-2 mb-0" htmlFor={`inline--4`}>
-                      123456786
-                    </label>
-                    <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
-                  </div>
-                </div>
-
+                </div> */}
+                {buildCheckbox('123456788', '')}
+                {buildCheckbox('123456787', '')}
+                {buildCheckbox('123456786', '')}
                 {/* <div className="col-md-4 col-xs-12 col-bl col-bb col-text-info">3 of 4</div> */}
                 {/* <div className="col-md-4 col-xs-12 col-last">4 of 4</div> */}
               </div>
@@ -147,9 +133,9 @@ function InsDetails(): React.ReactElement {
               פרטי יצירת קשר עם המבוטח
             </h3>
             <div className="col-md-9 col-xs-12 align-self-center col-last">
-              <div className="form-row col-text-info">
+              <div className="form-row">
                 <div className="form-group col-md-4">
-                  <label htmlFor="mobile">מספר טלפון נייד</label>
+                  <label className="primary-font" htmlFor="mobile">מספר טלפון נייד</label>
                   <label className="mr-2 text-danger">*</label>
                   <input
                     name="mobile"
@@ -169,7 +155,7 @@ function InsDetails(): React.ReactElement {
                   )}
                 </div>
                 <div className="form-group col-md-7">
-                  <label htmlFor="email">כתובת דואר אלקטרוני</label>
+                  <label className="primary-font" htmlFor="email">כתובת דואר אלקטרוני</label>
                   <label className="mr-2 text-danger">*</label>
                   <input
                     name="email"

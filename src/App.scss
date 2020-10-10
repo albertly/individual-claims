@@ -65,7 +65,34 @@ $main-background-color: #cfe4fe;
   font-size: var(--main-size);
 }
 
+
 @import '../node_modules/bootstrap/scss/bootstrap';
+
+// InsDetails for big check boxes
+.col-text-info {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--info_color);
+}
+
+// // InsDetails for big check boxes
+.checkbox-border {
+  border-bottom: 1px solid $gray-300;
+  border-left: 1px solid $gray-300;
+}
+
+@media (max-width: 576px) {
+  .checkbox-border {
+    border-bottom: 1px solid $gray-300;
+    border-left: 0;
+  }
+}
+
+.primary-font {
+  font-size: var(--main-size);
+  color: var(--primary);
+  font-weight: 500;
+}
 
 :root {
   --primary_one: #00427f;
@@ -139,15 +166,6 @@ footer {
   background-color: var(--info_color);
 }
 
-.col-bl {
-  border-left: 1px solid #e0e0e0;
-  background-color: white;
-}
-.col-bb {
-  border-bottom: 1px solid #e0e0e0;
-  background-color: white;
-}
-
 .col,
 .col-1,
 .col-2,
@@ -170,11 +188,8 @@ footer {
 // .col-text-help {
 //   font-size: 1rem;
 // }
-.col-text-info {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--info_color);
-}
+
+
 
 .col-first {
   background-color: var(--primary_one);
