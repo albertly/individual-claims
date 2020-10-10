@@ -80,13 +80,13 @@ function DocAttach(): React.ReactElement {
 
             {/* File 1 */}
             <div className="row mb-md-5 mt-md-2">
-              <div className="col-md-5 col-xs-12 border-bottom border-secondary text-right">
+              <div className="col-md-5 col-xs-12 radio-border text-right">
                 <ExclamationImg css="link-icon-color ml-1" />
                 <label htmlFor="invoice">חשבונית עבור הטיפול</label>
                 <label className="mr-2 text-danger">*</label>
               </div>
 
-              <div className="col-md-5 col-xs-12 border-bottom border-secondary text-right">
+              <div className="col-md-5 col-xs-12 radio-border text-right">
                 <Controller
                   control={control}
                   name="invoice"
@@ -125,13 +125,13 @@ function DocAttach(): React.ReactElement {
 
             {/* File 2 */}
             <div className="row mb-md-5 mt-md-2">
-              <div className="col-md-5 col-xs-12 text-right border-bottom border-secondary">
+              <div className="col-md-5 col-xs-12 text-right radio-border">
                 <ExclamationImg css="link-icon-color ml-1" />
                 <label htmlFor="medical">טופס פירוט ההליך הרפואי</label>
                 <label className="mr-2 text-danger">*</label>
               </div>
 
-              <div className="col-md-5 col-xs-12 text-right border-bottom border-secondary">
+              <div className="col-md-5 col-xs-12 text-right radio-border">
                 <FileUpload
                   id="medical"
                   handleFile={(e: any) => {
@@ -144,14 +144,14 @@ function DocAttach(): React.ReactElement {
 
             {/* File 3 */}
             <div className="row mb-md-5 mt-md-2">
-              <div className="col-md-5 col-xs-12 text-right border-bottom border-secondary">
+              <div className="col-md-5 col-xs-12 text-right radio-border">
                 <ExclamationImg css="link-icon-color ml-1" />
                 <label htmlFor="miscellaneous">
                   צילומים, מסמכים או אישורים נוספים
                 </label>
               </div>
 
-              <div className="col-md-5 col-xs-12 text-right border-bottom border-secondary">
+              <div className="col-md-5 col-xs-12 text-right radio-border">
                 <FileUpload
                   id="miscellaneous"
                   handleFile={(f: any) => {
