@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import NavBreadcrumb from './NavBreadcrumb';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import PageTransition from './components/PageTransition';
 
 import InsDetails from './InsDetails';
@@ -39,14 +39,7 @@ function Second(props: any): React.ReactElement {
           > */}
 
       <Route
-        render={({ location }) => {
-          console.log('Current page', location.pathname);
-          console.log(
-            'direction',
-            state.navigation.direction === Direction.Forward
-              ? 'moveToLeftFromRight'
-              : 'moveToRightFromLeft'
-          );
+        render={({ location }) => {          
           return (
             <>
               <PageTransition
@@ -69,6 +62,7 @@ function Second(props: any): React.ReactElement {
                   <Route exact path={Paths.DOCS} component={DocAttach} />
                   <Route exact path={Paths.PAYMENT} component={Payment} />
                   <Route exact path={Paths.FINISH} component={Finish} />
+                  <Redirect to={Paths.MAIN} />
                 </Switch>
               </PageTransition>
             </>
