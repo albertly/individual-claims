@@ -95,7 +95,7 @@ function TreatComp({
       <section key={key} className="row">
         <div className="col col-last">
           <div className="form-row">
-            <div className="form-group col-md-4">
+            <div className="form-group col-md-4 order-md-1 order-2">
               <label className="primary-font" htmlFor={`treatments[${index}].treatId`}>סוג טיפול</label>
               <label className="mr-2 text-danger">*</label>
 
@@ -146,7 +146,7 @@ function TreatComp({
 
             {kind !== 4 && (
               <>
-                <div className="form-group col-md-3">
+                <div className="form-group col-md-3 order-md-2 order-3">
                   <label className="primary-font" htmlFor={`treatments[${index}].treatDate`}>
                     תאריך הטיפול
                   </label>
@@ -172,7 +172,7 @@ function TreatComp({
                   )}
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-md-3 order-md-3 order-4">
                   <label className="primary-font" htmlFor={`treatments[${index}].cost`}>
                     עלות הטיפול
                   </label>
@@ -197,7 +197,7 @@ function TreatComp({
             )}
 
             {kind === 4 && (
-              <div className="col-md-6 d-flex pt-md-3 pr-md-2">
+              <div className="col-md-6 d-flex pt-md-3 pr-md-2 order-md-4 order-5">
                 <FontAwesomeIcon
                   className="icon-font-size va-m ml-2 link-icon-color d-inline"
                   icon={faExclamationCircle}
@@ -206,9 +206,9 @@ function TreatComp({
               </div>
             )}
 
-            <div className="col-md-2 d-xs-none">
+            <div className="col-md-2 order-md-5 order-1">
               <Button
-                className="bg-transparent border-0 btn-sm"
+                className="bg-transparent border-0 btn-sm px-0 px-md-2"
                 onClick={() => remove(index)}
               >
                 <FontAwesomeIcon icon={faTrashAlt} size="sm" color="#006CB2" />
