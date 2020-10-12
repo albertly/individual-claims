@@ -1,23 +1,39 @@
+// import loadable from "@loadable/component";
+// import { PrerenderedComponent } from "react-prerendered-component";
+
+
+// const MyComponent = prerenderedLoadable(() => import("./MyComponent"));
+
+
 import React, { useContext } from 'react';
-import { Switch, Route, useHistory, useParams } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import loadable from "@loadable/component";
+import { PrerenderedComponent } from "react-prerendered-component";
 
 import { DataProvider } from './shared/contextData';
 import { AppProvider } from './shared/contexApp';
 import Main from './Main';
-import Second from './Second';
+//import Second from './Second';
 
-import {
-  AppContext,
-  NavigationType,
-  Types,
-  Direction,
-} from './shared/contexApp';
+import {AppContext} from './shared/contexApp';
 import { Pages, Paths } from './shared/constants';
 
 import './App.scss';
 
+const prerenderedLoadable = (dynamicImport: any) => {
+  const LoadableComponent = loadable(dynamicImport);
+  return React.memo(props => (
+    // you can use the `.preload()` method from react-loadable or react-imported-component`
+    <PrerenderedComponent live={LoadableComponent.load()}>
+      <LoadableComponent {...props} />
+    </PrerenderedComponent>
+  ));
+};
+
+
 function App(): React.ReactElement {
   const { state, dispatch } = useContext(AppContext);
+  const Second = prerenderedLoadable(() => import('./Second'));
   return (
     <AppProvider>
       <DataProvider>
