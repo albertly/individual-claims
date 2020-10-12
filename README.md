@@ -86,3 +86,8 @@ https://codesandbox.io/s/modern-sea-tx3ro?from-embed=&file=/src/components/Greet
 
 Jest tests with react context api
 https://itnext.io/jest-tests-with-react-context-api-90f3d2e06c8f
+
+
+How to declare a new property on the Window object with Typescript
+https://ourcodeworld.com/articles/read/337/how-to-declare-a-new-property-on-the-window-object-with-typescript
+https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript
