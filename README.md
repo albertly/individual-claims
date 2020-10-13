@@ -15,6 +15,13 @@ https://www.sohamkamani.com/blog/react/2018-07-26-combining-react-context/
 https://gist.github.com/etienne-dldc/68d9539a42d0a9a2737c44ace26242f8
 https://github.com/GabrielBB/react-context-combining
 
+
+4 Terrible Ways (and 4 Better Ways) to fix 'TS7016: Could not find declaration file'
+https://blog.atomist.com/declaration-file-fix/
+
+How to Use React Router in Typescript
+https://www.pluralsight.com/guides/react-router-typescript
+
 JSON
 https://jsonschema.net/home
 https://json-schema.org/implementations.html
@@ -43,6 +50,7 @@ https://www.npmjs.com/package/reactjs-file-uploader
 Files
 https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
 https://developer.mozilla.org/en-US/docs/Web/API/File
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
 Read files in JavaScript
 https://web.dev/read-files/
 
@@ -62,6 +70,9 @@ https://www.digitalocean.com/community/tutorials/react-server-side-rendering
 
 Bootstrap
 https://bootstrap-menu.com/
+
+How to Customize Bootstrap
+https://uxplanet.org/how-to-customize-bootstrap-b8078a011203
 
 Responsive Border Utilities
 https://github.com/twbs/bootstrap/issues/23892
@@ -91,3 +102,12 @@ https://itnext.io/jest-tests-with-react-context-api-90f3d2e06c8f
 How to declare a new property on the Window object with Typescript
 https://ourcodeworld.com/articles/read/337/how-to-declare-a-new-property-on-the-window-object-with-typescript
 https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript
+
+
+SSR
+Using React Router 4 with Server-Side Rendering
+https://www.digitalocean.com/community/tutorials/react-react-router-ssr
+
+Pre-render routes with react-snap
+https://web.dev/prerender-with-react-snap/    
+WHY ??? If you are not server-side rendering routes in your application, use react-snap
