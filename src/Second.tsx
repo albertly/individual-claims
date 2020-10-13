@@ -5,11 +5,11 @@ import PageTransition from './components/PageTransition';
 import loadable from "@loadable/component";
 import { PrerenderedComponent } from "react-prerendered-component";
 
-// import InsDetails from './InsDetails';
-// import TreatDetails from './TreatDetails';
-// import DocAttach from './DocAttach';
-// import Payment from './Payment';
-// import Finish from './Finish';
+import InsDetails from './InsDetails';
+import TreatDetails from './TreatDetails';
+import DocAttach from './DocAttach';
+import Payment from './Payment';
+import Finish from './Finish';
 import { Pages, Paths } from './shared/constants';
 
 import {
@@ -38,11 +38,11 @@ function Second(props: any): React.ReactElement {
 
   let { path, url } = useRouteMatch();
 
-  const InsDetails = prerenderedLoadable(() => import('./InsDetails'));
-  const TreatDetails = prerenderedLoadable(() => import('./TreatDetails'));
-  const DocAttach = prerenderedLoadable(() => import('./DocAttach'));
-  const Payment = prerenderedLoadable(() => import('./Payment'));
-  const Finish = prerenderedLoadable(() => import('./Finish'));
+  // const InsDetails = prerenderedLoadable(() => import('./InsDetails'));
+  // const TreatDetails = prerenderedLoadable(() => import('./TreatDetails'));
+  // const DocAttach = prerenderedLoadable(() => import('./DocAttach'));
+  // const Payment = prerenderedLoadable(() => import('./Payment'));
+  // const Finish = prerenderedLoadable(() => import('./Finish'));
 
   return (
     <>

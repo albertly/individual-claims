@@ -1,21 +1,19 @@
 // import loadable from "@loadable/component";
 // import { PrerenderedComponent } from "react-prerendered-component";
 
-
 // const MyComponent = prerenderedLoadable(() => import("./MyComponent"));
-
 
 import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import loadable from "@loadable/component";
-import { PrerenderedComponent } from "react-prerendered-component";
+import loadable from '@loadable/component';
+import { PrerenderedComponent } from 'react-prerendered-component';
 
 import { DataProvider } from './shared/contextData';
 import { AppProvider } from './shared/contexApp';
 import Main from './Main';
-//import Second from './Second';
+import Second from './Second';
 
-import {AppContext} from './shared/contexApp';
+import { AppContext } from './shared/contexApp';
 import { Pages, Paths } from './shared/constants';
 
 import './App.scss';
@@ -30,10 +28,9 @@ const prerenderedLoadable = (dynamicImport: any) => {
   ));
 };
 
-
 function App(): React.ReactElement {
   const { state, dispatch } = useContext(AppContext);
-  const Second = prerenderedLoadable(() => import('./Second'));
+  //const Second = prerenderedLoadable(() => import('./Second'));
   return (
     <AppProvider>
       <DataProvider>
@@ -132,7 +129,7 @@ function App(): React.ReactElement {
 
         <Switch>
           <Route exact path={Paths.MAIN} component={Main} />
-          <Route  component={Second} />
+          <Route component={Second} />
         </Switch>
       </DataProvider>
     </AppProvider>
