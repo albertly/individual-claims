@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { faFileAlt, faCircle } from '@fortawesome/free-regular-svg-icons';
@@ -162,9 +161,13 @@ function Main(): React.ReactElement {
       {/* ------------------------------------- Footer with navigation  -------------------------------- */}
       <footer>
         <nav>
-          <Button variant="primary" onClick={handleClick}>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={handleClick}
+          >
             המשך
-          </Button>
+          </button>
         </nav>
       </footer>
     </>

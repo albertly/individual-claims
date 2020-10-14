@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import Button from 'react-bootstrap/Button';
 
 import {
   DataContext,
@@ -41,11 +40,10 @@ function TreadDetails(): React.ReactElement {
       dispatchApp({
         type: AppTypes.SetNumber,
         payload: {
-          page: Pages[Paths.TREATMENT],         
+          page: Pages[Paths.TREATMENT],
         },
-      });      
-    }
-    else {
+      });
+    } else {
       history.push(Paths.MAIN);
     }
   }, []);
@@ -193,11 +191,12 @@ function TreadDetails(): React.ReactElement {
 
         <div className="row">
           <div className="col">
-            <Button
+            <button
               className="bg-transparent border-0 btn-sm"
               onClick={() => {
                 append({ ...treatDetailsDefaults });
               }}
+              type="button"
             >
               <FontAwesomeIcon
                 className="link-icon-color"
@@ -205,7 +204,7 @@ function TreadDetails(): React.ReactElement {
                 size="sm"
               />
               <small className="link-icon-color pr-1">הוספת טיפול</small>
-            </Button>
+            </button>
           </div>
         </div>
       </main>
@@ -213,9 +212,13 @@ function TreadDetails(): React.ReactElement {
       <footer className="d-flex justify-content-end align-items-center">
         <nav>
           <GoBack handleBackClick={handleBackClick} />
-          <Button variant="primary" onClick={handleClick}>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={handleClick}
+          >
             המשך
-          </Button>
+          </button>
         </nav>
         {/* <NavBarBottom handleClick={handleClick} handleBackClick={handleBackClick} /> */}
       </footer>

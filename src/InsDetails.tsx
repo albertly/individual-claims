@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 
@@ -30,7 +29,7 @@ function Checkbox(
         <div className="mt-md-4">
           <Form.Check
             name={name}
-            className="pl-4"
+            className="form-check form-check-inline pl-4"
             inline
             type="radio"
             id={`${name}--${counter}`}
@@ -39,7 +38,10 @@ function Checkbox(
             })}
             value={value}
           />
-          <label className="pt-2 mb-0" htmlFor={`${name}--${counter}`}>
+          <label
+            className="form-check-label pt-2 mb-0"
+            htmlFor={`${name}--${counter}`}
+          >
             {value}
           </label>
           <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
@@ -199,9 +201,13 @@ function InsDetails(): React.ReactElement {
       </main>
       <footer>
         <nav>
-          <Button variant="primary" onClick={handleClick}>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={handleClick}
+          >
             המשך
-          </Button>
+          </button>
         </nav>
       </footer>
     </div>

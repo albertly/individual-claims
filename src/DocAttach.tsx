@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import Button from 'react-bootstrap/Button';
 import FileUpload from './components/FileUploader';
 import { ExclamationImg } from './shared/img';
 
@@ -25,11 +24,10 @@ function DocAttach(): React.ReactElement {
       dispatchApp({
         type: AppTypes.SetNumber,
         payload: {
-          page: Pages[Paths.DOCS],         
+          page: Pages[Paths.DOCS],
         },
-      });      
-    }
-    else {
+      });
+    } else {
       history.push(Paths.MAIN);
     }
   }, []);
@@ -175,9 +173,13 @@ function DocAttach(): React.ReactElement {
         <nav>
           <GoBack handleBackClick={handleBackClick} />
 
-          <Button variant="primary" onClick={handleClick}>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={handleClick}
+          >
             המשך
-          </Button>
+          </button>
         </nav>
       </footer>
     </div>

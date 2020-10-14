@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 
 import GoBack from './components/GoBack';
 import { AppContext, Types as AppTypes, Direction } from './shared/contexApp';
@@ -15,11 +14,10 @@ function Payment(): React.ReactElement {
       dispatchApp({
         type: AppTypes.SetNumber,
         payload: {
-          page: Pages[Paths.PAYMENT],         
+          page: Pages[Paths.PAYMENT],
         },
-      });      
-    }
-    else {
+      });
+    } else {
       history.push(Paths.MAIN);
     }
   }, []);
@@ -73,9 +71,13 @@ function Payment(): React.ReactElement {
       <footer className="d-flex justify-content-end align-items-center">
         <nav>
           <GoBack handleBackClick={handleBackClick} />
-          <Button variant="primary" onClick={handleClick}>
-            אישור והגשת תביעה
-          </Button>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={handleClick}
+          >
+            המשך
+          </button>
         </nav>
       </footer>
     </div>
