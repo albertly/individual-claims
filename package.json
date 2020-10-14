@@ -33,11 +33,13 @@
     "build": "react-scripts build",
     "postbuild": "react-snap",
     "test": "react-scripts test",
+    "test:nowatch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
     "docker:build": "docker build -t albertly31/individual-claims .",
     "docker:run": "docker run -p 5000:5000 individual-claims",
-    "docker:push": "docker push albertly31/individual-claims"
+    "dock:push": "docker push albertly31/individual-claims",
+    "docker": "npm-run-all build docker:*"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -37,8 +37,7 @@ const initialState: InitialStateType = {
     invoice: undefined,
     medical: undefined,
     miscellaneous: [],
-    temp: '',
-  }
+  },
 };
 
 const DataContext = React.createContext<{
@@ -67,4 +66,4 @@ const DataProvider: React.FC = ({ children }) => {
 };
 
 export { DataContext, DataProvider, Types };
-export type { InsType, TreatType, TreatDetail, DocsType };
+export type { InsType, TreatType, TreatDetail, DocsType, InitialStateType };

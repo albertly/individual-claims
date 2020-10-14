@@ -54,6 +54,9 @@ describe('Test of contextData', () => {
         invoice: 0,
         treatments: [],
       },
+      docs: {
+        miscellaneous: [],
+      },
     };
 
     const wrapper = mount(
@@ -77,12 +80,15 @@ describe('Test of contextData', () => {
         doctorId: 123,
         treatments: [],
       },
+      docs: {
+        miscellaneous: [],
+      },
     };
 
     const wrapper = mount(
       <DataProvider>
         <TestFullState data={data} />
-      </DataProvider>      
+      </DataProvider>
     );
 
     expect(wrapper.html()).toEqual(JSON.stringify(data));
@@ -100,21 +106,24 @@ describe('Test of contextData', () => {
         doctorId: 123,
         treatments: [],
       },
+      docs: {
+        miscellaneous: [],
+      },
     };
 
     const treatDetail: TreatDetail = {
-      id: 1,
+      treatId: 1,
       treatDate: new Date(),
       cost: 10,
       notes: 'Note1',
       tooth: 12,
-      B: true
-    } 
+      B: true,
+    };
 
     const wrapper = mount(
       <DataProvider>
-        <TestAddTreatDetail data={data} treatDetail={treatDetail}/>
-      </DataProvider>      
+        <TestAddTreatDetail data={data} treatDetail={treatDetail} />
+      </DataProvider>
     );
 
     data.treatment.treatments.push(treatDetail);

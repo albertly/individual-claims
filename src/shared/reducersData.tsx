@@ -93,7 +93,6 @@ export type DocsType = {
   invoice?: File | string;
   medical?: File;
   miscellaneous: File[];
-  temp: string;
 };
 
 type DocsPayload = {
