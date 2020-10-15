@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { PrerenderedComponent } from 'react-prerendered-component';
 
+import pjson from '../package.json';
 import { DataProvider } from './shared/contextData';
 import { AppProvider } from './shared/contexApp';
 import Main from './Main';
@@ -36,7 +37,8 @@ function App(): React.ReactElement {
       <DataProvider>
         <header className="bg-main">
           {/* --------------------  Logo Line --------------------- */}
-          <div className="bg-primary">
+          <div className="bg-primary d-flex">
+            <p className="ml-auto">Version: {pjson.version}</p>
             <svg
               className="mx-1 my-1"
               focusable="false"
