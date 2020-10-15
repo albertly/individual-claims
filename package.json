@@ -1,6 +1,6 @@
 {
   "name": "individual-claims",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -85,10 +85,6 @@
     "prettier": "^2.1.2",
     "purgecss-webpack-plugin": "^3.0.0",
     "react-snap": "^1.23.0"
-  },
-  "engines": {
-    "node": ">=14.12.0",
-    "npm": ">=6.14.8"
   },
   "reactSnap": {
     "puppeteerArgs": [
