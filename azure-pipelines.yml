@@ -21,7 +21,7 @@ stages:
       displayName: Build an image and push it
       inputs:
         containerRegistry: 'DockerHub_connection'
-        repository: 'myNewName'
+        repository: 'albertly31/individual-claims'
         command: 'buildAndPush'
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
