@@ -1,4 +1,4 @@
-# Docker
+
 # Build a Docker image 
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
@@ -21,9 +21,10 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build an image and push it
       inputs:
-        command: build
+        containerRegistry: 'DockerHub_connection'
+        command: 'buildAndPush'
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
