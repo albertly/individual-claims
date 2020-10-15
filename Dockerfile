@@ -10,6 +10,6 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-RUN npm install -g serve
+RUN npm install --no-save express helmet
 EXPOSE 5000
-ENTRYPOINT ["serve", "-s", "build"]
+ENTRYPOINT ["node", "."]
