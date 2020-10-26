@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
@@ -14,16 +14,10 @@ function Checkbox(
 ): (
   value: string,
   text: string,
+  counter: number,
   showErrorOnce?: boolean
 ) => React.ReactElement {
-  let counter = 0;
-
-  return (
-    value: string,
-    text: string,
-    showErrorOnce?: boolean
-  ): React.ReactElement => {
-    counter = +1;
+  return (value, text, counter, showErrorOnce): React.ReactElement => {
     return (
       <li>
         <input
@@ -98,6 +92,7 @@ function InsDetails(): React.ReactElement {
     defaultValues: { ...state.insured },
   });
 
+
   const onSubmit = (data: Inputs) => {
     dispatch({ type: Types.SetIns, payload: { ...data } }); //ToDo: Submit
     dispatchApp({
@@ -117,28 +112,29 @@ function InsDetails(): React.ReactElement {
   const buildCheckbox = Checkbox('insured', register, errors);
 
   return (
-    <form action="none" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="hsg-g">
-        <div className="hsg-c-12">
-          <div className="hsg-strip">
-            <div className="hsg-strip-side">
-              <h3 className="hsg-strip-title">
-                פרטי המבוטח לגביו מוגשת התביעה
-              </h3>
-            </div>
-            <div className="hsg-strip-content">
-              <div className="hsg-strip-body hsg-padding-remove">
-                <ul className="hsg-checks">
-                  {buildCheckbox('123456789', '', true)}
-                  {buildCheckbox('123456788', '')}
-                  {buildCheckbox('123456787', '')}
-                  {buildCheckbox('123456786', '')}
-                </ul>
+    <>
+      <form action="none" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className="hsg-g">
+          <div className="hsg-c-12">
+            <div className="hsg-strip">
+              <div className="hsg-strip-side">
+                <h3 className="hsg-strip-title">
+                  פרטי המבוטח לגביו מוגשת התביעה
+                </h3>
+              </div>
+              <div className="hsg-strip-content">
+                <div className="hsg-strip-body hsg-padding-remove">
+                  <ul className="hsg-checks">
+                    {buildCheckbox('123456789', '', 1, true)}
+                    {buildCheckbox('123456788', '', 2)}
+                    {buildCheckbox('123456788', '', 3)}
+                    {buildCheckbox('123456787', '', 4)}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* <main aria-labelledby="h2_insDetails">
+            {/* <main aria-labelledby="h2_insDetails">
         <h2 id="h2_insDetails" className="hidden">
           פרטי המבוטח
         </h2>
@@ -217,7 +213,7 @@ function InsDetails(): React.ReactElement {
           </section>
         </form>
       </main> */}
-          {/* <footer>
+            {/* <footer>
         <nav>
           <button
             className="btn btn-primary"
@@ -228,9 +224,83 @@ function InsDetails(): React.ReactElement {
           </button>
         </nav>
       </footer> */}
+
+            <div className="hsg-strip">
+              <div className="hsg-strip-side">
+                <h3 className="hsg-strip-title">פרטי יצירת קשר עם המבוטח</h3>
+              </div>
+              <div className="hsg-strip-content">
+                <div className="hsg-strip-body">
+                  <div className="hsg-g">
+                    <div className="hsg-c-medium-6">
+                      <label htmlFor="mobile">
+                        טלפון נייד
+                        <span className="hsg-form-asterix">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="mobile"
+                        id="mobile"
+                        aria-required="true"
+                        required
+                        ref={register({
+                          required: 'שדה חובה',
+                        })}
+                      />
+                      {errors.mobile && (
+                        <div className="invalid-tooltip">
+                          {errors.mobile.message}
+                        </div>
+                      )}
+                    </div>
+                    <div className="hsg-c-medium-6">
+                      <label htmlFor="email">
+                        כתובת דואר אלקטרוני
+                        <span className="hsg-form-asterix">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        aria-required="true"
+                        required
+                        ref={register({
+                          required: 'שדה חובה',
+                          pattern: {
+                            value: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                            message: 'דואר לא חוקי',
+                          },
+                        })}
+                      />
+                      {errors.email && (
+                        <div className="invalid-tooltip" role="alert">
+                          {errors.email.message}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      {/* ------------------------------------- Footer with navigation  -------------------------------- */}
+
+      <div className="hsg-g">
+        <div className="hsg-c-12">
+          <div className="hsg-text-background-white hsg-text-left">
+            <button
+              className="hsg-button hsg-button-primary"
+              onClick={handleClick}
+            >
+              המשך
+            </button>
+          </div>
         </div>
       </div>
-    </form>
+    </>
   );
 }
 export default InsDetails;
