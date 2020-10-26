@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { faFileAlt, faCircle } from '@fortawesome/free-regular-svg-icons';
+
 
 import { getCares, ICare } from './services/Cares';
 import { AppContext, Types as AppTypes } from './shared/contexApp';
@@ -29,147 +27,95 @@ function Main(): React.ReactElement {
 
   return (
     <>
-      <main aria-labelledby="h2_p1">
-        <h2 id="h2_p1" className="hidden">
-          דף נחיתה
-        </h2>
-
-        {/* -------------------- First Section ------------------------------------- */}
-        <section className="row" aria-labelledby="mainBefore">
-          {/* Header of the Section  */}
-          <h3 id="mainBefore" className="col-md-3 col-xs-12 col-first">
-            רגע לפני שמתחילים...
-          </h3>
-
-          <div className="col-md-9 col-xs-12 col-last">
-            {/* First Line of the Section  */}
-            <h4 className="text-secondary">
-              כדי שנוכל להתקדם בזריזות, אנחנו מבקשים שסריקה או צילום של המסמכים
-              תהיה ההישג ידך:
-            </h4>
-
-            {/* Body of the Section */}
-            <ul className="text-secondary">
-              <li>
-                חשבונית על טיפול השיניים שעברת (לא יתקבלות קבלות אלא חשבוניות
-                בלבד)
-              </li>
-              <li>צילומים שעברת בהקשר טיפול השיניים</li>
-              <li>
-                כל טופס, אישור, או מסמך רפואי אחר שקיבלת ממרפאת השיניים בהקשר
-                לטיפול זה
-              </li>
-            </ul>
+      <div className="hsg-g">
+        <div className="hsg-c-12">
+          <div className="hsg-strip">
+            <div className="hsg-strip-side">
+              <h3 className="hsg-strip-title">רגע לפני שמתחילים...</h3>
+            </div>
+            <div className="hsg-strip-content">
+              <div className="hsg-strip-body">
+                <p>
+                  כדי שנוכל להתקדם בזריזות, אנחנו מבקשים שסריקה או צילום של
+                  המסמכים הבאים תהיה בהישג ידך:
+                </p>
+                <ul className="hsg-list hsg-list-bullet">
+                  <li>
+                    חשבונית על טיפול השיניים שעברת (לא יתקבלו קבלות אלא חשבוניות
+                    בלבד)
+                  </li>
+                  <li>צילומים שעברת בהקשר טיפול השיניים</li>
+                  <li>
+                    כל טופס, אישור, או מסמך רפואי אחר שקיבלת ממרפאת השיניים
+                    בהקשר לטיפול זה
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </section>
 
-        {/* ----------------------------------  Second Section ------------------------------------------- */}
-        <section className="row" aria-labelledby="claimDoc">
-          {/* Header of the Section  */}
-          <h3 id="claimDoc" className="col-md-3 col-xs-12 col-first">
-            טופס התביעה
-          </h3>
-
-          <div className="col-md-9 col-xs-12 col-last">
-            <div className="row">
-              <div className="col-12 pr-0">
-                {/* First Line of the Section  */}
-                <h4 className="text-secondary">
+          <div className="hsg-strip">
+            <div className="hsg-strip-side">
+              <h3 className="hsg-strip-title">טופס התביעה</h3>
+            </div>
+            <div className="hsg-strip-content">
+              <div className="hsg-strip-body">
+                <p>
                   כדי להגיש את התביעה עבור חלק מהטיפולים נדרש טופס פירוט ההליך
                   הרפואי כפי שמולא על ידי מרפאת השיניים.
-                </h4>
-              </div>
-            </div>
-
-            {/* Body of the Section  */}
-            <div className="row mt-2 mt-md-3">
-              <div className="col-12 pr-0 d-flex">
-                <FontAwesomeIcon
-                  className="icon-font-size va-m ml-2 link-icon-color"
-                  icon={faExclamationCircle}
-                />
-                <h5 className="text-secondary">
+                </p>
+                <p>
+                  <i className="hsg-icon-notice"></i>
                   עבור הטיפולים הללו אין צורך בטופס:
-                </h5>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                {/* Treatments w/o document  */}
-                <div className="row">
-                  {/* First List  */}
-                  <div className="col-xs-12 col-md-4">
-                    <ul className="text-secondary">
-                      {cares.map((el: ICare, i: number) => {
-                        const count = Math.floor(cares.length / 2);
-                        return i < count ? (
-                          <li key={el.item}>{el.item}</li>
-                        ) : undefined;
-                      })}
-                    </ul>
-                  </div>
+                </p>
 
-                  {/* Second List  */}
-                  <div className="col-sx-12 col-md-4">
-                    <ul className="text-secondary">
-                      {cares.map((el: ICare, i: number) => {
-                        const count = Math.ceil(cares.length / 2);
-                        return i >= count ? (
-                          <li key={el.item}>{el.item}</li>
-                        ) : undefined;
-                      })}
+                <div className="hsg-g">
+                  <div className="hsg-c-small-6">
+                    <ul className="hsg-list hsg-list-bullet">
+                      <li>בדיקה</li>
+                      <li>(הסרת אבן שן (שיננית</li>
+                      <li>סתימה</li>
+                      <li>סתימה לבנה</li>
                     </ul>
                   </div>
-                  <div className="col col-md-4"></div>
+                  <div className="hsg-c-small-6">
+                    <ul className="hsg-list hsg-list-bullet">
+                      <li>עקירה</li>
+                      <li>עקירה כירורגית</li>
+                      <li>צילום נשך</li>
+                      <li>צילום פריאפיקלי</li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Download document sub-section  */}
-            <div className="row">
-              <div className="col-12 pr-0">
-                <h5 className="text-secondary">
+                <p>
                   אם לא קיבלת את הטופס, ניתן להורידו ולהעביר אותו למרפאה למילוי:
-                </h5>
-              </div>
-            </div>
-
-            <div className="row mt-2 mt-md-3 mb-2 mb-md-3">
-              {/* Download link with icon  */}
-              <div className="col-12 pr-0">
-                <span className="fa-layers fa-fw icon-font-size va-m ml-2 mb-2">
-                  <FontAwesomeIcon
-                    className="text-link-icon"
-                    icon={faCircle}
-                    size="lg"
-                  />
-                  <FontAwesomeIcon
-                    className="text-link-icon"
-                    icon={faFileAlt}
-                    size="xs"
-                  />
-                </span>
-                <a className="text-link-icon" href="#">
-                  טופס פירוט ההליך הרפואי
-                </a>
+                  <br />
+                  <a href="#">
+                    <i className="hsg-icon-sheet"></i>
+                    טופס פירוט ההליך הרפואי
+                  </a>
+                </p>
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </div>
 
       {/* ------------------------------------- Footer with navigation  -------------------------------- */}
-      <footer>
-        <nav>
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={handleClick}
-          >
-            המשך
-          </button>
-        </nav>
-      </footer>
+
+      <div className="hsg-g">
+        <div className="hsg-c-12">
+          <div className="hsg-text-background-white hsg-text-left">
+            <button
+              className="hsg-button hsg-button-primary"
+              onClick={handleClick}
+            >
+              המשך
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

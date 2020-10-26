@@ -25,33 +25,57 @@ function Checkbox(
   ): React.ReactElement => {
     counter = +1;
     return (
-      <div className="col-md-4 pb-md-4 col-xs-12 checkbox-border col-text-info">
-        <div className="mt-md-4">
-          <Form.Check
-            name={name}
-            className="form-check form-check-inline pl-4"
-            inline
-            type="radio"
-            id={`${name}--${counter}`}
-            ref={register({
-              required: 'נא לבחור מבוטח',
-            })}
-            value={value}
-          />
-          <label
-            className="form-check-label pt-2 mb-0"
-            htmlFor={`${name}--${counter}`}
-          >
-            {value}
-          </label>
-          <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
-          {showErrorOnce && errors[name] && (
-            <div className="invalid-tooltip" role="alert">
-              {errors[name].message}
-            </div>
-          )}
-        </div>
-      </div>
+      <li>
+        <input
+          name={name}
+          type="checkbox"
+          id={`${name}--${counter}`}
+          ref={register({
+            required: 'נא לבחור מבוטח',
+          })}
+          value={value}
+          aria-required="true"
+          required
+        />
+        <label htmlFor={`${name}--${counter}`}>
+          {value}
+          <br />
+          מיכל אברג'יל
+        </label>
+        {showErrorOnce && errors[name] && (
+          <div className="invalid-tooltip" role="alert">
+            {errors[name].message}
+          </div>
+        )}
+      </li>
+
+      // <div className="col-md-4 pb-md-4 col-xs-12 checkbox-border col-text-info">
+      //   <div className="mt-md-4">
+      //     <Form.Check
+      //       name={name}
+      //       className="form-check form-check-inline pl-4"
+      //       inline
+      //       type="radio"
+      //       id={`${name}--${counter}`}
+      //       ref={register({
+      //         required: 'נא לבחור מבוטח',
+      //       })}
+      //       value={value}
+      //     />
+      //     <label
+      //       className="form-check-label pt-2 mb-0"
+      //       htmlFor={`${name}--${counter}`}
+      //     >
+      //       {value}
+      //     </label>
+      //     <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
+      //     {showErrorOnce && errors[name] && (
+      //       <div className="invalid-tooltip" role="alert">
+      //         {errors[name].message}
+      //       </div>
+      //     )}
+      //   </div>
+      // </div>
     );
   };
 }
@@ -93,8 +117,28 @@ function InsDetails(): React.ReactElement {
   const buildCheckbox = Checkbox('insured', register, errors);
 
   return (
-    <div>
-      <main aria-labelledby="h2_insDetails">
+    <form action="none" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="hsg-g">
+        <div className="hsg-c-12">
+          <div className="hsg-strip">
+            <div className="hsg-strip-side">
+              <h3 className="hsg-strip-title">
+                פרטי המבוטח לגביו מוגשת התביעה
+              </h3>
+            </div>
+            <div className="hsg-strip-content">
+              <div className="hsg-strip-body hsg-padding-remove">
+                <ul className="hsg-checks">
+                  {buildCheckbox('123456789', '', true)}
+                  {buildCheckbox('123456788', '')}
+                  {buildCheckbox('123456787', '')}
+                  {buildCheckbox('123456786', '')}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* <main aria-labelledby="h2_insDetails">
         <h2 id="h2_insDetails" className="hidden">
           פרטי המבוטח
         </h2>
@@ -107,35 +151,9 @@ function InsDetails(): React.ReactElement {
             <div className="col-md-9 col-xs-12">
               <div className="row">
                 {buildCheckbox('123456789', '', true)}
-                {/* <div className="col-md-4 pb-md-4 col-xs-12 checkbox-border col-text-info">
-                  <div className="mt-md-4">
-                    <Form.Check
-                      name="insured"
-                      className="pl-4"
-                      inline
-                      type="radio"
-                      id={`inline--1`}
-                      ref={register({
-                        required: 'נא לבחור מבוטח',
-                      })}
-                      value="123456789"
-                    />
-                    <label className="pt-2 mb-0" htmlFor={`inline--1`}>
-                      123456789
-                    </label>
-                    <div style={{ paddingRight: '3.4rem' }}>מיכאל אברג'יל</div>
-                    {errors.insured && (
-                      <div className="invalid-tooltip" role="alert">
-                        {errors.insured.message}
-                      </div>
-                    )}
-                  </div>
-                </div> */}
                 {buildCheckbox('123456788', '')}
                 {buildCheckbox('123456787', '')}
                 {buildCheckbox('123456786', '')}
-                {/* <div className="col-md-4 col-xs-12 col-bl col-bb col-text-info">3 of 4</div> */}
-                {/* <div className="col-md-4 col-xs-12 col-last">4 of 4</div> */}
               </div>
             </div>
           </section>
@@ -198,8 +216,8 @@ function InsDetails(): React.ReactElement {
             </div>
           </section>
         </form>
-      </main>
-      <footer>
+      </main> */}
+          {/* <footer>
         <nav>
           <button
             className="btn btn-primary"
@@ -209,8 +227,10 @@ function InsDetails(): React.ReactElement {
             המשך
           </button>
         </nav>
-      </footer>
-    </div>
+      </footer> */}
+        </div>
+      </div>
+    </form>
   );
 }
 export default InsDetails;

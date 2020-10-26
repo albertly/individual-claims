@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { useHistory, Link } from 'react-router-dom';
 
 import {
@@ -100,83 +99,54 @@ function NavBreadcrumb(): React.ReactElement {
   };
 
   return (
-    <nav
-      style={{ marginRight: '0.2rem', marginLeft: '0.2rem' }}
-      aria-label="breadcrumb"
-    >
-      <ol className="breadcrumb">
-        <li
-          id="l1"
-          onClick={handleClick}
-          className="breadcrumb-item"
-          aria-current={active.l1 ? 'page' : 'false'}
-        >
+    <div className="hsg-g">
+      <div className="hsg-c-12">
+        <div className="hsg-steps" aria-label="breadcrumb">
           <div
-            className={`s ${
+            id="l1"
+            onClick={handleClick}
+            aria-current={active.l1 ? 'page' : 'false'}
+            className={`hsg-step ${
               active.l1 || active.l2 || active.l3 || active.l4
-                ? 'breadcrumb-item-active'
+                ? 'hsg-step-active'
                 : ''
             }`}
           >
-            <span className="badge badge-pill badge-primary">1</span>
-            <span className="d-none d-sm-inline">פרטי מבוטח</span>
-            <span className="d-inline d-sm-none">מבוטח</span>
+            <span>פרטי המבוטח</span>
           </div>
-          {active.l1 && <div className="arrow" />}
-        </li>
 
-        <li
-          id="l2"
-          className="breadcrumb-item"
-          onClick={handleClick}
-          aria-current={active.l2 ? 'page' : undefined}
-        >
           <div
-            className={`s ${
-              active.l2 || active.l3 || active.l4
-                ? 'breadcrumb-item-active'
-                : ''
+            id="l2"
+            onClick={handleClick}
+            aria-current={active.l2 ? 'page' : 'false'}
+            className={`hsg-step ${
+              active.l2 || active.l3 || active.l4 ? 'hsg-step-active' : ''
             }`}
           >
-            <span className="badge badge-pill badge-primary">2</span>
-            <span className="d-none d-sm-inline">פרטי טיפול</span>
-            <span className="d-inline d-sm-none">טיפול</span>
+            <span>פרטי הטיפול</span>
           </div>
-          {active.l2 && <div className="arrow" />}
-        </li>
-        <li
-          id="l3"
-          className="breadcrumb-item"
-          onClick={handleClick}
-          aria-current={active.l3 ? 'page' : undefined}
-        >
+
           <div
-            className={`s ${
-              active.l3 || active.l4 ? 'breadcrumb-item-active' : ''
+            id="l3"
+            onClick={handleClick}
+            aria-current={active.l3 ? 'page' : 'false'}
+            className={`hsg-step ${
+              active.l3 || active.l4 ? 'hsg-step-active' : ''
             }`}
           >
-            <span className="badge badge-pill badge-primary">3</span>
-            <span className="d-none d-sm-inline">צירוף מסמכים</span>
-            <span className="d-inline d-sm-none">מסמכים</span>
+            <span>צירוף מסמכים</span>
           </div>
-          {active.l3 && <div className="arrow" />}
-        </li>
-
-        <li
-          id="l4"
-          className="breadcrumb-item"
-          onClick={handleClick}
-          aria-current={active.l4 ? 'page' : undefined}
-        >
-          <div className={`s ${active.l4 ? 'breadcrumb-item-active' : ''}`}>
-            <span className="badge badge-pill badge-primary">4</span>
-            <span className="d-none d-sm-inline">אמצעי להעברת תשלום</span>
-            <span className="d-inline d-sm-none">תשלום</span>
+          <div
+            id="l4"
+            onClick={handleClick}
+            aria-current={active.l4 ? 'page' : 'false'}
+            className={`hsg-step ${active.l4 ? 'hsg-step-active' : ''}`}
+          >
+            <span>אמצעי להעברת תשלום</span>
           </div>
-          {active.l4 && <div className="arrow" />}
-        </li>
-      </ol>
-    </nav>
+        </div>
+      </div>
+    </div>
   );
 }
 export default NavBreadcrumb;

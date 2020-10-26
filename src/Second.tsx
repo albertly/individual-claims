@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import NavBreadcrumb from './NavBreadcrumb';
 import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import PageTransition from './components/PageTransition';
-import loadable from "@loadable/component";
-import { PrerenderedComponent } from "react-prerendered-component";
+import loadable from '@loadable/component';
+import { PrerenderedComponent } from 'react-prerendered-component';
 
 import InsDetails from './InsDetails';
 import TreatDetails from './TreatDetails';
@@ -46,6 +46,15 @@ function Second(props: any): React.ReactElement {
 
   return (
     <>
+      <div className="hsg-g">
+        <div className="hsg-c-12">
+          <div className="hsg-panel hsg-panel-light">
+            שדות בטופס המסומנים בכוכבית הינם שדות חובה{' '}
+            <span className="hsg-form-asterix">*</span>
+          </div>
+        </div>
+      </div>
+
       <NavBreadcrumb />
       {/* <div data-style={{ position: 'relative' }}> */}
       {/* <CSSTransition            
@@ -57,7 +66,7 @@ function Second(props: any): React.ReactElement {
           > */}
 
       <Route
-        render={({ location }) => {          
+        render={({ location }) => {
           return (
             <>
               <PageTransition
