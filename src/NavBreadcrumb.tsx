@@ -107,7 +107,7 @@ function NavBreadcrumb(): React.ReactElement {
             onClick={handleClick}
             aria-current={active.l1 ? 'page' : 'false'}
             className={`hsg-step ${
-              active.l1 || active.l2 || active.l3 || active.l4
+              active.l1 
                 ? 'hsg-step-active'
                 : ''
             }`}
@@ -120,7 +120,7 @@ function NavBreadcrumb(): React.ReactElement {
             onClick={handleClick}
             aria-current={active.l2 ? 'page' : 'false'}
             className={`hsg-step ${
-              active.l2 || active.l3 || active.l4 ? 'hsg-step-active' : ''
+              active.l2  ? 'hsg-step-active' : ''
             }`}
           >
             <span>פרטי הטיפול</span>
@@ -131,7 +131,7 @@ function NavBreadcrumb(): React.ReactElement {
             onClick={handleClick}
             aria-current={active.l3 ? 'page' : 'false'}
             className={`hsg-step ${
-              active.l3 || active.l4 ? 'hsg-step-active' : ''
+              active.l3  ? 'hsg-step-active' : ''
             }`}
           >
             <span>צירוף מסמכים</span>
