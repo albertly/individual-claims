@@ -36,7 +36,6 @@ function Checkbox({
         name={ctlName}
         render={({ onChange, onBlur, value, name }) => (
           <input
-            className="form-check-input"
             onBlur={onBlur}
             type="checkbox"
             onChange={e => onChange(e.target.checked)}
@@ -47,9 +46,7 @@ function Checkbox({
         )}
       />
 
-      <label className="form-check-label primary-font pr-4" htmlFor={ctlName}>
-        {lblName}
-      </label>
+      <label htmlFor={ctlName}>{lblName}</label>
     </>
   );
 }
@@ -92,233 +89,270 @@ function TreatComp({
 
   return (
     <>
-      <section key={key} className="row">
-        <div className="col col-last">
-          <div className="form-row">
-            <div className="form-group col-md-4 order-md-1 order-2">
-              <label className="primary-font" htmlFor={`treatments[${index}].treatId`}>סוג טיפול</label>
-              <label className="mr-2 text-danger">*</label>
+      <div key={key} className="hsg-panel hsg-panel-light">
+        <div className="hsg-g">
+          <div className="hsg-c-medium-4">
+            <label htmlFor={`treatments[${index}].treatId`}>
+              סוג טיפול <span className="hsg-form-asterix">*</span>
+            </label>
 
-              <Controller
-                control={control}
-                name={`treatments[${index}].treatId`}
-                rules={{
-                  validate: () => {
-                    console.log('getValues', getValues().treatments[index]);
-                    console.log('errors', errors);
-                    console.log('!!getValues().treatments[index].treatId', getValues().treatments[index].treatId);
-                    return (
-                      (getValues().treatments[index].treatId && getValues().treatments[index].treatId != 0) ||
-                      'חובה לבחור סוג טיפול'
-                    );
-                  },
-                }}
-                render={({ onChange, onBlur, value, name }) => (
-                  <select
-                    className="form-control"
-                    id={name}
-                    name={name}
-                    // onChange={handleTreatChange}
-                    //value={treatment.treatId}
-                    onChange={e => {
-                      setKind(lookupTreatKind(+e.target.value));
-                      return onChange(e.target.value);
-                    }}
-                    value={value}
-                  >
-                    <option key={0} value={0}>
-                      בחירה
+            <Controller
+              control={control}
+              name={`treatments[${index}].treatId`}
+              rules={{
+                validate: () => {
+                  return (
+                    (getValues().treatments[index].treatId &&
+                      getValues().treatments[index].treatId != 0) ||
+                    'חובה לבחור סוג טיפול'
+                  );
+                },
+              }}
+              render={({ onChange, onBlur, value, name }) => (
+                <select
+                  id={name}
+                  name={name}
+                  // onChange={handleTreatChange}
+                  //value={treatment.treatId}
+                  onChange={e => {
+                    setKind(lookupTreatKind(+e.target.value));
+                    return onChange(e.target.value);
+                  }}
+                  value={value}
+                >
+                  <option key={0} value={0}>
+                    בחירה
+                  </option>
+                  {treats.map(e => (
+                    <option key={e.id} value={e.id}>
+                      {e.item}
                     </option>
-                    {treats.map(e => (
-                      <option key={e.id} value={e.id}>
-                        {e.item}
-                      </option>
-                    ))}
-                  </select>
-                )}
-              />
-              {errors.treatments && errors.treatments[index].treatId && (
-                <div className="invalid-tooltip" role="alert">
-                  {errors.treatments[index].treatId.message}
-                </div>
+                  ))}
+                </select>
               )}
-            </div>
-
-            {kind !== 4 && (
-              <>
-                <div className="form-group col-md-3 order-md-2 order-3">
-                  <label className="primary-font" htmlFor={`treatments[${index}].treatDate`}>
-                    תאריך הטיפול
-                  </label>
-                  <label className="mr-2 text-danger">*</label>
-
-                  <input
-                    name={`treatments[${index}].treatDate`}
-                    type="date"
-                    className="form-control"
-                    id={`treatments[${index}].treatDate`}
-                    defaultValue={`${treatment.treatDate}`}
-                    aria-required="true"
-                    required
-                    ref={register({
-                      required: 'שדה חובה',
-                    })}
-                  />
-
-                  {errors.treatments && errors.treatments[index].treatDate && (
-                    <div className="invalid-tooltip" role="alert">
-                      {errors.treatments[index].treatDate.message}
-                    </div>
-                  )}
-                </div>
-
-                <div className="col-md-3 order-md-3 order-4">
-                  <label className="primary-font" htmlFor={`treatments[${index}].cost`}>
-                    עלות הטיפול
-                  </label>
-                  <label className="mr-2 text-danger">*</label>
-                  <div className="input-group">
-                    <input
-                      name={`treatments[${index}].cost`}
-                      type="text"
-                      className="form-control"
-                      id={`treatments[${index}].cost`}
-                      defaultValue={`${treatment.cost}`}
-                      aria-required="true"
-                      required
-                      ref={register()}
-                    />
-                    <div className="input-group-append">
-                      <span className="input-group-text">&#8362;</span>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-
-            {kind === 4 && (
-              <div className="col-md-6 d-flex pt-md-3 pr-md-2 order-md-4 order-5">
-                <FontAwesomeIcon
-                  className="icon-font-size va-m ml-2 link-icon-color d-inline"
-                  icon={faExclamationCircle}
-                />
-                <p className="d-inline11">{msgAnother}</p>
+            />
+            {errors.treatments && errors.treatments[index].treatId && (
+              <div className="invalid-tooltip" role="alert">
+                {errors.treatments[index].treatId.message}
               </div>
             )}
-
-            <div className="col-md-2 order-md-5 order-1">
-              <Button
-                className="bg-transparent border-0 btn-sm px-0 px-md-2"
-                onClick={() => remove(index)}
-              >
-                <FontAwesomeIcon icon={faTrashAlt} size="sm" color="#006CB2" />
-                <small className="link-icon-color pr-1">הסרת טיפול</small>
-              </Button>
-            </div>
           </div>
 
-          <div className="form-row">
-            {kind >= 2 && kind !== 4 && (
-              <div className="form-group col-md-1">
-                <label className="primary-font" htmlFor={`treatments[${index}].tooth`}>מספר שן</label>
-                <label className="mr-2 text-danger">*</label>
+          {kind !== 4 && (
+            <>
+              <div className="hsg-c-medium-4">
+                <label
+                  className="primary-font"
+                  htmlFor={`treatments[${index}].treatDate`}
+                >
+                  תאריך הטיפול
+                  <span className="hsg-form-asterix">*</span>
+                </label>
 
                 <input
-                  type="number"
-                  className="form-control"
-                  id={`treatments[${index}].tooth`}
+                  name={`treatments[${index}].treatDate`}
+                  type="date"
+                  id={`treatments[${index}].treatDate`}
+                  defaultValue={`${treatment.treatDate}`}
+                  aria-required="true"
+                  required
+                  ref={register({
+                    required: 'שדה חובה',
+                  })}
+                />
+
+                {errors.treatments && errors.treatments[index].treatDate && (
+                  <div className="invalid-tooltip" role="alert">
+                    {errors.treatments[index].treatDate.message}
+                  </div>
+                )}
+              </div>
+
+              <div className="hsg-c-medium-4">
+                <label htmlFor={`treatments[${index}].cost`}>
+                  עלות הטיפול
+                  <span className="hsg-form-asterix">*</span>
+                </label>
+
+                <input
+                  name={`treatments[${index}].cost`}
+                  type="text"
+                  id={`treatments[${index}].cost`}
+                  defaultValue={`${treatment.cost}`}
+                  aria-required="true"
+                  required
+                  ref={register()}
+                />
+              </div>
+            </>
+          )}
+          {kind === 4 && (
+            <div className="hsg-c-medium-8">
+              <p style={{ paddingTop: '30px' }}>
+                <i className="hsg-icon-exclamation"></i> כדי להגיש את התביעה
+                נדרש טופס פירוט ההליך הרפואי כפי שמולא על ידי מרפאת השיניים אם
+                לא קיבלת את הטופס, ניתן להסיר את הטיפול מרשימת הטיפולים כעת
+                ולהגיש תביעה לגבי .טיפול זה במועד מאוחר יותר{' '}
+              </p>
+            </div>
+          )}
+
+          <div className="hsg-c-12">
+            <a href="#" onClick={() => remove(index)}>
+              הסרת טיפול
+            </a>
+          </div>
+        </div>
+
+        <div className="hsg-g">
+          {kind === 2 && (
+            <>
+              <div className="hsg-c-medium-2">
+                <label htmlFor={`treatments[${index}].tooth`}>
+                  מספר שן
+                  <span className="hsg-form-asterix">*</span>
+                </label>
+                <input
+                  type="text"
                   name={`treatments[${index}].tooth`}
+                  id={`treatments[${index}].tooth`}
                   defaultValue={`${treatment.tooth}`}
                   ref={register()}
                 />
               </div>
-            )}
 
-            {kind >= 3 && kind !== 4 && (
-              <div className="form-group col-md-3">
-                <div className="row">
-                  <label className="primary-font" htmlFor="surface">משטח</label>
-                  <label className="mr-2 text-danger">*</label>
-                </div>
-                <div className="row">
-                  <div className="form-check col-md-3">
-                    <Checkbox
-                      ctlName={`treatments[${index}].CL_V`}
-                      lblName="CL_V"
-                      control={control}
-                    />
-                  </div>
-                  <div className="form-check col-md-3">
-                    <Checkbox
-                      ctlName={`treatments[${index}].L_P`}
-                      lblName="L_P"
-                      control={control}
-                    />
-                  </div>
-                  <div className="form-check col-md-3">
-                    <Checkbox
-                      ctlName={`treatments[${index}].B`}
-                      lblName="B"
-                      control={control}
-                    />
-                  </div>
-                  <div className="col-md-3 d-xs-none"></div>
-                </div>
-                <div className="row mt-md-4">
-                  <div className="form-check col-md-3">
-                    <Checkbox
-                      ctlName={`treatments[${index}].D`}
-                      lblName="D"
-                      control={control}
-                    />
-                  </div>
-
-                  <div className="form-check col-md-3">
-                    <Checkbox
-                      ctlName={`treatments[${index}].M`}
-                      lblName="M"
-                      control={control}
-                    />
-                  </div>
-
-                  <div className="form-check col-md-3">
-                    <Checkbox
-                      ctlName={`treatments[${index}].O`}
-                      lblName="O"
-                      control={control}
-                    />
-                  </div>
-                  <div className="col-md-3 d-xs-none"></div>
-                </div>
-              </div>
-            )}
-
-            {kind >= 1 && kind !== 4 && (
-              <div className="form-group col-md-4">
-                <label
-                  className="d-block primary-font"
-                  htmlFor={`treatments[${index}].notes`}
-                >
+              <div className="hsg-c-medium-10">
+                <label htmlFor={`treatments[${index}].notes`}>
                   הערות רפואיות נוספות
                 </label>
                 <textarea
-                  className="form-control"
-                  id={`treatments[${index}].notes`}
                   name={`treatments[${index}].notes`}
-                  rows={5}
-                  cols={60}
+                  id={`treatments[${index}].notes`}
                   ref={register()}
                 >
                   {treatment.notes}
                 </textarea>
               </div>
-            )}
+            </>
+          )}
 
-            <div className="col-md-8 d-xs-none"></div>
-          </div>
+          {kind === 3 && (
+            <>
+              <div className="hsg-c-medium-6">
+                <div className="hsg-g">
+                  <div className="hsg-c-medium-3">
+                    <label htmlFor={`treatments[${index}].tooth`}>
+                      מספר שן
+                      <span className="hsg-form-asterix">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name={`treatments[${index}].tooth`}
+                      id={`treatments[${index}].tooth`}
+                      defaultValue={`${treatment.tooth}`}
+                      ref={register()}
+                    />
+                  </div>
+
+                  <div className="hsg-c-medium-9">
+                    <label htmlFor="a3">
+                      משטח
+                      <span className="hsg-form-asterix">*</span>
+                    </label>
+
+                    <div className="hsg-g">
+                      <div className="hsg-c-medium-4">
+                        <span className="hsg-custom-input">
+                          <Checkbox
+                            ctlName={`treatments[${index}].CL_V`}
+                            lblName="CL_V"
+                            control={control}
+                          />
+                        </span>
+                      </div>
+                      <div className="hsg-c-medium-4">
+                        <span className="hsg-custom-input">
+                          <Checkbox
+                            ctlName={`treatments[${index}].L_P`}
+                            lblName="L_P"
+                            control={control}
+                          />
+                        </span>
+                      </div>
+                      <div className="hsg-c-medium-4">
+                        <span className="hsg-custom-input">
+                          <Checkbox
+                            ctlName={`treatments[${index}].B`}
+                            lblName="B"
+                            control={control}
+                          />
+                        </span>
+                      </div>
+                      <div className="hsg-c-medium-4">
+                        <span className="hsg-custom-input">
+                          <Checkbox
+                            ctlName={`treatments[${index}].D`}
+                            lblName="D"
+                            control={control}
+                          />
+                        </span>
+                      </div>
+                      <div className="hsg-c-medium-4">
+                        <span className="hsg-custom-input">
+                          <Checkbox
+                            ctlName={`treatments[${index}].M`}
+                            lblName="M"
+                            control={control}
+                          />
+                        </span>
+                      </div>
+                      <div className="hsg-c-medium-4">
+                        <span className="hsg-custom-input">
+                          <Checkbox
+                            ctlName={`treatments[${index}].O`}
+                            lblName="O"
+                            control={control}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hsg-c-medium-6">
+                <label htmlFor={`treatments[${index}].notes`}>
+                  הערות רפואיות נוספות
+                </label>
+                <textarea
+                  name={`treatments[${index}].notes`}
+                  id={`treatments[${index}].notes`}
+                  ref={register()}
+                >
+                  {treatment.notes}
+                </textarea>
+              </div>
+            </>
+          )}
+
+          {kind === 1 && (
+            <div className="hsg-c-medium-12">
+              <label htmlFor={`treatments[${index}].notes`}>
+                הערות רפואיות נוספות
+              </label>
+              <textarea
+                name={`treatments[${index}].notes`}
+                id={`treatments[${index}].notes`}
+                ref={register()}
+              >
+                {treatment.notes}
+              </textarea>
+            </div>
+          )}
         </div>
-      </section>
+      </div>
     </>
   );
 }
+
 export default TreatComp;

@@ -116,12 +116,62 @@ function TreadDetails(): React.ReactElement {
   }
 
   return (
-    <div>
+    <>
+      <div className="hsg-g">
+        <div className="hsg-c-12">
+          <div className="hsg-strip">
+            <div className="hsg-strip-side">
+              <h3 className="hsg-strip-title">פרטי הטיפולים</h3>
+            </div>
+            <div className="hsg-strip-content">
+              <div className="hsg-strip-body">
+                <h4>יש למלא את פרטי הטיפולים שעברת בהתאם למופע בחשבונית</h4>
+
+                <div className="hsg-g">
+                  <div className="hsg-c-medium-6">
+                    <label htmlFor="invoice">
+                      מספר חשבונית
+                      <span className="hsg-form-asterix">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="invoice"
+                      id="invoice"
+                      aria-required="true"
+                      required
+                      ref={register({
+                        required: 'שדה חובה',
+                      })}
+                    />
+                    {errors.invoice && (
+                      <div className="invalid-tooltip">
+                        {errors.invoice.message}
+                      </div>
+                    )}
+                  </div>
+                  <div className="hsg-c-medium-6">
+                    <label htmlFor="doctorId">מספר רשיון הרופא/ה</label>
+                    <input
+                      type="text"
+                      name="doctorId"
+                      id="doctorId"
+                      ref={register}
+                    />
+                    {errors.doctorId && (
+                      <div className="invalid-tooltip" role="alert">
+                        {errors.doctorId.message}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <main aria-labelledby="h2_treatDetails">
-        <h2 id="h2_treatDetails" className="hidden">
-          פרטי טיפול
-        </h2>
-        <form action="none" onSubmit={handleSubmit(onSubmit)} noValidate>
+        {/* <form action="none" onSubmit={handleSubmit(onSubmit)} noValidate>
           <section className="row" aria-labelledby="treatDetails">
             <h3 id="treatDetails" className="col-md-3 col-xs-12 col-first">
               פרטי הטיפול/ים
@@ -170,7 +220,7 @@ function TreadDetails(): React.ReactElement {
               </div>
             </div>
           </section>
-        </form>
+        </form> */}
 
         {fields.map((item, index) => {
           return (
@@ -189,7 +239,7 @@ function TreadDetails(): React.ReactElement {
           );
         })}
 
-        <div className="row">
+        {/* <div className="row">
           <div className="col">
             <button
               className="bg-transparent border-0 btn-sm"
@@ -206,23 +256,38 @@ function TreadDetails(): React.ReactElement {
               <small className="link-icon-color pr-1">הוספת טיפול</small>
             </button>
           </div>
+        </div> */}
+
+        <div className="hsg-panel hsg-panel-light">
+          <a
+            href="#"
+            className="hsg-link-add"
+            onClick={() => {
+              append({ ...treatDetailsDefaults });
+            }}
+          >
+            הוספת טיפול
+          </a>
         </div>
       </main>
 
-      <footer className="d-flex justify-content-end align-items-center">
-        <nav>
-          <GoBack handleBackClick={handleBackClick} />
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={handleClick}
-          >
-            המשך
-          </button>
-        </nav>
-        {/* <NavBarBottom handleClick={handleClick} handleBackClick={handleBackClick} /> */}
-      </footer>
-    </div>
+      <div className="hsg-g">
+        <div className="hsg-c-12">
+          <div className="hsg-text-background-white hsg-text-left">
+            <span className="hsg-margin-left">
+              {/* <GoBack handleBackClick={handleBackClick} /> */}
+              <a href="start.html">חזרה אחורה</a> או
+            </span>
+            <button
+              className="hsg-button hsg-button-primary"
+              onClick={handleClick}
+            >
+              המשך
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 export default TreadDetails;
