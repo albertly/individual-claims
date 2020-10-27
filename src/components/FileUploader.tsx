@@ -52,7 +52,7 @@ const FileUploader = (props: any): React.ReactElement => {
       >
         {!file && (
           <>
-            <AddImg />
+            <i className="hsg-icon-file"></i>
             <label
               style={{ cursor: 'inherit' }}
               className="link-icon-color pr-1"
@@ -83,7 +83,7 @@ const FileUploader = (props: any): React.ReactElement => {
           alt={file.name}
         ></img>
       )}
-      <p className="d-inline px-2">{file ? file.name : 'לא נבחר קובץ'}</p>
+      <p className="file-label d-inline px-2">{file ? file.name : 'לא נבחר קובץ'}</p>
       {/* <Image.AddButton className="link-icon-color" style={{height: '1rem', width: '1rem'}} src={Image.AddButton} /> */}
       <input
         type="file"

@@ -30,7 +30,7 @@ const ExclamationImg = (props: any): React.ReactElement => {
     return (
       <MinusButtonSvg
         className="link-icon-color"
-        style={{ height: '1.2rem', width: '1.2rem' }}
+        style={{ height: '1.4rem', width: '1.4rem', verticalAlign: 'middle' }}
         stroke="#006CB2"
         fill="#006CB2"
       />

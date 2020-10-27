@@ -1,4 +1,69 @@
 .invalid-tooltip {
-    display: block;
-    color: red;
-  }
+  display: block;
+  color: red;
+}
+
+/* File Uploader */
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.border-0 {
+  border: 0 !important;
+}
+
+.pr-0,
+.px-0 {
+  padding-right: 0 !important;
+}
+
+.pt-0,
+.py-0 {
+  padding-top: 0 !important;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn-primary {
+  color: #fff;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.link-icon-color {
+  color: #006cb2;
+  display: inline-block;
+  /* margin-bottom: 0.5rem; */
+  font-weight: normal;
+}
+
+.pr-1,
+.px-1 {
+  padding-right: 0.25rem !important;
+}
+
+
+
+/**/
+.ml-2,
+.mx-2 {
+  margin-left: 0.5rem !important;
+}
+
+.d-inline {
+  display: inline !important;
+}
+
+p.file-label {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.pr-2,
+.px-2 {
+  padding-right: 0.5rem !important;
+}
